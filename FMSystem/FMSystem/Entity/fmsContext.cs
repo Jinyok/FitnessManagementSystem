@@ -19,14 +19,14 @@ namespace FMSystem.Models
         public virtual DbSet<Section> Section { get; set; }
         public virtual DbSet<User> User { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                //optionsBuilder.UseMySql("server=localhost;database=fms;user=root;password=lqq13710438181;treattinyasboolean=true", x => x.ServerVersion("8.0.19-mysql"));
-            }
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+        //        //optionsBuilder.UseMySql("server=localhost;database=fms;user=root;password=lqq13710438181;treattinyasboolean=true", x => x.ServerVersion("8.0.19-mysql"));
+        //    }
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

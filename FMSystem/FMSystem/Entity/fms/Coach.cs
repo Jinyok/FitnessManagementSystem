@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FMSystem.Models
 {
     public partial class Coach
     {
-        public Coach()
-        {
-            Instructs = new HashSet<Instructs>();
-        }
+        //public Coach()
+        //{
+        //    Instructs = new HashSet<Instructs>();
+        //}
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int CoachId { get; set; }
         [Column(TypeName ="varchar(45)")]
         public string Name { get; set; }

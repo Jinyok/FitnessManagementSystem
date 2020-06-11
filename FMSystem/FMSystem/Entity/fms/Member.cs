@@ -6,10 +6,10 @@ namespace FMSystem.Models
 {
     public partial class Member
     {
-        public Member()
-        {
-            Instructs = new HashSet<Instructs>();
-        }
+        //public Member()
+        //{
+        //    Instructs = new HashSet<Instructs>();
+        //}
 
         public int MemberId { get; set; }
         public long? PhoneNo { get; set; }

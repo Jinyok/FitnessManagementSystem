@@ -7,8 +7,13 @@ namespace FMSystem.Models
 {
     public partial class User
     {
-        [Column(TypeName ="varchar(20)")]
+        [Column(TypeName ="varchar(30)")]
+        [Key]
         public string Userid { get; set; }
+
+        [Column(TypeName ="varchar(30)")]
+        public string UserName { get; set; }
+
         [Column(TypeName ="varchar(100)")]
         [Required]
         public string Password { get; set; }

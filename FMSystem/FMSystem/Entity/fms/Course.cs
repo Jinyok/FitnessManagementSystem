@@ -5,10 +5,10 @@ namespace FMSystem.Models
 {
     public partial class Course
     {
-        public Course()
-        {
-            Section = new HashSet<Section>();
-        }
+        //public Course()
+        //{
+        //    Section = new HashSet<Section>();
+        //}
 
         public int CourseId { get; set; }
         public string Title { get; set; }
