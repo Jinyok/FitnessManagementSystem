@@ -14,6 +14,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Microsoft.OpenApi.Models;
+using System.IO;
+using System.Reflection;
+using MySql.Data.MySqlClient;
 
 namespace FMSystem
 {
@@ -36,15 +40,24 @@ namespace FMSystem
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
             {
-                o.LoginPath = new PathString("/Account/Login");
+                o.LoginPath = new PathString("/Home/Login");
                 o.AccessDeniedPath = new PathString("/Home/Privacy");
-                
-            });
 
+            });
+            //mysql
+            var builder = new MySqlConnectionStringBuilder(Configuration.GetConnectionString("DefaultConnection"));
+            builder.Password = Configuration.GetSection("dbpassward")["default"];
             services.AddDbContextPool<fmsContext>(options => options
-            .UseMySql(Configuration.GetConnectionString("DefaultConnection"), mySqlOptions => mySqlOptions
+            .UseMySql(builder.ConnectionString, mySqlOptions => mySqlOptions
             .ServerVersion(Configuration.GetConnectionString("Version"))));
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FMS API", Version = "v1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +73,10 @@ namespace FMSystem
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -73,6 +90,11 @@ namespace FMSystem
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "FMS API V1");
             });
         }
     }

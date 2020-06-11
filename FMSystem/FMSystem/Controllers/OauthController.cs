@@ -13,20 +13,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace Server.Controllers
 
 {
-
+    [Route("api/[controller]/[Action]")]
+    [ApiController]
     public class OauthController : Controller
 
     {
-
-        /// <summary>
-        /// 登录页面
-        /// </summary>
-        /// <returns></returns>
-        public IActionResult Login()
-        {
-            return View();
-        }
-
         /// <summary>
         /// post 登录请求
         /// </summary>
@@ -70,7 +61,7 @@ namespace Server.Controllers
 
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return Redirect("/Account/Login");
+            return Redirect("/Home/Login");
 
         }
         //public FileResult excel()

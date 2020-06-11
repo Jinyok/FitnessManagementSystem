@@ -38,5 +38,14 @@ namespace FMSystem.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        /// <summary>
+        /// 登录页面
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Login()
+        {
+            return View("../Oauth/login");
+        }
     }
 }
