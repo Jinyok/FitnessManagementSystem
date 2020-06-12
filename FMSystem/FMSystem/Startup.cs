@@ -51,6 +51,7 @@ namespace FMSystem
             .UseMySql(builder.ConnectionString, mySqlOptions => mySqlOptions
             .ServerVersion(Configuration.GetConnectionString("Version"))));
 
+            //swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FMS API", Version = "v1" });
@@ -91,6 +92,8 @@ namespace FMSystem
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //swagger
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

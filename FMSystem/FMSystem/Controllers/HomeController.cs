@@ -45,7 +45,9 @@ namespace FMSystem.Controllers
         /// <returns></returns>
         public IActionResult Login()
         {
-            return View("../Oauth/login");
+            //while (true) ;
+            //return View("../Oauth/login");
+            return View();
         }
     }
 }

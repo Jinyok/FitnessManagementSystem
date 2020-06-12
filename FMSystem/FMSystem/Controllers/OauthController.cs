@@ -23,17 +23,17 @@ namespace Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Login(string userName, string password)
+        public async Task<IActionResult> Login(string username, string password)
         {
-            if (userName == null || password == null)
+            if (username == null || password == null)
                 return Json(new { result = false, msg = "空" });
 
-            if (userName.Equals("admin") && password.Equals("123456"))
+            if (username.Equals("admin") && password.Equals("123456"))
             {
 
                 var claims = new List<Claim>(){
 
-                 new Claim(ClaimTypes.Name,userName),new Claim("password",password)
+                 new Claim(ClaimTypes.Name,username),new Claim("password",password)
 
                 };
 
