@@ -23,7 +23,7 @@ namespace Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login([FromForm]string username, [FromForm] string password)
         {
             if (username == null || password == null)
                 return Json(new { result = false, msg = "空" });
