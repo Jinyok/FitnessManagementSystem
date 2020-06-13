@@ -100,6 +100,20 @@ namespace FMSystem.Controllers
 
             return coach;
         }
+        
+                public async Task<ActionResult<List<Coach>>> SearchById(int id)
+        {
+            var coaches = await _context.Coach.Where(c => c.CoachId == id).ToListAsync();
+            
+            return coaches;
+        }
+
+        public async Task<ActionResult<List<Coach>>> SearchByName(string name)
+        {
+            var coaches = await _context.Coach.Where(c => c.Name == name).ToListAsync();
+
+            return coaches;
+        }
 
         private bool CoachExists(int id)
         {
