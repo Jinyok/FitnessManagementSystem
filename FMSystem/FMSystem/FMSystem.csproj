@@ -37,6 +37,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.4.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://json.schemastore.org/apple-app-site-association" /></VisualStudio></ProjectExtensions>
 
 </Project>

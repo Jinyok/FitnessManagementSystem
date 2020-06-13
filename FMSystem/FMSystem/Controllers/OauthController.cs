@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.Json;
 using System.Threading.Tasks;
+using FMSystem.Controllers.Binder;
+using FMSystem.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-
+using Newtonsoft.Json.Linq;
 
 namespace Server.Controllers
-
 {
+
     [Route("api/[controller]/[Action]")]
     [ApiController]
-    public class OauthController : Controller
+    public class OauthController : ControllerBase
 
     {
         /// <summary>
@@ -23,10 +25,12 @@ namespace Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Login([FromForm]string username, [FromForm] string password)
+        public async Task<IActionResult> Login([ModelBinder(typeof(BodyFormModelBinder))] User user)
         {
+            string username = user.UserName;
+            string password = user.Password;
             if (username == null || password == null)
-                return Json(new { result = false, msg = "空" });
+                return Ok(new { result = false, msg = $"{username} {password}" });
 
             if (username.Equals("admin") && password.Equals("123456"))
             {
@@ -48,10 +52,10 @@ namespace Server.Controllers
 
                 return Redirect("/Home/Index");
             }
-            return Json(new { result = false, msg = "用户名密码错误!" });
+            return Ok(new { result = false, msg = "用户名密码错误!" });
         }
 
-        [HttpPost,Authorize]
+        [HttpPost, Authorize]
         /// <summary>
         /// 退出登录
         /// </summary>
@@ -63,6 +67,11 @@ namespace Server.Controllers
 
             return Redirect("/Home/Login");
 
+        }
+        [HttpPost]
+        public string pp([FromBody] JsonElement json)
+        {
+            return "post respone" + json.GetProperty("username");
         }
         //public FileResult excel()
         //{

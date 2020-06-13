@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,6 +10,7 @@ namespace FMSystem.Models
     {
         [Column(TypeName ="varchar(30)")]
         [Key]
+        [BindNever]
         public string Userid { get; set; }
 
         [Column(TypeName ="varchar(30)")]
