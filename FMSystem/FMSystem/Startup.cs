@@ -18,6 +18,7 @@ using Microsoft.OpenApi.Models;
 using System.IO;
 using System.Reflection;
 using MySql.Data.MySqlClient;
+using FMSystem.Extensions;
 
 namespace FMSystem
 {
@@ -76,8 +77,6 @@ namespace FMSystem
             }
 
 
-
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -99,6 +98,10 @@ namespace FMSystem
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "FMS API V1");
             });
+
+            //Auth
+            var serviceProvider = app.ApplicationServices;
+            AuthContext.Configure(serviceProvider.GetService<IHttpContextAccessor>());
         }
     }
 }

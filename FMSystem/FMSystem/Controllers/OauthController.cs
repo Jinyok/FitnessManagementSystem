@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
 using FMSystem.Controllers.Binder;
+using FMSystem.Extensions;
 using FMSystem.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -36,8 +37,9 @@ namespace Server.Controllers
             {
 
                 var claims = new List<Claim>(){
-
-                 new Claim(ClaimTypes.Name,username),new Claim("password",password)
+                    new Claim("Id",0.ToString()),
+                    new Claim(ClaimTypes.Name,username),
+                    new Claim("UserRole",((int)FMSystem.Models.User.UserRole.Root).ToString())
 
                 };
 
@@ -68,10 +70,11 @@ namespace Server.Controllers
             return Redirect("/Home/Login");
 
         }
-        [HttpPost]
-        public string pp([FromBody] JsonElement json)
+        [HttpGet]
+        [Authorize]
+        public ActionResult<User> Authtest()
         {
-            return "post respone" + json.GetProperty("username");
+            return AuthContext.CurrentUser;
         }
         //public FileResult excel()
         //{
