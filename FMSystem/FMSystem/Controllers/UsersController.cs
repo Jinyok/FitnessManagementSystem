@@ -45,7 +45,7 @@ namespace FMSystem.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, User user)
+        public async Task<IActionResult> PutUser(long id, User user)
         {
             if (id != user.Userid)
             {
@@ -115,7 +115,7 @@ namespace FMSystem.Controllers
             return user;
         }
 
-        private bool UserExists(string id)
+        private bool UserExists(long id)
         {
             return dbcontext.User.Any(e => e.Userid == id);
         }

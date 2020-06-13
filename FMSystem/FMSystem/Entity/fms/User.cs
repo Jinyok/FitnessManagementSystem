@@ -8,18 +8,37 @@ namespace FMSystem.Models
 {
     public partial class User
     {
-        [Column(TypeName ="varchar(30)")]
-        [Key]
-        [BindNever]
-        public string Userid { get; set; }
 
-        [Column(TypeName ="varchar(30)")]
+        [Key]
+        public long Userid { get; set; }
+
+
+
+        [Column(TypeName = "varchar(30)")]
         public string UserName { get; set; }
 
-        [Column(TypeName ="varchar(100)")]
+
+
+        [Column(TypeName = "varchar(100)")]
         [Required]
         public string Password { get; set; }
-        [Column(TypeName ="date")]
+
+
+        [Required]
+        public UserRole Role { get; set; }
+
+
+
+        [Column(TypeName = "date")]
         public DateTime? CreateTime { get; set; }
+
+        public enum UserRole
+        {
+            Root = 0,
+            Admin = 1,
+            Coach = 2,
+            Clerk = 3,
+            Member = 4,
+        }
     }
 }
