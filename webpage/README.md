@@ -1,6 +1,6 @@
 The webpage of this project providing user interface for coach and other clerk.
 
-## Page Logic (incomplite)
+## Page Logic (incomplete)
 
 > Here describe with Chinese for readability
 
