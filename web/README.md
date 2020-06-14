@@ -1,5 +1,25 @@
 The webpage of this project providing user interface for coach and other clerk.
 
+## Usage
+
+1. Install dependencies
+
+  ```
+  npm install
+  ```
+
+2. Build pages
+
+  ```
+  npm run build
+  ```
+
+3. Start server
+
+  ```
+  npm run server
+  ```
+
 ## Page Logic (incomplete)
 
 > Here describe with Chinese for readability
