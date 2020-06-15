@@ -1,4 +1,5 @@
 ﻿using System;
+using FMSystem.Entity.fms;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -19,6 +20,8 @@ namespace FMSystem.Models
         public virtual DbSet<Section> Section { get; set; }
         public virtual DbSet<User> User { get; set; }
 
+        public virtual DbSet<Takes> Take { get; set; }
+
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    if (!optionsBuilder.IsConfigured)
@@ -30,7 +33,7 @@ namespace FMSystem.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
             modelBuilder.Entity<Coach>(entity =>
             {
                 entity.ToTable("coach");
@@ -103,7 +106,7 @@ namespace FMSystem.Models
                 //    .HasColumnType("varchar(45)")
                 //    //.HasCharSet("utf8mb4")
                 //    //.HasCollation("utf8mb4_0900_ai_ci")
-                    ;
+                ;
             });
 
             modelBuilder.Entity<Section>(entity =>
@@ -150,6 +153,23 @@ namespace FMSystem.Models
                 //    //.HasCharSet("utf8mb4")
                 //    //.HasCollation("utf8mb4_0900_ai_ci")
                 //    ;
+            });
+            modelBuilder.Entity<Takes>(entity =>
+            {
+                entity.ToTable("takes");
+                entity.HasKey(e => new { e.MemberId, e.SectionId })
+                    .HasName("PRIMARY");
+
+                entity.HasOne(d => d.Member)
+                    .WithMany(p => p.Takes)
+                    .HasForeignKey(d => d.MemberId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.Section)
+                    .WithMany(p => p.Takes)
+                    .HasForeignKey(d => d.SectionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
             });
 
             OnModelCreatingPartial(modelBuilder);
