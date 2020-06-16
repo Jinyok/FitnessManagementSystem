@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FMSystem.Entity.fms;
+using System;
 using System.Collections.Generic;
 
 namespace FMSystem.Models
@@ -11,5 +12,6 @@ namespace FMSystem.Models
         public DateTime? EndDate { get; set; }
 
         public virtual Course Course { get; set; }
+        public virtual ICollection<Takes> Takes { get; set; }
     }
 }

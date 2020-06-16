@@ -101,19 +101,7 @@ namespace FMSystem.Controllers
             return member;
         }
 
-        public async Task<ActionResult<List<Member>>> SearchByID(int id)
-        {
-            var members = await _context.Member.Where(m => m.MemberId == id).ToListAsync();
-
-            return members;
-        }
-
-        public async Task<ActionResult<List<Member>>> SearchByName(string name)
-        {
-            var members = await _context.Member.Where(m => m.Name == name).ToListAsync();
-
-            return members;
-        }
+       
         private bool MemberExists(int id)
         {
             return _context.Member.Any(e => e.MemberId == id);

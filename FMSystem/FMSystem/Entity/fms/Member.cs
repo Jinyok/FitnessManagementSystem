@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FMSystem.Entity.fms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,5 +18,6 @@ namespace FMSystem.Models
         public string Name { get; set; }
 
         public virtual ICollection<Instructs> Instructs { get; set; }
+        public virtual ICollection<Takes> Takes { get; set; }
     }
 }
