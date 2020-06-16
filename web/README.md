@@ -6,6 +6,7 @@ The webpage of this project providing user interface for coach and other clerk.
 
   ```
   npm install
+  npm i element-ui -S
   ```
 
 2. Build pages

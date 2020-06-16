@@ -1,13 +1,19 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import CoachView from '../components/CoachView.vue';
+import CoachLogin from '../components/Coach/CoachLogin.vue';
+import CoachView from '../components/Coach/CoachView.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
     {
         path: '/',
-        name: 'Coach',
+        name: 'CoachLogin',
+        component: CoachLogin
+    },
+    {
+        path: '/CoachView',
+        name: 'CoachView',
         component: CoachView
     }
 ];

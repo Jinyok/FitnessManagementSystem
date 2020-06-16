@@ -4,7 +4,6 @@
 <script>
 
 export default {
-    name: 'Coach',
+    name: 'CoachView',
 };
-
 </script>
