@@ -6,5 +6,4 @@
 export default {
     name: 'CoachView',
 };
-
 </script>

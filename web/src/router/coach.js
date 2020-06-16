@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import CoachLogin from '../components/Coach/CoachLogin.vue';
 import CoachView from '../components/Coach/CoachView.vue';
 
 Vue.use(VueRouter);
@@ -7,7 +8,12 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
-        name: 'Coach',
+        name: 'CoachLogin',
+        component: CoachLogin
+    },
+    {
+        path: '/CoachView',
+        name: 'CoachView',
         component: CoachView
     }
 ];
