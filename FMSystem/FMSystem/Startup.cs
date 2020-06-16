@@ -19,6 +19,7 @@ using System.IO;
 using System.Reflection;
 using MySql.Data.MySqlClient;
 using FMSystem.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace FMSystem
 {
@@ -59,6 +60,12 @@ namespace FMSystem
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+            });
+
+            services.AddLogging(builder =>
+            {
+                builder.ClearProviders();
+                builder.AddLog4Net("log4net.config");
             });
         }
 

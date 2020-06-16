@@ -47,6 +47,8 @@ namespace FMSystem.Controllers
         {
             //while (true) ;
             //return View("../Oauth/login");
+            _logger.LogInformation("Hello");
+            _logger.LogError("OH");
             return View();
         }
     }
