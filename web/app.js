@@ -2,6 +2,7 @@ var express = require ('express');
 var app = express ();
 var path = require ('path');
 
+var port = 8000;
 app.use (express.static ('dist'));
 
 app.get ('/', (req, res) => {
@@ -20,4 +21,6 @@ app.get ('/admin', (req, res) => {
     res.sendFile (path.join (__dirname, 'dist', 'admin.html'));
 });
 
-app.listen (8000);
+app.listen (port, () => {
+    console.log ('Server is running at http://localhost:' + port);
+});

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import CoachView from '../components/CoachView.vue';
+import CoachView from '../components/Coach/CoachView.vue';
 
 Vue.use(VueRouter);
 
