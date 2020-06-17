@@ -20,6 +20,8 @@ using System.Reflection;
 using MySql.Data.MySqlClient;
 using FMSystem.Extensions;
 using Microsoft.Extensions.Logging;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.Extensions.Logging.Log4Net.AspNetCore.Entities;
 
 namespace FMSystem
 {
@@ -47,8 +49,11 @@ namespace FMSystem
 
             });
             //mysql
-            var builder = new MySqlConnectionStringBuilder(Configuration.GetConnectionString("DefaultConnection"));
-            builder.Password = Configuration.GetSection("dbpassward")["default"];
+            var builder = new MySqlConnectionStringBuilder(Configuration.GetConnectionString("DefaultConnection"))
+            {
+                Password = Configuration.GetSection("dbpassward")["default"],
+                Database = "fms"
+            };
             services.AddDbContextPool<fmsContext>(options => options
             .UseMySql(builder.ConnectionString, mySqlOptions => mySqlOptions
             .ServerVersion(Configuration.GetConnectionString("Version"))));
@@ -62,10 +67,16 @@ namespace FMSystem
                 c.IncludeXmlComments(xmlPath);
             });
 
-            services.AddLogging(builder =>
+            services.AddLogging(logger =>
             {
-                builder.ClearProviders();
-                builder.AddLog4Net("log4net.config");
+                logger.ClearProviders();
+                Log4NetProviderOptions options = new Log4NetProviderOptions("log4net.config");
+                options.PropertyOverrides = new List<NodeInfo>{
+                    new NodeInfo() {
+                        XPath = "/log4net/appender[@name='SQLAppender']/connectionString",
+                        Attributes = new Dictionary<string, string> { { "value", $"{builder.ConnectionString}" } } }
+                };
+                logger.AddLog4Net(options);
             });
         }
 
