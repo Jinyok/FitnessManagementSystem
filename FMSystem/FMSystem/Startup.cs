@@ -22,6 +22,7 @@ using FMSystem.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Logging.Log4Net.AspNetCore.Entities;
+using LogDashboard;
 
 namespace FMSystem
 {
@@ -72,12 +73,17 @@ namespace FMSystem
                 logger.ClearProviders();
                 Log4NetProviderOptions options = new Log4NetProviderOptions("log4net.config");
                 options.PropertyOverrides = new List<NodeInfo>{
-                    new NodeInfo() {
-                        XPath = "/log4net/appender[@name='SQLAppender']/connectionString",
-                        Attributes = new Dictionary<string, string> { { "value", $"{builder.ConnectionString}" } } }
+                    //new NodeInfo() {
+                    //    XPath = "/log4net/appender[@name='SQLAppender']/connectionString",
+                    //    Attributes = new Dictionary<string, string> { { "value", $"{builder.ConnectionString}" } } },
+                    new NodeInfo { 
+                        XPath = "/log4net/appender/file[last()]", 
+                        Attributes = new Dictionary<string, string> { { "value", $"{AppContext.BaseDirectory}LogFiles/" } } }
                 };
                 logger.AddLog4Net(options);
             });
+
+            services.AddLogDashboard();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -116,6 +122,8 @@ namespace FMSystem
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "FMS API V1");
             });
+
+            app.UseLogDashboard();
 
             //Auth
             var serviceProvider = app.ApplicationServices;
