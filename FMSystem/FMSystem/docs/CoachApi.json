@@ -3,11 +3,11 @@
 //
   input:
   {
-           “serviceProvider”: IserviceProvider
+           "serviceProvider": IserviceProvider
   }
   output:
   {
-            “context”: fmsContext
+            "context": fmsContext
   }
 
 
@@ -16,7 +16,7 @@
 //
   input:
   {
-        “Id”: 1, // Id > 0,
+        "Id": 1, // Id > 0,
   }
   output:
   {
@@ -24,12 +24,12 @@
          "Message": "成功"
          "Data":
          {
-              "Id": 1
-              "Name": "教练"
-              "PhoneNo": 1
-              "Email": "123456@qq.com"
+              "Id": 1,
+              "Name": "教练",
+              "PhoneNo": 1,
+              "Email": "123456@qq.com",
               "User":{
-                    "UserId": 123
+                    "UserId": 123,
                     "isCoach": true/false
                     }
           }
@@ -38,14 +38,14 @@
           "Message": "失败"
           "Data": null
                
-  }
+   }
 
 //通过名字获得指定的教练信息
  GetCoachesByName
 //
   input:
   {
-         “Name”: "教练"
+         "Name": "教练"
   }
   output:
   {
@@ -53,23 +53,23 @@
          "Message": "成功"
          "Data":[
          {
-              "Id": 1 
-              "Name": "教练"
-              "PhoneNo": 123456
-              "Email": "123456@qq.com"
+              "Id": 1, 
+              "Name": "教练",
+              "PhoneNo": 123456,
+              "Email": "123456@qq.com",
               "User":{
-                    "UserId": 123
+                    "UserId": 123,
                     "isCoach": true/false
                     }
          }
         
          {
-              "Id": 2 
-              "Name": "教练"
-              "PhoneNo": 456789
-              "Email": "456789@qq.com"
+              "Id": 2, 
+              "Name": "教练",
+              "PhoneNo": 456789,
+              "Email": "456789@qq.com",
               "User":{
-                    "UserId": 123
+                    "UserId": 123,
                     "isCoach": true/false
                     }            
          }
@@ -89,9 +89,9 @@
 //
   input:
   { 
-         "Id": 1 // Id > 0
-         "Name": "教练"
-         "PhoneNo": 123456
+         "Id": 1, // Id > 0
+         "Name": "教练",
+         "PhoneNo": 123456,
          "Email": "123456@qq.com"
   }
   output:
@@ -130,9 +130,9 @@
 //
   input:
   {
-          "Id": 1 // Id > 0
-          "Name": "教练"
-          "PhoneNo": 123456
+          "Id": 1, // Id > 0
+          "Name": "教练",
+          "PhoneNo": 123456,
           "Email": "123456@qq.com"
 
   }
