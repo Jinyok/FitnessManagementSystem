@@ -23,5 +23,6 @@ namespace FMSystem.Models
         public string Email { get; set; }
 
         public virtual ICollection<Instructs> Instructs { get; set; }
+        public virtual ICollection<Section> Sections { get; set; }
     }
 }

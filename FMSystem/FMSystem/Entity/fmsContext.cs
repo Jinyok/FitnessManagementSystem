@@ -129,6 +129,10 @@ namespace FMSystem.Models
                     .HasForeignKey(d => d.CourseId)
                     //.HasConstraintName("section_CourseID")
                     ;
+
+                entity.HasOne(d => d.Coach)
+                    .WithMany(p => p.Sections)
+                    .HasForeignKey(d => d.CourseId);
             });
 
             modelBuilder.Entity<User>(entity =>
