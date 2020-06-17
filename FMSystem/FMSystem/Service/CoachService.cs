@@ -17,7 +17,7 @@ namespace FMSystem.Service
     public class CoachService
     {
         private static fmsContext context;
-        public static ResponseModel ResponseModel;
+        public ResponseModel ResponseModel;
 
 
         public static Coach GetCoachesById(int id)
