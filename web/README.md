@@ -8,13 +8,19 @@ The webpage of this project providing user interface for coach and other clerk.
   npm install
   ```
 
-2. Build pages
+2. Develop mode
+
+  ```
+  npm run devserver
+  ```
+
+3. Build pages
 
   ```
   npm run build
   ```
 
-3. Start server
+4. Start server
 
   ```
   npm run server
