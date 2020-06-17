@@ -1,0 +1,120 @@
+//返回错误类型注释
+       return：
+            200 -> 成功
+            400 -> 输入主键错误
+            404 -> 主键对应的数据不存在
+
+//生成数据上下文实例
+ Initialize
+//
+  input:
+  {
+           “serviceProvider”: IserviceProvider
+  }
+  output:
+  {
+            “context”: fmsContext
+  }
+
+
+//用于通过教练的ID来得到指定的教练信息
+ GetCoachesById
+//
+  input:
+  {
+        “Id”:int, // Id > 0,
+  }
+  output:
+  {
+         “Id”: int
+         “Name”: string
+         “PhoneNo”: long
+         “Email”: string
+  }
+                                                    ifnotfound:
+                                                    {
+                                                                      return null;
+                                                     }
+
+//通过名字获得指定的教练信息
+ GetCoachesByName
+//
+  input:
+  {
+         “Name”: string
+  }
+  output:
+{
+        List< 
+“Id”: int // Id > 0
+         “Name”: string
+         “PhoneNo”: long
+         “Email”: string
+        >
+
+}
+ifnotfound:
+{
+                                          return null;
+}
+
+
+//新添加一条教练信息
+AddCoach
+//
+input:
+{ 
+“Id”: int // Id > 0
+         “Name”: string
+         “PhoneNo”: long
+         “Email”: string
+}
+output:
+{
+          return 1
+}
+ifnotfound:
+{
+                                             return 2
+} 
+
+//删除指定的教练信息
+DeleteCoach
+//
+input:
+{
+          “Id”: int //Id > 0
+}
+output:
+{
+            return 1
+}
+ifnotfound:
+{
+                                            return 3
+}
+
+//修改指定的教练信息
+UpdateCoach
+//
+input:
+{
+          “Id”: int
+          “Name”: string
+          “PhoneNo”: long
+          “Email”: string
+
+}
+output:
+{
+           retrun 1
+}
+ifnotfound1:
+{
+                                             return 2
+}
+
+                                 ifnotfound2:
+                                 {
+                                             return 3
+                                 }
