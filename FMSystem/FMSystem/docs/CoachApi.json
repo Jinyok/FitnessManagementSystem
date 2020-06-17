@@ -1,15 +1,3 @@
-//生成数据上下文实例
-Initialize
-//
-  input:
-  {
-           "serviceProvider":IserviceProvider
-  }
-  output:
-  {
-            "context": fmsContext
-  }
-
 
 //用于通过教练的ID来得到指定的教练信息
  GetCoachesById
@@ -27,11 +15,7 @@ Initialize
               "Id": 1,
               "Name": "教练",
               "PhoneNo": 1,
-              "Email": "123456@qq.com",
-              "User":{
-                    "UserId": 123,
-                    "isCoach": true/false
-                    }
+              "Email": "123456@qq.com"
           },
           
           "Code":999,
@@ -56,22 +40,14 @@ Initialize
               "Id": 1, 
               "Name": "教练",
               "PhoneNo": 123456,
-              "Email": "123456@qq.com",
-              "User":{
-                    "UserId": 123,
-                    "isCoach": true/false
-                    }
+              "Email": "123456@qq.com"
          }
         
          {
               "Id": 2, 
               "Name": "教练",
               "PhoneNo": 456789,
-              "Email": "456789@qq.com",
-              "User":{
-                    "UserId": 123,
-                    "isCoach": true/false
-                    }            
+              "Email": "456789@qq.com"      
          }
             
         ],
