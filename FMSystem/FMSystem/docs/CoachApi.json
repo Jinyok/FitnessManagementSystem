@@ -16,99 +16,133 @@
 //
   input:
   {
-        “Id”:int, // Id > 0,
+        “Id”: 1, // Id > 0,
   }
   output:
   {
-         “Id”: int
-         “Name”: string
-         “PhoneNo”: long
-         “Email”: string
+         "Code": 200
+         "Message": "成功"
+         "Data":
+         {
+              "Id": 1
+              "Name": "教练"
+              "PhoneNo": 1
+              "Email": "123456@qq.com"
+              "User":{
+                    "UserId": 123
+                    "isCoach": true/false
+                    }
+          }
+          
+          "Code":999
+          "Message": "失败"
+          "Data": null
+               
   }
-                                                    ifnotfound:
-                                                    {
-                                                                      return null;
-                                                     }
 
 //通过名字获得指定的教练信息
  GetCoachesByName
 //
   input:
   {
-         “Name”: string
+         “Name”: "教练"
   }
   output:
-{
-        List< 
-“Id”: int // Id > 0
-         “Name”: string
-         “PhoneNo”: long
-         “Email”: string
-        >
+  {
+         "Code": 200
+         "Message": "成功"
+         "Data":[
+         {
+              "Id": 1 
+              "Name": "教练"
+              "PhoneNo": 123456
+              "Email": "123456@qq.com"
+              "User":{
+                    "UserId": 123
+                    "isCoach": true/false
+                    }
+         }
+        
+         {
+              "Id": 2 
+              "Name": "教练"
+              "PhoneNo": 456789
+              "Email": "456789@qq.com"
+              "User":{
+                    "UserId": 123
+                    "isCoach": true/false
+                    }            
+         }
+            
+        ]
+        
+        "Code": 999
+        "Message": "失败"
+        "Data":null
 
 }
-ifnotfound:
-{
-                                          return null;
-}
+
 
 
 //新添加一条教练信息
-AddCoach
+ AddCoach
 //
-input:
-{ 
-“Id”: int // Id > 0
-         “Name”: string
-         “PhoneNo”: long
-         “Email”: string
-}
-output:
-{
-          return 1
-}
-ifnotfound:
-{
-                                             return 2
-} 
+  input:
+  { 
+         "Id": 1 // Id > 0
+         "Name": "教练"
+         "PhoneNo": 123456
+         "Email": "123456@qq.com"
+  }
+  output:
+  {
+          "Code": 200
+          "Message": "成功"
+          "Data":null
+          
+          "Code": 999
+          "Message": "失败"
+          "Data": null
+  }
+
 
 //删除指定的教练信息
-DeleteCoach
+ DeleteCoach
 //
-input:
-{
-          “Id”: int //Id > 0
-}
-output:
-{
-            return 1
-}
-ifnotfound:
-{
-                                            return 3
-}
+  input:
+  {
+          "Id": 1 //Id > 0
+  }
+  output:
+  {
+          "Code": 200
+          "Message": "成功"
+          "Data":null
+          
+          "Code": 999
+          "Message": "失败"
+          "Data": null
+  }
+
 
 //修改指定的教练信息
-UpdateCoach
+ UpdateCoach
 //
-input:
-{
-          “Id”: int
-          “Name”: string
-          “PhoneNo”: long
-          “Email”: string
+  input:
+  {
+          "Id": 1 // Id > 0
+          "Name": "教练"
+          "PhoneNo": 123456
+          "Email": "123456@qq.com"
 
-}
-output:
-{
-           retrun 1
-}
-ifnotfound1:
-{
-                                             return 2
-}
-
-                                 ifnotfound2:
-                                 {
-                                             return 3
-                                 }
+  }
+  output:
+  {
+          "Code": 200
+          "Message": "成功"
+          "Data":null
+          
+          "Code": 999
+          "Message": "失败"
+          "Data": null
+  }
