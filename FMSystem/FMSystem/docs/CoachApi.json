@@ -1,9 +1,9 @@
 //生成数据上下文实例
- Initialize
+Initialize
 //
   input:
   {
-           "serviceProvider": IserviceProvider
+           "serviceProvider":IserviceProvider
   }
   output:
   {
@@ -20,8 +20,8 @@
   }
   output:
   {
-         "Code": 200
-         "Message": "成功"
+         "Code": 200,
+         "Message": "成功",
          "Data":
          {
               "Id": 1,
@@ -32,10 +32,10 @@
                     "UserId": 123,
                     "isCoach": true/false
                     }
-          }
+          },
           
-          "Code":999
-          "Message": "失败"
+          "Code":999,
+          "Message": "失败",
           "Data": null
                
    }
@@ -49,8 +49,8 @@
   }
   output:
   {
-         "Code": 200
-         "Message": "成功"
+         "Code": 200,
+         "Message": "成功",
          "Data":[
          {
               "Id": 1, 
@@ -74,10 +74,10 @@
                     }            
          }
             
-        ]
+        ],
         
-        "Code": 999
-        "Message": "失败"
+        "Code": 999,
+        "Message": "失败",
         "Data":null
 
 }
@@ -89,19 +89,19 @@
 //
   input:
   { 
-         "Id": 1, // Id > 0
+         "Id": 1, //Id>0
          "Name": "教练",
          "PhoneNo": 123456,
          "Email": "123456@qq.com"
   }
   output:
   {
-          "Code": 200
-          "Message": "成功"
-          "Data":null
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
           
-          "Code": 999
-          "Message": "失败"
+          "Code": 999,
+          "Message": "失败",
           "Data": null
   }
 
@@ -115,12 +115,12 @@
   }
   output:
   {
-          "Code": 200
-          "Message": "成功"
-          "Data":null
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
           
-          "Code": 999
-          "Message": "失败"
+          "Code": 999,
+          "Message": "失败",
           "Data": null
   }
 
@@ -138,11 +138,11 @@
   }
   output:
   {
-          "Code": 200
-          "Message": "成功"
-          "Data":null
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
           
-          "Code": 999
-          "Message": "失败"
+          "Code": 999,
+          "Message": "失败",
           "Data": null
   }
