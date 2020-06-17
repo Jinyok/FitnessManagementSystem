@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "main": "app.js",
   "scripts": {
-    "server": "node app",
+    "server": "npm run build && serve -s dist",
     "devserver": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },
@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
     "path": "^0.12.7",
+    "serve": "^11.3.2",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0"
   },

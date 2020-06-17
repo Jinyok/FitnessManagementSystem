@@ -40,12 +40,17 @@ export default {
             input_account: '',
             input_password: ''
         }
+    },
+    methods: {
+        login () {
+            // code here
+        }
     }
 };
 </script>
 
 <style>
-@import url("../../../static/css/font.css");
+@import url("../../assets/css/font.css");
 </style>
 
 <style>
