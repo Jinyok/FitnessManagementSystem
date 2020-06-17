@@ -8,7 +8,6 @@ using FMSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using FMSystem.Service;
-using Microsoft.Extensions.Logging;
 
 
 namespace FMSystem.Service
@@ -36,7 +35,7 @@ namespace FMSystem.Service
 
         public static void AddCoach(Coach coach)
         {
-         ResponseModel ResponseModel = new ResponseModel();
+            ResponseModel ResponseModel = new ResponseModel();
             if (coach.CoachId > 0)//合法性
             {
                 if (GetCoachesById(coach.CoachId) == null)//主键唯一性
@@ -48,51 +47,51 @@ namespace FMSystem.Service
                 }
             }
             ResponseModel.SetFailed();
-            
+
         }
 
         public static void DeleteCoach(int id)
         {
-         ResponseModel ResponseModel = new ResponseModel();
-            Coach coach = GetCoachesById(id);
-
-            if (coach == null)
+            ResponseModel ResponseModel = new ResponseModel();
+            if (id > 0)
             {
-                ResponseModel.SetFailed();
-                return;
+                Coach coach = GetCoachesById(id);
+                if (coach != null)
+                {
+                    coach.State = Coach.CoachState.LeaveOffice;
+                    context.SaveChanges();
+                    ResponseModel.SetSuccess();
+                    return;
+                }
             }
-
-            context.Coach.Remove(coach);
-            
-            context.SaveChanges();
-
             ResponseModel.SetSuccess();
+            return;
         }
 
         public static void UpdateCoach(Coach coach)
         {
-         ResponseModel ResponseModel = new ResponseModel();
+            ResponseModel ResponseModel = new ResponseModel();
+
             if (coach.CoachId > 0)
             {
-                Coach temp = context.Coach.Find(coach.CoachId);
-                if (temp == null)
+                Coach temp = context.Coach.Single(c => c.CoachId == coach.CoachId);
+                if (temp != null)
                 {
-                    ResponseModel.SetFailed();
+                    temp.CoachId = coach.CoachId;
+
+                    temp.Name = coach.Name;
+
+                    temp.Email = coach.Email;
+
+                    temp.PhoneNo = coach.PhoneNo;
+
+                    temp.State = coach.State;
+
+                    context.SaveChanges();
+
+                    ResponseModel.SetSuccess();
                     return;
                 }
-
-                temp.CoachId = coach.CoachId;
-
-                temp.Name = coach.Name;
-
-                temp.Email = coach.Email;
-
-                temp.PhoneNo = coach.PhoneNo;
-
-                context.SaveChanges();
-
-                ResponseModel.SetSuccess();
-                return;
             }
             ResponseModel.SetFailed();
             return;
