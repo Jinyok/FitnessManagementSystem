@@ -8,10 +8,12 @@ namespace FMSystem.Models
     {
         public int SectionId { get; set; }
         public int? CourseId { get; set; }
+        public int CoachId { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
 
         public virtual Course Course { get; set; }
+        public virtual Coach Coach { get; set; }
         public virtual ICollection<Takes> Takes { get; set; }
     }
 }

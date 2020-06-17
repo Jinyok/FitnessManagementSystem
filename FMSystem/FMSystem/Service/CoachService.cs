@@ -17,7 +17,6 @@ namespace FMSystem.Service
     public class CoachService
     {
         private static fmsContext context;
-        public static ResponseModel ResponseModel;
 
 
         public static Coach GetCoachesById(int id)
@@ -37,6 +36,7 @@ namespace FMSystem.Service
 
         public static void AddCoach(Coach coach)
         {
+         ResponseModel ResponseModel = new ResponseModel();
             if (coach.CoachId > 0)//合法性
             {
                 if (GetCoachesById(coach.CoachId) == null)//主键唯一性
@@ -53,6 +53,7 @@ namespace FMSystem.Service
 
         public static void DeleteCoach(int id)
         {
+         ResponseModel ResponseModel = new ResponseModel();
             Coach coach = GetCoachesById(id);
 
             if (coach == null)
@@ -70,6 +71,7 @@ namespace FMSystem.Service
 
         public static void UpdateCoach(Coach coach)
         {
+         ResponseModel ResponseModel = new ResponseModel();
             if (coach.CoachId > 0)
             {
                 Coach temp = context.Coach.Find(coach.CoachId);
