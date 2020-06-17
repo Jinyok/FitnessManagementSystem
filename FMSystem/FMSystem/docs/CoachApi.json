@@ -4,7 +4,7 @@
 //
   input:
   {
-        "Id": 1, // Id > 0,
+        "CoachId": 1, // CoachId > 0,
   }
   output:
   {
@@ -12,10 +12,11 @@
          "Message": "成功",
          "Data":
          {
-              "Id": 1,
+              "CoachId": 1,
               "Name": "教练",
               "PhoneNo": 1,
-              "Email": "123456@qq.com"
+              "Email": "123456@qq.com",
+              "State": "InOffice"
           },
           
           "Code":999,
@@ -37,17 +38,19 @@
          "Message": "成功",
          "Data":[
          {
-              "Id": 1, 
+              "CoachId": 1, 
               "Name": "教练",
               "PhoneNo": 123456,
-              "Email": "123456@qq.com"
+              "Email": "123456@qq.com",
+              "State": "InOffice"
          }
         
          {
-              "Id": 2, 
+              "CoachId": 2, 
               "Name": "教练",
               "PhoneNo": 456789,
-              "Email": "456789@qq.com"      
+              "Email": "456789@qq.com",
+              "State": "InOffice"
          }
             
         ],
@@ -65,10 +68,11 @@
 //
   input:
   { 
-         "Id": 1, //Id>0
+         "CoachId": 1, //CoachId>0
          "Name": "教练",
          "PhoneNo": 123456,
-         "Email": "123456@qq.com"
+         "Email": "123456@qq.com",
+         "State": "InOffice"
   }
   output:
   {
@@ -87,7 +91,7 @@
 //
   input:
   {
-          "Id": 1 //Id > 0
+          "CoachId": 1 //CoachId > 0
   }
   output:
   {
@@ -106,10 +110,11 @@
 //
   input:
   {
-          "Id": 1, // Id > 0
+          "CoachId": 1, // CoachId > 0
           "Name": "教练",
           "PhoneNo": 123456,
-          "Email": "123456@qq.com"
+          "Email": "123456@qq.com",
+          "State": "InOffice"
 
   }
   output:
