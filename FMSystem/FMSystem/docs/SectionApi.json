@@ -1,0 +1,198 @@
+
+//用于通过某节课的ID来得到指定的单节课的信息
+GetSectionBySectionId
+//
+  input:
+  {
+        "SectionId": 1, // SectionId > 0,
+  }
+  output:
+  {
+         "Code": 200,
+         "Message": "成功",
+         "Data":
+         {
+              "SectionId": 1,
+              "CourseId" : 1,
+              "CoachId"  : 1,
+              "StartDate":"周一 8:50",
+              "EndDate"  :"周一 12:15"
+          },
+          
+          "Code":999,
+          "Message": "失败",
+          "Data": null
+               
+   }
+
+//通过课程ID获得指定的课程的开课信息
+ GetSectionByCourseId
+//
+  input:
+  {
+         "CourseId": 1//CourseId > 0
+  }
+  output:
+  {
+         "Code": 200,
+         "Message": "成功",
+         "Data":[
+         {
+                "SectionId": 1,
+                "CourseId" : 1,
+                "CoachId"  : 1,
+                "StartDate":"周一 8:50",
+                "EndDate"  :"周一 12:15"
+         }
+        
+         {
+                "SectionId": 2,
+                "CourseId" : 1,
+                "CoachId"  : 2,
+                "StartDate":"周一 8:50",
+                "EndDate"  :"周一 12:15"
+         }
+            
+        ],
+        
+        "Code": 999,
+        "Message": "失败",
+        "Data":null
+
+}
+
+//通过教练ID获得指定的教练的教课信息
+GetSectionByCoachId
+//
+  input:
+  {
+         "CoachId": 1//CoachId > 0
+  }
+  output:
+  {
+         "Code": 200,
+         "Message": "成功",
+         "Data":[
+         {
+                "SectionId": 1,
+                "CourseId" : 1,
+                "CoachId"  : 1,
+                "StartDate":"周一 8:50",
+                "EndDate"  :"周一 12:15"
+         }
+        
+         {
+                "SectionId": 2,
+                "CourseId" : 1,
+                "CoachId"  : 1,
+                "StartDate":"周二 8:50",
+                "EndDate"  :"周二 12:15"
+         }
+            
+        ],
+        
+        "Code": 999,
+        "Message": "失败",
+        "Data":null
+
+}
+
+//通过上课时间获得在指定时间上课的课
+GetSectionByStratDate
+//
+  input:
+  {
+         "StratDate": "周一 8:50"
+  }
+  output:
+  {
+         "Code": 200,
+         "Message": "成功",
+         "Data":[
+         {
+                "SectionId": 1,
+                "CourseId" : 1,
+                "CoachId"  : 1,
+                "StartDate":"周一 8:50",
+                "EndDate"  :"周一 12:15"
+         }
+        
+         {
+                "SectionId": 2,
+                "CourseId" : 1,
+                "CoachId"  : 2,
+                "StartDate":"周一 8:50",
+                "EndDate"  :"周一 12:15"
+         }
+            
+        ],
+        
+        "Code": 999,
+        "Message": "失败",
+        "Data":null
+
+}
+
+//新添加一节课
+AddSection
+//
+  input:
+  { 
+        "SectionId": 1,//SectionId > 0
+        "CourseId" : 1,//CourseId > 0
+        "CoachId"  : 1,//CoachId > 0
+        "StartDate":"周一 8:50",
+        "EndDate"  :"周一 12:15"
+  }
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }
+
+//删除指定的一节课
+ DeleteSection
+//
+  input:
+  {
+          "SectionId": 1 //SectionId > 0
+  }
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }
+
+
+//修改指定的某节课的信息
+ UpdateSection
+//
+  input:
+  {
+        "SectionId": 1,//SectionId > 0
+        "CourseId" : 1,//CourseId > 0
+        "CoachId"  : 1,//CoachId > 0
+        "StartDate":"周一 8:50",
+        "EndDate"  :"周一 12:15"
+
+  }
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }

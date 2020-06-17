@@ -1,0 +1,119 @@
+
+//用于通过会员的ID来得到指定的会员信息
+GetMembersById
+//
+  input:
+  {
+        "MemberId": 1, // MemberId > 0,
+  }
+  output:
+  {
+         "Code": 200,
+         "Message": "成功",
+         "Data":
+         {
+              "MemberId": 1,
+              "Name": "会员",
+              "PhoneNo": 1
+          },
+          
+          "Code":999,
+          "Message": "失败",
+          "Data": null
+               
+   }
+
+//通过名字获得指定的会员信息
+ GetMembersByName
+//
+  input:
+  {
+         "Name": "会员"
+  }
+  output:
+  {
+         "Code": 200,
+         "Message": "成功",
+         "Data":[
+         {
+              "MemberId": 1, 
+              "Name": "会员",
+              "PhoneNo": 123456
+         }
+        
+         {
+              "MemberId": 2, 
+              "Name": "会员",
+              "PhoneNo": 456789
+         }
+            
+        ],
+        
+        "Code": 999,
+        "Message": "失败",
+        "Data":null
+
+}
+
+
+
+//新添加一条会员信息
+ AddMember
+//
+  input:
+  { 
+         "MemberId": 1, //MemberId > 0
+         "Name": "会员",
+         "PhoneNo": 123456
+  }
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }
+
+
+//删除指定的会员信息
+ DeleteMember
+//
+  input:
+  {
+          "MemberId": 1 //MemberId > 0
+  }
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }
+
+
+//修改指定的会员信息
+ UpdateCoach
+//
+  input:
+  {
+          "MemberId": 1, // MemberId > 0
+          "Name": "会员",
+          "PhoneNo": 123456
+
+  }
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }

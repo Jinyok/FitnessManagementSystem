@@ -1,0 +1,122 @@
+
+//用于通过会员的ID来得到会员的选课信息
+GetTakesByMemberId
+//
+  input:
+  {
+        "MemberId": 1, // MemberId > 0,
+  }
+  output:
+  {
+         "Code": 200,
+         "Message": "成功",
+         "Data":[
+         {
+              "MemberId": 1, 
+              "SectionId": 1
+         }
+        
+         {
+            "MemberId": 1, 
+            "SectionId": 2
+         }
+            
+        ],
+        
+        "Code": 999,
+        "Message": "失败",
+        "Data":null
+               
+   }
+
+//通过某节课的Id获得选该节课的会员信息
+ GetTakesBySectionId
+//
+  input:
+  {
+         "SectionId": 1 //SectionId > 0
+  }
+  output:
+  {
+         "Code": 200,
+         "Message": "成功",
+         "Data":[
+         {
+            "MemberId": 1, 
+            "SectionId": 1
+         }
+        
+         {
+            "MemberId": 2, 
+            "SectionId": 1
+         }
+            
+        ],
+        
+        "Code": 999,
+        "Message": "失败",
+        "Data":null
+
+}
+
+
+
+//新添加一条选课信息
+ AddTakes
+//
+  input:
+  { 
+          "MemberId": 1, //MemberId > 0
+          "SectionId": 1// SectionId > 0
+  }
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }
+
+
+//删除指定的选课信息
+ DeleteCoach
+//
+  input:
+  {
+          "MemberId": 1,//MemberId > 0
+          "SectionId": 1//SectionId > 0
+  }
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }
+
+
+//修改指定的选课信息
+ UpdateCoach
+//
+  input:
+  {
+           "MemberId": 1, 
+           "SectionId": 1
+
+  }
+  output:
+  {
+           "Code": 200,
+           "Message": "成功",
+           "Data":null,
+          
+           "Code": 999,
+           "Message": "失败",
+           "Data": null
+  }
