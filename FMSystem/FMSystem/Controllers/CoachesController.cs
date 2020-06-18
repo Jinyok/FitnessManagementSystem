@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FMSystem.Models;
+using FMSystem.Entity;
+using FMSystem.Entity.fms;
 
 namespace FMSystem.Controllers
 {

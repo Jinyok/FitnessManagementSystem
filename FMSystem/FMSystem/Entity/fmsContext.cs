@@ -3,7 +3,7 @@ using FMSystem.Entity.fms;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace FMSystem.Models
+namespace FMSystem.Entity
 {
     public partial class fmsContext : DbContext
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace FMSystem.Models
+namespace FMSystem.ViewModels
 {
     public class ErrorViewModel
     {

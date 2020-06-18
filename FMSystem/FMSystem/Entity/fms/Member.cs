@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FMSystem.Models
+namespace FMSystem.Entity.fms
 {
     public partial class Member
     {

@@ -10,6 +10,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using FMSystem.ViewModels;
 
 namespace FMSystem.Controllers
 {
@@ -47,8 +48,8 @@ namespace FMSystem.Controllers
         {
             //while (true) ;
             //return View("../Oauth/login");
-            _logger.LogInformation("Hello");
-            _logger.LogError("OH");
+            //_logger.LogInformation("Hello");
+            //_logger.LogError("OH");
             return View();
         }
     }

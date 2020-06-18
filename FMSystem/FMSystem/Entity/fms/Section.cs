@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace FMSystem.Models
+namespace FMSystem.Entity.fms
 {
     public partial class Section
     {

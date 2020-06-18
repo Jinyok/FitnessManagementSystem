@@ -23,6 +23,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Logging.Log4Net.AspNetCore.Entities;
 using LogDashboard;
+using FMSystem.Entity;
 
 namespace FMSystem
 {
