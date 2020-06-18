@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Comment CommentText="实体映射类">
-    <Position X="26.75" Y="5.75" Height="0.417" Width="0.971" />
+    <Position X="45" Y="3" Height="0.417" Width="0.971" />
   </Comment>
   <Class Name="FMSystem.Controllers.CoachesController">
-    <Position X="11.5" Y="7.75" Width="1.5" />
+    <Position X="11.25" Y="5.25" Width="4.25" />
     <TypeIdentifier>
-      <HashCode>IAAAAAgAAAAABAAAAAAAAAIAAAEAQAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAAAAAgAAAAABAAAAAAAAAIAAAEAQAABAAAAAAAAAAA=</HashCode>
       <FileName>Controllers\CoachesController.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -14,14 +14,14 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="FMSystem.Controllers.HomeController">
-    <Position X="9.75" Y="12.25" Width="1.5" />
+    <Position X="8.75" Y="13.25" Width="4.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAIAAAAQAAAAEQAAAAAAA=</HashCode>
       <FileName>Controllers\HomeController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FMSystem.Controllers.MembersController">
-    <Position X="9.75" Y="7.75" Width="1.5" />
+    <Position X="5.5" Y="4.5" Width="5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACgAAABEAAAAAAAACAAAAAAAAAACAAAAAAAAA=</HashCode>
       <FileName>Controllers\MembersController.cs</FileName>
@@ -31,7 +31,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="FMSystem.Controllers.UsersController">
-    <Position X="13" Y="9.5" Width="2" />
+    <Position X="15" Y="8.75" Width="4" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAAAAAAQAEAQAAAAAAAAAAAAAAMAAAAAAAAAA=</HashCode>
       <FileName>Controllers\UsersController.cs</FileName>
@@ -41,7 +41,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="FMSystem.Controllers.Binder.BodyFormModelBinder" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="9.75" Y="5.75" Width="1.5" />
+    <Position X="16" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Controllers\Binder\BodyFormModelBinder.cs</FileName>
@@ -49,7 +49,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Controllers.OauthController">
-    <Position X="9.75" Y="10.25" Width="1.5" />
+    <Position X="0.5" Y="4.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAACAAIAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>Controllers\OauthController.cs</FileName>
@@ -59,133 +59,131 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="FMSystem.Entity.fms.Coach" Collapsed="true">
-    <Position X="26.75" Y="6.5" Width="1.5" />
+    <Position X="45" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAACAAEAAAAAQAAAAQAAAAAEAABAAAAAA=</HashCode>
       <FileName>Entity\fms\Coach.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FMSystem.Entity.fms.Course" Collapsed="true">
-    <Position X="28.5" Y="6.5" Width="1.5" />
+    <Position X="46.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEACAAAAAAAEAAAAAAABAAAAAAAAAAAAAAAIAAAAA=</HashCode>
       <FileName>Entity\fms\Course.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FMSystem.Entity.fms.Instructs" Collapsed="true">
-    <Position X="26.75" Y="7.5" Width="1.5" />
+    <Position X="45" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACCAAAAAAAQAAAgAIAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Entity\fms\Instructs.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FMSystem.Entity.fms.Member" Collapsed="true">
-    <Position X="28.5" Y="7.5" Width="1.5" />
+    <Position X="46.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAEAAAAQQAAAAQAAAAAAAAAgAAAAA=</HashCode>
       <FileName>Entity\fms\Member.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FMSystem.Entity.fms.Section" Collapsed="true">
-    <Position X="30.5" Y="6.5" Width="1.5" />
+    <Position X="48.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAACAAAIAAAAAgAgAAAAAAAAAAAkAQAAA=</HashCode>
       <FileName>Entity\fms\Section.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FMSystem.Entity.fms.Takes" Collapsed="true">
-    <Position X="26.75" Y="8.5" Width="1.5" />
+    <Position X="45" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAIAAAAAAAAAIAQAAA=</HashCode>
       <FileName>Entity\fms\Takes.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FMSystem.Entity.fms.User" Collapsed="true">
-    <Position X="28.5" Y="8.5" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="FMSystem.Entity.fms.User.UserRole" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Entity\fms\User.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
+    <Position X="46.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAAAAAAAAAAAEAAAAAAAAAEAAAACAQAAAAAAAAA=</HashCode>
       <FileName>Entity\fms\User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FMSystem.Entity.fmsContext">
-    <Position X="14" Y="7" Width="5" />
-    <AssociationLine Name="User" Type="Microsoft.EntityFrameworkCore.DbSet&lt;TEntity&gt;" FixedFromPoint="true">
-      <Path>
-        <Point X="14.179" Y="7" />
-        <Point X="14.179" Y="6.298" />
-      </Path>
-    </AssociationLine>
+    <Position X="20.25" Y="2.75" Width="9" />
     <AssociationLine Name="Coach" Type="Microsoft.EntityFrameworkCore.DbSet&lt;TEntity&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="17.812" Y="7" />
-        <Point X="17.781" Y="6.876" />
-        <Point X="17.781" Y="6.298" />
+        <Point X="27.112" Y="2.75" />
+        <Point X="27.112" Y="2.375" />
+        <Point X="26.678" Y="2.375" />
+        <Point X="26.678" Y="1.048" />
       </Path>
       <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-0.234" Y="0.112" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="Instructs" Type="Microsoft.EntityFrameworkCore.DbSet&lt;TEntity&gt;" FixedFromPoint="true">
-      <Path>
-        <Point X="18.75" Y="7" />
-        <Point X="18.75" Y="6.298" />
-      </Path>
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-0.286" Y="0.164" />
+        <Position X="0.112" Y="-0.234" />
       </MemberNameLabel>
     </AssociationLine>
     <AssociationLine Name="Course" Type="Microsoft.EntityFrameworkCore.DbSet&lt;TEntity&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="14.625" Y="7" />
-        <Point X="14.625" Y="6.649" />
-        <Point X="14.625" Y="6.649" />
-        <Point X="14.625" Y="6.298" />
+        <Point X="21.375" Y="2.75" />
+        <Point X="21.375" Y="2.5" />
+        <Point X="21.312" Y="2.5" />
+        <Point X="21.312" Y="1.048" />
       </Path>
       <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-0.282" Y="0.145" />
+        <Position X="0.145" Y="-0.282" />
       </MemberNameLabel>
     </AssociationLine>
-    <AssociationLine Name="Section" Type="Microsoft.EntityFrameworkCore.DbSet&lt;TEntity&gt;" FixedFromPoint="true">
+    <AssociationLine Name="Instructs" Type="Microsoft.EntityFrameworkCore.DbSet&lt;TEntity&gt;" FixedFromPoint="true">
       <Path>
-        <Point X="17" Y="7" />
-        <Point X="17" Y="6.298" />
+        <Point X="24.75" Y="2.75" />
+        <Point X="24.75" Y="1.048" />
       </Path>
       <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-0.307" Y="0.154" />
+        <Position X="0.164" Y="-0.286" />
       </MemberNameLabel>
     </AssociationLine>
     <AssociationLine Name="Member" Type="Microsoft.EntityFrameworkCore.DbSet&lt;TEntity&gt;" FixedFromPoint="true">
       <Path>
-        <Point X="15.625" Y="7" />
-        <Point X="15.625" Y="6.298" />
+        <Point X="24.75" Y="2.75" />
+        <Point X="24.75" Y="2.375" />
+        <Point X="23.031" Y="2.375" />
+        <Point X="23.031" Y="1.048" />
       </Path>
       <MemberNameLabel ManuallyPlaced="true">
-        <Position X="-0.377" Y="0.141" />
+        <Position X="0.141" Y="-0.377" />
       </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Section" Type="Microsoft.EntityFrameworkCore.DbSet&lt;TEntity&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="24.75" Y="2.75" />
+        <Point X="24.75" Y="2.375" />
+        <Point X="25.714" Y="2.375" />
+        <Point X="25.714" Y="1.048" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.154" Y="-0.307" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="User" Type="Microsoft.EntityFrameworkCore.DbSet&lt;TEntity&gt;" FixedFromPoint="true">
+      <Path>
+        <Point X="20.572" Y="2.75" />
+        <Point X="20.572" Y="1.048" />
+      </Path>
     </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAQAAAAEIAAAAAAEgAIAAAAAAEAAIAAAAA=</HashCode>
       <FileName>Entity\fmsContext.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="User" />
       <Property Name="Coach" />
-      <Property Name="Instructs" />
       <Property Name="Course" />
-      <Property Name="Section" />
+      <Property Name="Instructs" />
       <Property Name="Member" />
+      <Property Name="Section" />
+      <Property Name="User" />
       <Property Name="Take" />
     </ShowAsAssociation>
   </Class>
   <Class Name="FMSystem.Extensions.AuthContext">
-    <Position X="13.25" Y="13" Width="1.5" />
+    <Position X="13.75" Y="14" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAABAAAAADAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Extensions\AuthContext.cs</FileName>
@@ -195,14 +193,14 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="FMSystem.Models.ResponseModel" Collapsed="true">
-    <Position X="30.5" Y="8.5" Width="1.5" />
+    <Position X="48.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAAAAAEAAAAgAAAAAAAAABAAIAAAIAAAAAA=</HashCode>
       <FileName>Models\ResponseModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FMSystem.Service.CoachService">
-    <Position X="15" Y="9.5" Width="1.75" />
+    <Position X="20" Y="9.25" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAACAAgAAAAAAAAABAACAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
       <FileName>Service\CoachService.cs</FileName>
@@ -210,9 +208,20 @@
     <ShowAsAssociation>
       <Field Name="context" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="FMSystem.Service.MemberService">
-    <Position X="20.75" Y="7" Width="1.5" />
+    <Position X="35" Y="9.75" Width="3.75" />
+    <AssociationLine Name="context" Type="FMSystem.Entity.fmsContext" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="36.875" Y="9.75" />
+        <Point X="36.875" Y="7.265" />
+        <Point X="32.208" Y="7.265" Type="JumpStart" />
+        <Point X="32.042" Y="7.265" Type="JumpEnd" />
+        <Point X="28.188" Y="7.265" />
+        <Point X="28.188" Y="4.32" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAQAAAAAAAAAACAAQAICAAAAAAAAAAAAAA=</HashCode>
       <FileName>Service\MemberService.cs</FileName>
@@ -220,9 +229,10 @@
     <ShowAsAssociation>
       <Field Name="context" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="FMSystem.Service.SectionService">
-    <Position X="16.75" Y="9.5" Width="2" />
+    <Position X="25.25" Y="9.25" Width="4" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAIAQAAAAgAAAAAAAAAAgQAgCAAAAAAAAAAA=</HashCode>
       <FileName>Service\SectionService.cs</FileName>
@@ -230,9 +240,10 @@
     <ShowAsAssociation>
       <Field Name="context" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="FMSystem.Service.TakeService">
-    <Position X="19.25" Y="9.75" Width="2" />
+    <Position X="30" Y="9.75" Width="4.25" />
     <TypeIdentifier>
       <HashCode>AAICAAAAAAAAIAAAAAAAAAAAAAAAAAAAABAAAgAAAIA=</HashCode>
       <FileName>Service\TakeService.cs</FileName>
@@ -240,35 +251,36 @@
     <ShowAsAssociation>
       <Field Name="context" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="FMSystem.ViewModels.ErrorViewModel" Collapsed="true">
-    <Position X="30.5" Y="7.5" Width="1.5" />
+    <Position X="48.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\ErrorViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FMSystem.Program">
-    <Position X="21.5" Y="10.75" Width="1.5" />
+    <Position X="32.25" Y="14.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FMSystem.Startup">
-    <Position X="23.75" Y="10.75" Width="1.5" />
+    <Position X="29.25" Y="14.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAgAAACAAAAAA=</HashCode>
       <FileName>Startup.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Microsoft.EntityFrameworkCore.DbSet&lt;TEntity&gt;" Collapsed="true">
-    <Position X="14" Y="5.75" Width="5" />
+    <Position X="20.25" Y="0.5" Width="8.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="Microsoft.AspNetCore.Http.IHttpContextAccessor" Collapsed="true">
-    <Position X="13.25" Y="12" Width="1.5" />
+    <Position X="15" Y="12.25" Width="1.5" />
     <TypeIdentifier />
   </Interface>
   <Font Name="Microsoft YaHei UI" Size="9" />

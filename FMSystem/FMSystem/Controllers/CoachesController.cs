@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FMSystem.Models;
 using FMSystem.Entity;
 using FMSystem.Entity.fms;
+using FMSystem.Interface;
 
 namespace FMSystem.Controllers
 {
@@ -16,10 +17,12 @@ namespace FMSystem.Controllers
     public class CoachesController : ControllerBase
     {
         private readonly fmsContext _context;
+        private readonly ICoachService _coachService;
 
-        public CoachesController(fmsContext context)
+        public CoachesController(fmsContext context,ICoachService coachService)
         {
             _context = context;
+            _coachService = coachService;
         }
 
         // GET: api/Coaches

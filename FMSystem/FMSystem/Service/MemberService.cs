@@ -9,15 +9,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using FMSystem.Service;
 using FMSystem.Entity.fms;
+using FMSystem.Interface;
 
 namespace FMSystem.Service
 {
-    public class MemberService
+    public class MemberService:IMemberService
     {
 
-        private static fmsContext context;
+        private fmsContext context;
 
-        public static ResponseModel GetMembersById(int id)
+        public MemberService(fmsContext context)
+        {
+            this.context = context;
+        }
+        public ResponseModel GetMembersById(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -33,7 +38,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel GetMembersByName(string name)
+        public ResponseModel GetMembersByName(string name)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -50,7 +55,7 @@ namespace FMSystem.Service
 
         }
 
-        public static ResponseModel AddMember(Member member)
+        public ResponseModel AddMember(Member member)
         {
             ResponseModel ResponseModel = new ResponseModel();
             if (member.MemberId > 0)//合法性
@@ -67,7 +72,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel DeleteMember(int id)
+        public ResponseModel DeleteMember(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -86,7 +91,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel UpdateMember(Member member)
+        public ResponseModel UpdateMember(Member member)
         {
             ResponseModel ResponseModel = new ResponseModel();
             if (member.MemberId > 0)

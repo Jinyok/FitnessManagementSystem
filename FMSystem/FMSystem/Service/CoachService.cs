@@ -9,16 +9,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using FMSystem.Service;
 using FMSystem.Entity.fms;
+using FMSystem.Interface;
 
 namespace FMSystem.Service
 {
 
-    public class CoachService
+    public class CoachService:ICoachService
     {
-        private static fmsContext context;
+        private fmsContext context;
+        public CoachService(fmsContext context)
+        {
+            this.context = context;
+        }
 
-
-        public static ResponseModel GetCoachesById(int id)
+        public ResponseModel GetCoachesById(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -34,7 +38,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel GetCoachesByName(string name)
+        public ResponseModel GetCoachesByName(string name)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -51,7 +55,7 @@ namespace FMSystem.Service
 
         }
 
-        public static ResponseModel AddCoach(Coach coach)
+        public ResponseModel AddCoach(Coach coach)
         {
             ResponseModel ResponseModel = new ResponseModel();
             if (coach.CoachId > 0)//合法性
@@ -69,7 +73,7 @@ namespace FMSystem.Service
 
         }
 
-        public static ResponseModel DeleteCoach(int id)
+        public ResponseModel DeleteCoach(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
             if (id > 0)
@@ -87,7 +91,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel UpdateCoach(Coach coach)
+        public ResponseModel UpdateCoach(Coach coach)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
