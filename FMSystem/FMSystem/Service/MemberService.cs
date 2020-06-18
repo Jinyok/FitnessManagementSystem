@@ -16,22 +16,40 @@ namespace FMSystem.Service
 
         private static fmsContext context;
 
-        public static Member GetMembersById(int id)
+        public static ResponseModel GetMembersById(int id)
         {
+            ResponseModel ResponseModel = new ResponseModel();
+
             Member members = context.Member.Single(m => m.MemberId == id);
 
-            return members;
+            ResponseModel.SetData(members);
+
+            if (members == null)
+                ResponseModel.SetFailed();
+            else
+                ResponseModel.SetSuccess();
+
+            return ResponseModel;
         }
 
-        public static List<Member> GetMembersByName(string name)
+        public static ResponseModel GetMembersByName(string name)
         {
+            ResponseModel ResponseModel = new ResponseModel();
+
             List<Member> members = context.Member.Where(m => m.Name == name).ToList();
 
-            return members;
+            ResponseModel.SetData(members);
+
+            if (members == null)
+                ResponseModel.SetFailed();
+            else
+                ResponseModel.SetSuccess();
+
+            return ResponseModel;
 
         }
 
-        public static void AddMember(Member member)
+        public static ResponseModel AddMember(Member member)
         {
             ResponseModel ResponseModel = new ResponseModel();
             if (member.MemberId > 0)//合法性
@@ -41,33 +59,33 @@ namespace FMSystem.Service
                     context.Member.Add(member);
                     context.SaveChanges();
                     ResponseModel.SetSuccess();
-                    return;
+                    return ResponseModel;
                 }
             }
             ResponseModel.SetFailed();
-
+            return ResponseModel;
         }
 
-        public static void DeleteMember(int id)
+        public static ResponseModel DeleteMember(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
             if (id > 0)
             {
-                Member member = GetMembersById(id);
+                Member member = context.Member.Single(m => m.MemberId == id);
                 if (member != null)
                 {
                     context.Member.Remove(member);
                     context.SaveChanges();
                     ResponseModel.SetSuccess();
-                    return;
+                    return ResponseModel;
                 }
             }
             ResponseModel.SetSuccess();
-            return;
+            return ResponseModel;
         }
 
-        public static void UpdateMember(Member member)
+        public static ResponseModel UpdateMember(Member member)
         {
             ResponseModel ResponseModel = new ResponseModel();
             if (member.MemberId > 0)
@@ -84,11 +102,11 @@ namespace FMSystem.Service
                     context.SaveChanges();
 
                     ResponseModel.SetSuccess();
-                    return;
+                    return ResponseModel;
                 }
             }
             ResponseModel.SetFailed();
-            return;
+            return ResponseModel;
         }
 
     }

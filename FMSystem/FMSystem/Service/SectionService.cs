@@ -14,34 +14,70 @@ namespace FMSystem.Service
     public class SectionService
     {
         private static fmsContext context;
-        public static Section GetSectionBySectionId(int id)
+        public static ResponseModel GetSectionBySectionId(int id)
         {
+            ResponseModel ResponseModel = new ResponseModel();
+
             Section section = context.Section.Single(s => s.SectionId == id);
 
-            return section;
+            ResponseModel.SetData(section);
+
+            if (section == null)
+                ResponseModel.SetFailed();
+            else
+                ResponseModel.SetSuccess();
+
+            return ResponseModel;
         }
 
-        public static List<Section> GetSectionByCourseId(int id)
+        public static ResponseModel GetSectionByCourseId(int id)
         {
+            ResponseModel ResponseModel = new ResponseModel();
+
             var sections = context.Section.Where(s => s.CourseId == id).ToList();
 
-            return sections;
+            ResponseModel.SetData(sections);
+
+            if (sections == null)
+                ResponseModel.SetFailed();
+            else
+                ResponseModel.SetSuccess();
+
+            return ResponseModel;
         }
 
-        public static List<Section> GetSectionByCoachId(int id)
+        public static ResponseModel GetSectionByCoachId(int id)
         {
+            ResponseModel ResponseModel = new ResponseModel();
+
             var sections = context.Section.Where(s => s.CoachId == id).ToList();
 
-            return sections;
+            ResponseModel.SetData(sections);
+
+            if (sections == null)
+                ResponseModel.SetFailed();
+            else
+                ResponseModel.SetSuccess();
+
+            return ResponseModel;
         }
 
-        public static List<Section> GetSectionByStartDate(DateTime time)
+        public static ResponseModel GetSectionByStartDate(DateTime time)
         {
+            ResponseModel ResponseModel = new ResponseModel();
+
             var sections = context.Section.Where(s => s.StartDate == time).ToList();
 
-            return sections;
+            ResponseModel.SetData(sections);
+
+            if (sections == null)
+                ResponseModel.SetFailed();
+            else
+                ResponseModel.SetSuccess();
+
+            return ResponseModel;
         }
-        public static void AddSection(Section section)
+        public static ResponseModel AddSection(Section section)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -51,42 +87,42 @@ namespace FMSystem.Service
                 {
                     var sections = context.Section.Where(s => s.StartDate == section.StartDate).ToList();
                     var sections1 = sections.Find(s => s.CoachId == section.CoachId);
-                    if (sections1 == null || CoachService.GetCoachesById(sections1.CoachId).State == Coach.CoachState.LeaveOffice)//上课的教练在此时间没有课或已经离职
+                    if (sections1 == null || context.Coach.Single(c => c.CoachId == section.CoachId).State == Coach.CoachState.LeaveOffice)//上课的教练在此时间没有课或已经离职
                     {
                         context.Section.Add(section);
                         context.SaveChanges();
                         ResponseModel.SetSuccess();
-                        return;
+                        return ResponseModel;
                     }
 
                 }
             }
 
             ResponseModel.SetFailed();
-            return;
+            return ResponseModel;
         }
 
-        public static void DeleteSection(int id)
+        public static ResponseModel DeleteSection(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
             if (id > 0)
             {
-                Section section = GetSectionBySectionId(id);
+                Section section = context.Section.Single(s => s.SectionId == id);
                 if (section != null)
                 {
                     context.Section.Remove(section);
                     context.SaveChanges();
                     ResponseModel.SetSuccess();
-                    return;
+                    return ResponseModel;
                 }
             }
             ResponseModel.SetSuccess();
-            return;
+            return ResponseModel;
 
         }
 
-        public static void UpdateSection(Section section)
+        public static ResponseModel UpdateSection(Section section)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -108,11 +144,11 @@ namespace FMSystem.Service
                     context.SaveChanges();
 
                     ResponseModel.SetSuccess();
-                    return;
+                    return ResponseModel;
                 }
             }
             ResponseModel.SetFailed();
-            return;
+            return ResponseModel;
         }
     }
 }

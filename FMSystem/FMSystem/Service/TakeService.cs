@@ -16,21 +16,39 @@ namespace FMSystem.Service
     {
         private static fmsContext context;
 
-        public static List<Takes> GetTakesByMemberId(int id)
+        public static ResponseModel GetTakesByMemberId(int id)
         {
+            ResponseModel ResponseModel = new ResponseModel();
+
             var takes = context.Take.Where(t => t.MemberId == id).ToList();
 
-            return takes;
+            ResponseModel.SetData(takes);
+
+            if (takes == null)
+                ResponseModel.SetFailed();
+            else
+                ResponseModel.SetSuccess();
+
+            return ResponseModel;
         }
 
-        public static List<Takes> GetTakesBySectionId(int id)
+        public static ResponseModel GetTakesBySectionId(int id)
         {
+            ResponseModel ResponseModel = new ResponseModel();
+
             var takes = context.Take.Where(t => t.SectionId == id).ToList();
 
-            return takes;
+            ResponseModel.SetData(takes);
+
+            if (takes == null)
+                ResponseModel.SetFailed();
+            else
+                ResponseModel.SetSuccess();
+
+            return ResponseModel;
         }
 
-        public static void AddTakes(Takes takes)
+        public static ResponseModel AddTakes(Takes takes)
         {
             ResponseModel ResponseModel = new ResponseModel();
             if(takes.MemberId > 0 && takes.SectionId > 0)
@@ -42,14 +60,14 @@ namespace FMSystem.Service
                     context.Take.Add(takes);
                     context.SaveChanges();
                     ResponseModel.SetSuccess();
-                    return;
+                    return ResponseModel;
                 }
             }
             ResponseModel.SetFailed();
-            return;
+            return ResponseModel;
         }
 
-        public static void DeleteTakes(int memberid, int sectionid)
+        public static ResponseModel DeleteTakes(int memberid, int sectionid)
         {
             ResponseModel ResponseModel = new ResponseModel();
             if (memberid > 0 && sectionid > 0)
@@ -61,14 +79,14 @@ namespace FMSystem.Service
                     context.Take.Remove(takes1);
                     context.SaveChanges();
                     ResponseModel.SetSuccess();
-                    return;
+                    return ResponseModel;
                 }
             }
             ResponseModel.SetFailed();
-            return;
+            return ResponseModel;
         }
 
-        public static void UpdateTakes(Takes takes)
+        public static ResponseModel UpdateTakes(Takes takes)
         {
             ResponseModel ResponseModel = new ResponseModel();
             if(takes.MemberId > 0 && takes.SectionId > 0)
@@ -81,11 +99,11 @@ namespace FMSystem.Service
                     take1.SectionId = takes.SectionId;
                     context.SaveChanges();
                     ResponseModel.SetSuccess();
-                    return;
+                    return ResponseModel;
                 }
             }
             ResponseModel.SetFailed();
-            return;
+            return ResponseModel;
         }
 
     }
