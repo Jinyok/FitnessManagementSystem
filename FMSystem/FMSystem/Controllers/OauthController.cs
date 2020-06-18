@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
 using FMSystem.Controllers.Binder;
+using FMSystem.Entity.fms;
 using FMSystem.Extensions;
 using FMSystem.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -39,7 +40,7 @@ namespace Server.Controllers
                 var claims = new List<Claim>(){
                     new Claim("Id",0.ToString()),
                     new Claim(ClaimTypes.Name,username),
-                    new Claim("UserRole",((int)FMSystem.Models.User.UserRole.Root).ToString())
+                    new Claim("UserRole",((int)FMSystem.Entity.fms.User.UserRole.Root).ToString())
 
                 };
 

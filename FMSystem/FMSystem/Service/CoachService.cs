@@ -8,7 +8,7 @@ using FMSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using FMSystem.Service;
-
+using FMSystem.Entity.fms;
 
 namespace FMSystem.Service
 {
