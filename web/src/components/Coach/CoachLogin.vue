@@ -1,4 +1,5 @@
 <template>
+<div class = "CoachLogin">
 <el-container>
     <el-header class="red" style="height: 370px">
         <div class="div_content" style="top: 210px">
@@ -17,10 +18,10 @@
             <el-input placeholder="PASSWORD" v-model="input_password" show-password>
             </el-input>
         </div>
-        <div class="div_content" style="margin-top: 140px">
+        <div class="div_content" style="margin-top: 140px" @click="routeToView">
             <el-button type="danger" round>SIGN IN</el-button>
         </div>
-        <div class="div_content" style="margin-top: 300px">
+        <div class="div_content" style="bottom: 50px">
             <el-link type="info">Login as reception </el-link>
             <span style="color:#909399">/</span>
             <el-link type="info">Login as manager </el-link>
@@ -29,10 +30,10 @@
         </div>
     </el-main>
 </el-container>
+</div>
 </template>
 
 <script>
-
 export default {
     name: 'CoachLogin',
     data () {
@@ -42,11 +43,15 @@ export default {
         }
     },
     methods: {
-        login () {
+        login: function() {
             // code here
+        },
+        routeToView: function() {
+            this.$router.push({ path:'/coach' })
         }
     }
 };
+
 </script>
 
 <style>
