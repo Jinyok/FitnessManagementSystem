@@ -9,14 +9,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using FMSystem.Service;
 using FMSystem.Entity.fms;
+using FMSystem.Interface;
 
 namespace FMSystem.Service
 {
-    public class TakeService
+    public class TakeService:ITakeService
     {
-        private static fmsContext context;
+        private fmsContext context;
+        public TakeService(fmsContext context)
+        {
+            this.context = context;
+        }
 
-        public static ResponseModel GetTakesByMemberId(int id)
+        public ResponseModel GetTakesByMemberId(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -32,7 +37,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel GetTakesBySectionId(int id)
+        public ResponseModel GetTakesBySectionId(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -48,7 +53,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel AddTakes(Takes takes)
+        public ResponseModel AddTakes(Takes takes)
         {
             ResponseModel ResponseModel = new ResponseModel();
             if(takes.MemberId > 0 && takes.SectionId > 0)
@@ -67,7 +72,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel DeleteTakes(int memberid, int sectionid)
+        public ResponseModel DeleteTakes(int memberid, int sectionid)
         {
             ResponseModel ResponseModel = new ResponseModel();
             if (memberid > 0 && sectionid > 0)
@@ -86,7 +91,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel UpdateTakes(Takes takes)
+        public ResponseModel UpdateTakes(Takes takes)
         {
             ResponseModel ResponseModel = new ResponseModel();
             if(takes.MemberId > 0 && takes.SectionId > 0)

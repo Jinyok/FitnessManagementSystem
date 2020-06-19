@@ -9,13 +9,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using FMSystem.Service;
 using FMSystem.Entity.fms;
+using FMSystem.Interface;
 
 namespace FMSystem.Service
 {
-    public class SectionService
+    public class SectionService:ISectionService
     {
-        private static fmsContext context;
-        public static ResponseModel GetSectionBySectionId(int id)
+        private fmsContext context;
+        public SectionService(fmsContext context)
+        {
+            this.context = context;
+        }
+        public ResponseModel GetSectionBySectionId(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -31,7 +36,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel GetSectionByCourseId(int id)
+        public ResponseModel GetSectionByCourseId(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -47,7 +52,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel GetSectionByCoachId(int id)
+        public ResponseModel GetSectionByCoachId(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -63,7 +68,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel GetSectionByStartDate(DateTime time)
+        public ResponseModel GetSectionByStartDate(DateTime time)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -78,7 +83,7 @@ namespace FMSystem.Service
 
             return ResponseModel;
         }
-        public static ResponseModel AddSection(Section section)
+        public ResponseModel AddSection(Section section)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -103,7 +108,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public static ResponseModel DeleteSection(int id)
+        public ResponseModel DeleteSection(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -123,7 +128,7 @@ namespace FMSystem.Service
 
         }
 
-        public static ResponseModel UpdateSection(Section section)
+        public ResponseModel UpdateSection(Section section)
         {
             ResponseModel ResponseModel = new ResponseModel();
 

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
 using FMSystem.Controllers.Binder;
+using FMSystem.Entity;
 using FMSystem.Entity.fms;
 using FMSystem.Extensions;
 using FMSystem.Models;
@@ -14,14 +15,20 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
-namespace Server.Controllers
+namespace Controllers
 {
 
     [Route("api/[controller]/[Action]")]
     [ApiController]
     public class OauthController : ControllerBase
-
     {
+
+        private readonly fmsContext _context;
+        public OauthController(fmsContext context)
+        {
+            _context = context;
+        }
+
         /// <summary>
         /// post 登录请求
         /// </summary>

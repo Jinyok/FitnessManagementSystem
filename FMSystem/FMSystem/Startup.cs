@@ -24,6 +24,8 @@ using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Logging.Log4Net.AspNetCore.Entities;
 using LogDashboard;
 using FMSystem.Entity;
+using FMSystem.Interface;
+using FMSystem.Service;
 
 namespace FMSystem
 {
@@ -85,6 +87,12 @@ namespace FMSystem
             });
 
             services.AddLogDashboard();
+
+            //
+            services.AddScoped<ICoachService, CoachService>();
+            services.AddScoped<IMemberService, MemberService>();
+            services.AddScoped<ISectionService, SectionService>();
+            services.AddScoped<ITakeService, TakeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
