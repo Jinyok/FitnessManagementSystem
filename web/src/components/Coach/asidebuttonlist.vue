@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import asidebutton from './asidebutton.vue'
+import asidebutton from '../asidebutton.vue'
 
 export default {
   name: "asidebuttonlist",
@@ -28,20 +28,28 @@ export default {
       var allasidebutton = this.$children
       for (var i = 0; i < allasidebutton.length; i++) {
         allasidebutton[i].reselect(con)
+      }
       
       if (con === 'EXIT')
-        this.$router.push({ path: '/coach/login' })
-      }
+        this.$emit('exit')
+
+      this.$emit('select', con)
     }
   },
   mounted: function () {
-    this.reselect("HOME")
+    var allasidebutton = this.$children
+      for (var i = 0; i < allasidebutton.length; i++) {
+          allasidebutton[i].bgcolor_="#de5757" 
+          allasidebutton[i].bgcolorMoveover_="#de8888"
+          allasidebutton[i].button_mouseleave()
+      }
+      allasidebutton[0].button_click()
   }
 }
 </script>
 
 <style>
-@import url("../../../assets/css/font.css");
+@import url("../../assets/css/font.css");
 </style>
 
 
