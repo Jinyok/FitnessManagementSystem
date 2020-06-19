@@ -11,7 +11,7 @@ const routes = [
         component: () => import ('./components/Coach/CoachView.vue'),
         children:[ // sub pages
             {
-                path: '/home',
+                path: 'home',
                 name: 'CoachHome',
                 component: CoachHome
             }
@@ -35,6 +35,23 @@ const routes = [
         path: '/coach',
         name: 'Coach',
         component: () => import ('./components/Coach/CoachView.vue'),
+        children:[
+            {
+                path: 'home',
+                name: 'CoachHome',
+                component: () => import ('./components/Coach/CoachHome.vue')
+            },
+            {
+                path: 'schedule',
+                name: 'CoachSchedule',
+                component: () => import ('./components/Coach/CoachSchedule.vue')
+            },
+            {
+                path: 'courses',
+                name: 'CoachCourses',
+                component: () => import ('./components/Coach/CoachCourses.vue')
+            },
+        ],
     },
     {
         path: '/coach/login',
@@ -70,6 +87,10 @@ const routes = [
         path: '/reception/login',
         name: 'ReceptionLogin',
         component: () => import ('./components/Reception/ReceptionLogin.vue'),
+    },
+    {
+        path: '/',
+        redirect: '/coach'
     }
 ];
 

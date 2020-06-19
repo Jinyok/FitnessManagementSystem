@@ -7,26 +7,19 @@
         </el-aside>
 
         <el-main  style="background: #E5E5E5">
-            <pagehome v-show="showpage.showPageHome"></pagehome>
-            <pageschedule v-show="showpage.showPageSchedule"></pageschedule>
-            <pagecourses v-show="showpage.showPageCourses"></pagecourses>
+            <router-view></router-view>
         </el-main>
     </el-container>
 </template>
 
 <script>
+import methods from '../../methods.js'
 import asidebuttonlist from './asidebuttonlist.vue'
-import pagehome from './PageHome.vue'
-import pageschedule from './PageSchedule'
-import pagecourses from './PageCourses'
 
 export default {
     name: 'CoachView',
     components: {
         asidebuttonlist,
-        pagehome,
-        pageschedule,
-        pagecourses
     },
     data() {
         return {
@@ -39,20 +32,16 @@ export default {
     },
     methods: {
         change: function (con) {
-            if (con=='HOME') {
-                this.$set(this.showpage, 'showPageHome', true)
-                this.$set(this.showpage, 'showPageSchedule', false)
-                this.$set(this.showpage, 'showPageCourses', false)
-            }
-            else if (con=='SCHEDULE') {
-                this.$set(this.showpage, 'showPageHome', false)
-                this.$set(this.showpage, 'showPageSchedule', true)
-                this.$set(this.showpage, 'showPageCourses', false)
-            }
-            else if (con=='COURSES') {
-                this.$set(this.showpage, 'showPageHome', false)
-                this.$set(this.showpage, 'showPageSchedule', false)
-                this.$set(this.showpage, 'showPageCourses', true)
+            switch (con) {
+                case 'HOME':
+                    this.$router.push ('/coach/home');
+                    break;
+                case 'SCHEDULE':
+                    this.$router.push ('/coach/schedule');
+                    break;
+                case 'COURSES':
+                    this.$router.push ('/coach/courses');
+                    break;
             }
         },
         exit: function () {
