@@ -1,11 +1,10 @@
 <template>
   <div class="asidebuttonlist">
     <div class="div_aside">
-      <h1 style="font-size: 32px">COACH<br></h1>
+      <h1 style="font-size: 32px">RECEPTION<br></h1>
     </div>
 
-    <asidebutton content="HOME" @select="reselect"></asidebutton>
-    <asidebutton content="SCHEDULE" @select="reselect"></asidebutton>
+    <asidebutton content="COURSE MANAGER" @select="reselect"></asidebutton>
     <asidebutton content="COURSES" @select="reselect"></asidebutton>
 
     <div style="position:absolute;bottom: 10px">
@@ -39,8 +38,8 @@ export default {
   mounted: function () {
     var allasidebutton = this.$children
       for (var i = 0; i < allasidebutton.length; i++) {
-          allasidebutton[i].bgcolor_="#de5757" 
-          allasidebutton[i].bgcolorMoveover_="#de8888"
+          allasidebutton[i].bgcolor_="#78D386" 
+          allasidebutton[i].bgcolorMoveover_="#8aD399"
           allasidebutton[i].button_mouseleave()
       }
       allasidebutton[0].button_click()

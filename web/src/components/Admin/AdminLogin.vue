@@ -1,9 +1,9 @@
 <template>
-<div class = "CoachLogin">
+<div class = "AdminLogin">
 <el-container>
-    <el-header class="red" style="height: 370px">
+    <el-header class="grey" style="height: 370px">
         <div class="div_content" style="top: 210px">
-            <span style="font-size: 35px; letter-spacing:18px">COACH</span>
+            <span style="font-size: 35px; letter-spacing:18px">ADMIN</span>
             <br>
             <strong style="font-size: 90px; letter-spacing:15px; line-height:84px">LOGIN</strong>
         </div>
@@ -19,14 +19,14 @@
             </el-input>
         </div>
         <div class="div_content" style="margin-top: 140px" @click="routeToView">
-            <el-button type="danger" round>SIGN IN</el-button>
+            <el-button type="info" round>SIGN IN</el-button>
         </div>
         <div class="div_content" style="bottom: 50px">
             <el-link type="info" @click="routeToReception">Login as reception </el-link>
             <span style="color:#909399">/</span>
             <el-link type="info" @click="routeToManager">Login as manager </el-link>
             <span style="color:#909399">/</span>
-            <el-link type="info" @click="routeToAdmin">Login as admin</el-link>
+            <el-link type="info" @click="routeToCoach">Login as coach</el-link>
         </div>
     </el-main>
 </el-container>
@@ -35,7 +35,7 @@
 
 <script>
 export default {
-    name: 'CoachLogin',
+    name: 'AdminLogin',
     data () {
         return {
             input_account: '',
@@ -47,7 +47,7 @@ export default {
             // code here
         },
         routeToView: function() {
-            this.$router.push({ path:'/coach' })
+            this.$router.push({ path:'/admin' })
         },
         routeToReception: function() {
             this.$router.push({ path:'/reception/login' })
@@ -55,8 +55,8 @@ export default {
         routeToManager: function() {
             this.$router.push({ path:'/manager/login' })
         },
-        routeToAdmin: function() {
-            this.$router.push({ path:'/admin/login' })
+        routeToCoach: function() {
+            this.$router.push({ path:'/coach/login' })
         }
     }
 };
@@ -84,8 +84,8 @@ html,body,#app,.el-container{
     /*高度为100%*/
     height: 100%;
   }
-.red {
-    background-color: #de5757;
+.grey {
+    background-color: #929292;
     color: #ffffff;
   }
 </style>

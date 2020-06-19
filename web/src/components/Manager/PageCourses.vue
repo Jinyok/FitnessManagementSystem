@@ -1,12 +1,12 @@
 <template>
-    <div class="pagehome">
-        <p>pagehome</p>
+    <div class="pagecourses">
+        <p>pagecourses</p>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'pagehome',
+    name: 'pagecourses',
     data() {
         return {
 
@@ -17,7 +17,4 @@ export default {
 
 <style>
 @import url("../../assets/css/font.css");
-</style>
-
-<style>
 </style>
