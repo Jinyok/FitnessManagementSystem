@@ -32,7 +32,7 @@ The webpage of this project providing user interface for coach and other clerk.
 
 ### 教练 (coach)
 
-- 教练登入页(`coach_login`): 作为教练登入，登入后跳转至教练个人页（下列所有页面可以直接登出至该页面）
+- 教练登入页(`coach_login`): 作为教练登入，下列所有页面可以直接登出至该页面，登入后跳转至教练个人页
 
 - 教练个人页(`coach_home`): 显示部分个人信息、当前负责的课程数、下一次课的课程安排，可跳转至教练课程表页、教练负责课程页
 
@@ -44,7 +44,7 @@ The webpage of this project providing user interface for coach and other clerk.
 
 ### 人事 (manager)
 
-- 人事登入页(`manager_login`): 作为人事登入，登入后跳转至教练管理页（下列所有页面可以直接登出至该页面）
+- 人事登入页(`manager_login`): 作为人事登入，下列所有页面可以直接登出至该页面，登入后跳转至教练管理页
 
 - 人事教练管理页(`manager_coaches`): 教练列表，可以导出教练数据，可通过筛选显示符合条件的教练，可通过搜索教练id跳转至特定人事教练详情页，可跳转至人事新增教练页、人事教练详情页
 
@@ -57,11 +57,11 @@ The webpage of this project providing user interface for coach and other clerk.
 
 - 人事新增课程页(`manager_new_course`): 填写课程信息，提交可新增课程，可返回至人事课程管理页
 
-- 人事课程详情页(`manager_course_details`): 显示课程详情、负责教练、参与成员，可修改课程信息、删除课程，可返回至人事课程管理页
+- 人事课程详情页(`manager_course_details`): 显示课程详情，可修改课程信息、删除课程，可返回至人事课程管理页
 
 ### 前台 (reception)
 
-- 前台登入页(`reception_login`): 作为前台登入，登入后跳转至前台管理页（下列所有页面可以直接登出至该页面）
+- 前台登入页(`reception_login`): 作为前台登入，下列所有页面可以直接登出至该页面，登入后跳转至前台管理页
 
 > 下列所有页面侧栏均有一输入框，可通过输入会员id来显示特定会员的信息
 
@@ -69,6 +69,10 @@ The webpage of this project providing user interface for coach and other clerk.
 
 - 前台选课列表页(`reception_courses`): 显示课程列表，可通过筛选显示符合条件的课程，可选课，可跳转至前台课程管理页
 
-(followings unfinished)
-
 ### 系统管理员 (admin)
+
+- 系统管理员登入页(`admin_login`): 作为系统管理员登入，下列所有页面可以直接登出至该页面，登入后跳转至账户管理页
+
+- 用户管理页(`admin_users`): 显示用户列表，可新增或删除用户
+
+- 用户注册页(`admin_register`): 注册新用户
