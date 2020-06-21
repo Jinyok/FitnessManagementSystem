@@ -14,9 +14,7 @@ GetSectionBySectionId
               "SectionId": 1,
               "CourseId" : 1,
               "CoachId"  : 1,
-              "Date"     : 1, //monday
-              "StartTime": { "Hour":8, "Minute": 50 },
-              "EndTime"  : { "Hour":12, "Minute": 15 }
+              "Slot"     : { "Start": 1592700600, "End": 1592712900 }
           },
           
           "Code":999,
@@ -41,18 +39,14 @@ GetSectionBySectionId
                 "SectionId": 1,
                 "CourseId" : 1,
                 "CoachId"  : 1,
-                "Date"     : 1,//monday
-                "StartTime": { "Hour":8, "Minute": 50 },
-                "EndTime"  : { "Hour":12, "Minute": 15 }
+                "Slot"     : { "Start": 1592700600, "End": 1592712900 }
          }
         
          {
                 "SectionId": 2,
                 "CourseId" : 1,
                 "CoachId"  : 2,
-                "Date"     : 1,//monday
-                "StartTime": { "Hour":8, "Minute": 50 },
-                "EndTime"  : { "Hour":12, "Minute": 15 }
+                "Slot"     : { "Start": 1592700600, "End": 1592712900 }
          }
             
         ],
@@ -79,18 +73,14 @@ GetSectionByCoachId
                 "SectionId": 1,
                 "CourseId" : 1,
                 "CoachId"  : 1,
-                "Date"     : 1,//monday
-                "StartTime": { "Hour":8, "Minute": 50 },
-                "EndTime"  : { "Hour":12, "Minute": 15 }
+                "Slot"     : { "Start": 1592700600, "End": 1592712900 }
          }
         
          {
                 "SectionId": 2,
                 "CourseId" : 1,
                 "CoachId"  : 1,
-                "Date"     : 2,//tuesday
-                "StartTime": { "Hour":8, "Minute": 50 },
-                "EndTime"  : { "Hour":12, "Minute": 15 }
+                "Slot"     : { "Start": 1592787000, "End": 1592799300 }
          }
             
         ],
@@ -117,18 +107,14 @@ GetSectionByStratDate
                 "SectionId": 1,
                 "CourseId" : 1,
                 "CoachId"  : 1,
-                "Date"     : 1,//monday
-                "StartTime": { "Hour":8, "Minute": 50 },
-                "EndTime"  : { "Hour":12, "Minute": 15 }
+                "Slot"     : { "Start": 1592700600, "End": 1592712900 }
          }
         
          {
                 "SectionId": 2,
                 "CourseId" : 1,
                 "CoachId"  : 2,
-                "Date"     : 1,//monday
-                "StartTime": { "Hour":8, "Minute": 50 },
-                "EndTime"  : { "Hour":12, "Minute": 15 }
+                "Slot"     : { "Start": 1592700600, "End": 1592712900 }
          }
             
         ],
@@ -147,9 +133,7 @@ AddSection
         "SectionId": 1,//SectionId > 0
         "CourseId" : 1,//CourseId > 0
         "CoachId"  : 1,//CoachId > 0
-        "Date"     : 1, //monday
-        "StartTime": { "Hour":8, "Minute": 50 },
-        "EndTime"  : { "Hour":12, "Minute": 15 }
+        "Slot"     : { "Start": 1592700600, "End": 1592712900 }
   }
   output:
   {
@@ -189,9 +173,7 @@ AddSection
         "SectionId": 1,//SectionId > 0
         "CourseId" : 1,//CourseId > 0
         "CoachId"  : 1,//CoachId > 0
-        "Date"     : 1, //monday
-        "StartTime": { "Hour":8, "Minute": 50 },
-        "EndTime"  : { "Hour":12, "Minute": 15 }
+        "Slot"     : { "Start": 1592700600, "End": 1592712900 }
 
   }
   output:
