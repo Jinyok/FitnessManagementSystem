@@ -130,7 +130,6 @@ AddSection
 //
   input:
   { 
-        "SectionId": 1,//SectionId > 0
         "CourseId" : 1,//CourseId > 0
         "CoachId"  : 1,//CoachId > 0
         "Slot"     : { "Start": 1592700600, "End": 1592712900 }

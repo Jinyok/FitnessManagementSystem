@@ -62,7 +62,6 @@ GetMembersById
 //
   input:
   { 
-         "MemberId": 1, //MemberId > 0
          "Name": "会员",
          "PhoneNo": 123456
   }
