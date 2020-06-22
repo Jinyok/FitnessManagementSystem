@@ -15,6 +15,7 @@ namespace FMSystem.Entity.fms
 
 
         [Column(TypeName = "varchar(30)")]
+        [Required]
         public string UserName { get; set; }
 
 

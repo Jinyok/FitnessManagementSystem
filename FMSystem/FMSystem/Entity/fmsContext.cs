@@ -22,6 +22,8 @@ namespace FMSystem.Entity
 
         public virtual DbSet<Takes> Take { get; set; }
 
+        public virtual DbSet<CourseArrangement> CourseArrangement { get; set; }
+
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    if (!optionsBuilder.IsConfigured)
@@ -120,9 +122,9 @@ namespace FMSystem.Entity
 
                 //entity.Property(e => e.CourseId).HasColumnName("CourseID");
 
-                entity.Property(e => e.EndDate).HasColumnType("date");
+                //entity.Property(e => e.EndDate).HasColumnType("date");
 
-                entity.Property(e => e.StartDate).HasColumnType("date");
+                //entity.Property(e => e.StartDate).HasColumnType("date");
 
                 entity.HasOne(d => d.Course)
                     .WithMany(p => p.Section)
@@ -174,6 +176,22 @@ namespace FMSystem.Entity
                     .HasForeignKey(d => d.SectionId)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
+            });
+
+            modelBuilder.Entity<CourseArrangement>(entity =>
+            {
+                entity.ToTable("coursearrangement");
+                entity.HasKey(e => new { e.CourseId, e.CourseNo })
+                    .HasName("PRIMARY");
+
+                entity.HasOne(d => d.Course)
+                    .WithMany(p => p.CourseArrangement)
+                    .HasForeignKey(d => d.CourseId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(d => d.Coach)
+                    .WithMany(p => p.CourseArrangement)
+                    .HasForeignKey(d => d.CoachId);
             });
 
             OnModelCreatingPartial(modelBuilder);
