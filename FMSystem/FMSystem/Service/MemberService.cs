@@ -55,18 +55,24 @@ namespace FMSystem.Service
 
         }
 
-        public ResponseModel AddMember(Member member)
+        public Member Merge(long phoneno, string name)
+        {
+            Member member = null;
+            member.PhoneNo = phoneno;
+            member.Name = name;
+            return member;
+        }
+
+        public ResponseModel AddMember(long phoneno, string name)
         {
             ResponseModel ResponseModel = new ResponseModel();
-            if (member.MemberId > 0)//合法性
+            Member member = Merge(phoneno, name);
+            context.Member.Add(member);
+            context.SaveChanges();
+            if (GetMembersById(member.MemberId) != null)
             {
-                if (GetMembersById(member.MemberId) == null)//主键唯一性
-                {
-                    context.Member.Add(member);
-                    context.SaveChanges();
-                    ResponseModel.SetSuccess();
-                    return ResponseModel;
-                }
+                ResponseModel.SetSuccess();
+                return ResponseModel;
             }
             ResponseModel.SetFailed();
             return ResponseModel;

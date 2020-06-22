@@ -55,18 +55,25 @@ namespace FMSystem.Service
 
         }
 
-        public ResponseModel AddCoach(Coach coach)
+        public Coach Merge(string name, long phoneno, string email)
+        {
+            Coach coach = null;
+            coach.Name = name;
+            coach.Email = email;
+            coach.State = Coach.CoachState.InOffice;
+            return coach;
+        }
+
+        public ResponseModel AddCoach(string name, long phoneno, string email)
         {
             ResponseModel ResponseModel = new ResponseModel();
-            if (coach.CoachId > 0)//合法性
+            Coach coach = Merge(name, phoneno, email);
+            context.Coach.Add(coach);
+            context.SaveChanges();
+            if (GetCoachesById(coach.CoachId) != null)
             {
-                if (GetCoachesById(coach.CoachId) == null)//主键唯一性
-                {
-                    context.Coach.Add(coach);
-                    context.SaveChanges();
-                    ResponseModel.SetSuccess();
-                    return ResponseModel;
-                }
+                ResponseModel.SetSuccess();
+                return ResponseModel;
             }
             ResponseModel.SetFailed();
             return ResponseModel;
