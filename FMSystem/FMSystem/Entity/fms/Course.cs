@@ -18,6 +18,5 @@ namespace FMSystem.Entity.fms
         public int ClassHour { get; set; }
 
         public virtual ICollection<Section> Section { get; set; }
-        public virtual ICollection<CourseArrangement> CourseArrangement { get; set; }
     }
 }
