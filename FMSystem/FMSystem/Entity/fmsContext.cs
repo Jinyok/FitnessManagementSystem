@@ -187,7 +187,7 @@ namespace FMSystem.Entity
                     .HasForeignKey(d => d.SectionId)
                     .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasOne<Course>()
+                entity.HasOne<Coach>()
                     .WithMany()
                     .HasForeignKey(d=>d.CoachId);
 
