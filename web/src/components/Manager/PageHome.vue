@@ -9,7 +9,12 @@ export default {
     name: 'pagehome',
     data() {
         return {
-
+            coachInfo: {
+                ID: '00000000',
+                Name: '未命名',
+                Email: 'unknown@email.com',
+                PhoneNo: '000-0000-0000' 
+            }
         }
     }
 }

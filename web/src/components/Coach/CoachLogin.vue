@@ -3,7 +3,7 @@
 <el-container>
     <el-header class="red" style="height: 370px">
         <div class="div_content" style="top: 210px">
-            <span style="font-size: 35px; letter-spacing:18px">COACH</span>
+            <span style="font-size: 40px; letter-spacing:18px">教练</span>
             <br>
             <strong style="font-size: 90px; letter-spacing:15px; line-height:84px">LOGIN</strong>
         </div>
@@ -11,22 +11,22 @@
 
     <el-main>
         <div class="div_content" style="margin-top: 23px">
-            <el-input placeholder="ACCOUNT" v-model="input_account" clearable>
+            <el-input placeholder="用户名" v-model="input_account" clearable>
             </el-input>
         </div>
         <div class="div_content" style="margin-top: 75px">
-            <el-input placeholder="PASSWORD" v-model="input_password" show-password>
+            <el-input placeholder="密码" v-model="input_password" show-password>
             </el-input>
         </div>
         <div class="div_content" style="margin-top: 140px" @click="routeToView">
-            <el-button type="danger" round>SIGN IN</el-button>
+            <el-button type="danger" round>登 录</el-button>
         </div>
         <div class="div_content" style="bottom: 50px">
-            <el-link type="info" @click="routeToReception">Login as reception </el-link>
-            <span style="color:#909399">/</span>
-            <el-link type="info" @click="routeToManager">Login as manager </el-link>
-            <span style="color:#909399">/</span>
-            <el-link type="info" @click="routeToAdmin">Login as admin</el-link>
+            <el-link type="info" @click="routeToReception">会员登陆</el-link>
+            <span style="color:#909399;">&emsp;/&emsp;</span>
+            <el-link type="info" @click="routeToManager">教练登录</el-link>
+            <span style="color:#909399">&emsp;/&emsp;</span>
+            <el-link type="info" @click="routeToAdmin">管理员登录</el-link>
         </div>
     </el-main>
 </el-container>
