@@ -1,49 +1,3 @@
-GetSectionByCoachIdAndDateSlot
-  input:
-  {
-       "CoachId": 1,
-       "From": 1592614100,//起始时间
-       "To": 1592713000 //结束时间
-  }
-  output:
-  {
-       "Code": 200,
-       "Message": "成功",
-       "Data":[
-              {
-                     //Section信息
-                     "SectionId" : 1,
-                     "CourseId"  : 1,
-                     "CoachId"   : 1,
-                     "StartDate" : 1592614200,
-                     "EndDate"   : 1592626500,
-                     "SectionNumber": 10, //课时编号
-                     //Course信息
-                     "Title"     : "肌肉塑形",
-                     "Cost"      : 3000,
-                     "ClassHour" : 15
-              },
-              {
-                     //Section信息
-                     "SectionId" : 1,
-                     "CourseId"  : 2,
-                     "CoachId"   : 1,
-                     "StartDate" : 1592700600,
-                     "EndDate"   : 1592712900,
-                     "SectionNumber": 10, //课时编号
-                     //Course信息
-                     "Title"     : "快速减脂",
-                     "Cost"      : 2000,
-                     "ClassHour" : 8
-              }
-            
-       ],
-
-       "Code": 999,
-       "Message": "失败",
-       "Data":null
-  }
-
 //用于通过某节课的ID来得到指定的单节课的信息
 GetSectionBySectionId
 //
@@ -137,59 +91,6 @@ GetSectionByCoachId
 
 }
 
-//通过上课时间获得在指定时间上课的课
-GetSectionByStratDate
-//
-  input:
-  {
-         "StratDate": "周一 8:50"
-  }
-  output:
-  {
-         "Code": 200,
-         "Message": "成功",
-         "Data":[
-         {
-                "SectionId": 1,
-                "CourseId" : 1,
-                "CoachId"  : 1,
-                "Slot"     : { "Start": 1592700600, "End": 1592712900 }
-         }
-        
-         {
-                "SectionId": 2,
-                "CourseId" : 1,
-                "CoachId"  : 2,
-                "Slot"     : { "Start": 1592700600, "End": 1592712900 }
-         }
-            
-        ],
-        
-        "Code": 999,
-        "Message": "失败",
-        "Data":null
-
-}
-
-//新添加一节课
-AddSection
-//
-  input:
-  { 
-        "CourseId" : 1,//CourseId > 0
-        "CoachId"  : 1,//CoachId > 0
-        "Slot"     : { "Start": 1592700600, "End": 1592712900 }
-  }
-  output:
-  {
-          "Code": 200,
-          "Message": "成功",
-          "Data":null,
-          
-          "Code": 999,
-          "Message": "失败",
-          "Data": null
-  }
 
 //删除指定的一节课
  DeleteSection

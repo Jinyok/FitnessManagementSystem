@@ -1,0 +1,175 @@
+//通过SectionId获取Lesson
+  GetLessonBySectionId
+  //
+  input
+  {
+      "SectionId": 1 // id > 0
+  }
+  output
+  {
+       "Code": 200,
+       "Message": "成功",
+       "Data":[
+       {
+          "SectionId": 1,
+          "LessonNo" : 1,
+          "CoachId"  : 1,
+          "StartDate": 2020/6/24 08:00:00 +08:00, 
+          "EndDate": 2020/6/24 12:15:00 +08:00
+       },
+       {
+          "SectionId": 1,
+          "LessonNo" : 2,
+          "CoachId"  : 1,
+          "StartDate": 2020/6/24 14:00:00 +08:00,
+          "EndDate":2020/6/24 15:30:00 +08:00
+       }
+    ]
+       "Code":999,
+       "Message": "失败",
+       "Data": null
+  }
+
+//通过LessonNo获取Lesson
+  GetLessonByLessonNo
+  //
+  input
+  {
+        "LessonNo": 1 //no > 0
+  }
+  output
+  {
+        "Code": 200,
+        "Message": "成功",
+        "Data":[
+        {
+           "SectionId": 1,
+           "LessonNo" : 1,
+           "CoachId"  : 1,
+           "StartDate": 2020/6/24 08:00:00 +08:00, 
+           "EndDate": 2020/6/24 12:15:00 +08:00
+        },
+        {
+           "SectionId": 2,
+           "LessonNo" : 1,
+           "CoachId"  : 1,
+           "StartDate": 2020/6/24 14:00:00 +08:00,
+           "EndDate":2020/6/24 15:30:00 +08:00
+        }
+     ]
+        "Code":999,
+        "Message": "失败",
+        "Data": null
+  }
+
+//通过CoachId获取Lesson
+  GetLessonByCoachId
+  //
+  input
+  {
+        "CoachId": 1 // id > 0
+  }
+  output
+  {
+        "Code": 200,
+        "Message": "成功",
+        "Data":[
+        {
+           "SectionId": 1,
+           "LessonNo" : 1,
+           "CoachId"  : 1,
+           "StartDate": 2020/6/24 08:00:00 +08:00, 
+           "EndDate": 2020/6/24 12:15:00 +08:00
+        },
+        {
+           "SectionId": 1,
+           "LessonNo" : 1,
+           "CoachId"  : 2,
+           "StartDate": 2020/6/24 14:00:00 +08:00,
+           "EndDate":2020/6/24 15:30:00 +08:00
+        }
+     ]
+         "Code":999,
+         "Message": "失败",
+         "Data": null
+  }
+
+//添加一个Lesson
+  AddLesson
+  input
+  {
+          "SectionId": 1, // id > 0
+          "CoachId": 1, // id > 0
+          "StartDate": 2020/6/24 08:00:00 +08:00,
+          "EndDate":2020/6/24 12:15:00 +08:00
+  }
+  output
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+            
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }
+
+//删除一个Lesson
+  DeleteLesson
+  //
+  input
+  {
+          "SectionId": 1, // id > 0
+          "LessonNo": 1
+  }
+  output
+  {
+           "Code": 200,
+           "Message": "成功",
+           "Data":null,
+            
+           "Code": 999,
+           "Message": "失败",
+           "Data": null
+  }
+
+//更新一个Lesson的信息
+  UpdateLesson
+  //
+  input
+  {
+            "SectionId": 1,// id > 0
+            "LessonNo" : 1,// no > 0
+            "CoachId"  : 1,// id > 0
+            "StartDate": 2020/6/24 08:00:00 +08:00, 
+            "EndDate": 2020/6/24 12:15:00 +08:00
+  }
+  output
+  {
+            "Code": 200,
+            "Message": "成功",
+            "Data":null,
+                
+            "Code": 999,
+            "Message": "失败",
+            "Data": null
+  }
+
+ //获取一个Section的课程进度
+  GetCourseProcess
+  //
+  input
+  {
+      "SectionId":1 // id > 0
+  }
+  output
+  {
+              "Code": 200,
+              "Message": "成功",
+              "Data":null,
+    
+              "Code": 999,
+              "Message": "失败",
+              "Data": null
+  }
+                
