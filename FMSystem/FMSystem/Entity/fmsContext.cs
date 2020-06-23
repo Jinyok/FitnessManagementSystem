@@ -22,7 +22,7 @@ namespace FMSystem.Entity
 
         public virtual DbSet<Takes> Take { get; set; }
 
-        public virtual DbSet<CourseArrangement> CourseArrangement { get; set; }
+        public virtual DbSet<Lesson> Lesson { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -178,20 +178,19 @@ namespace FMSystem.Entity
 
             });
 
-            modelBuilder.Entity<CourseArrangement>(entity =>
+            modelBuilder.Entity<Lesson>(entity =>
             {
-                entity.ToTable("coursearrangement");
-                entity.HasKey(e => new { e.CourseId, e.CourseNo })
-                    .HasName("PRIMARY");
+                entity.HasKey(e => new {e.SectionId,e.LessonNo });
 
-                entity.HasOne(d => d.Course)
-                    .WithMany(p => p.CourseArrangement)
-                    .HasForeignKey(d => d.CourseId)
+                entity.HasOne<Section>()
+                    .WithMany(p=>p.Lesson)
+                    .HasForeignKey(d => d.SectionId)
                     .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasOne(d => d.Coach)
-                    .WithMany(p => p.CourseArrangement)
-                    .HasForeignKey(d => d.CoachId);
+                entity.HasOne<Course>()
+                    .WithMany()
+                    .HasForeignKey(d=>d.CoachId);
+
             });
 
             OnModelCreatingPartial(modelBuilder);

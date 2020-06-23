@@ -25,7 +25,6 @@ namespace FMSystem.Entity.fms
         public CoachState State { get; set; }
         public virtual ICollection<Instructs> Instructs { get; set; }
         public virtual ICollection<Section> Sections { get; set; }
-        public virtual ICollection<CourseArrangement> CourseArrangement { get; set; }
 
         public enum CoachState
         {
