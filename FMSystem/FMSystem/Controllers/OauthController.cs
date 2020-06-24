@@ -66,10 +66,6 @@ namespace Controllers
         }
 
         [HttpPost, Authorize]
-        /// <summary>
-        /// 退出登录
-        /// </summary>
-        /// <returns></returns>
         public async Task<IActionResult> Logout()
         {
 

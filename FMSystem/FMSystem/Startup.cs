@@ -26,6 +26,7 @@ using LogDashboard;
 using FMSystem.Entity;
 using FMSystem.Interface;
 using FMSystem.Service;
+using FMSystem.Entity.fms;
 
 namespace FMSystem
 {
@@ -93,6 +94,8 @@ namespace FMSystem
             services.AddScoped<IMemberService, MemberService>();
             services.AddScoped<ISectionService, SectionService>();
             services.AddScoped<ITakeService, TakeService>();
+            services.AddScoped<SectionService>();
+            services.AddScoped<LessonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

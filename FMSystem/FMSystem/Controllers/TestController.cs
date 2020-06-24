@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FMSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TestController : ControllerBase
     {
