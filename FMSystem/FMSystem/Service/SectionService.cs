@@ -84,33 +84,28 @@ namespace FMSystem.Service
         //    return ResponseModel;
         //}
 
-        public Section Merge(int coachid, int courseid, DateTime startdate, DateTime enddate)
+        public Section Merge(int coachid, int courseid)
         {
             Section section = null;
             section.CoachId = coachid;
             section.CourseId = courseid;
-            //section.StartDate = startdate;
-            //section.EndDate = enddate;
             return section;
         }
-        //public ResponseModel AddSection(int coachid, int courseid, DateTime startdate, DateTime enddate)
-        //{
-        //    ResponseModel ResponseModel = new ResponseModel();
-        //    Section section = Merge(coachid, courseid, startdate, enddate);
-        //    var sections = context.Section.Where(s => s.StartDate == section.StartDate).ToList();
-        //    var sections1 = sections.Find(s => s.CoachId == section.CoachId);
-        //    if (sections1 == null || context.Coach.Single(c => c.CoachId == section.CoachId).State == Coach.CoachState.LeaveOffice)//上课的教练在此时间没有课或已经离职
-        //    {
-        //                context.Section.Add(section);
-        //                context.SaveChanges();
-        //        if(GetSectionBySectionId(section.SectionId) != null)
-        //                ResponseModel.SetSuccess();
-        //                return ResponseModel;
-        //     }
-
-        //    ResponseModel.SetFailed();
-        //    return ResponseModel;
-        //}
+        public ResponseModel AddSection(int coachid, int courseid)
+        {
+            ResponseModel ResponseModel = new ResponseModel();
+            if (context.Coach.Any(c => c.CoachId == coachid) && context.Course.Any(c => c.CourseId == courseid))//输入的教练和课程存在
+            {
+                Section section = Merge(coachid, courseid);
+                context.Section.Add(section);
+                context.SaveChanges();
+                if (GetSectionBySectionId(section.SectionId) != null)
+                    ResponseModel.SetSuccess();
+                return ResponseModel;
+            }
+            ResponseModel.SetFailed();
+            return ResponseModel;
+        }
 
         public ResponseModel DeleteSection(int id)
         {
