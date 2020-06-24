@@ -17,11 +17,25 @@ export default {
     },
     data() {
         return {
-        sections: []
+        sections: [
+                {
+                    SectionId   : 1,
+                    Title       : '肌肉塑形',
+                    ClassHour   : 15,
+                    Progress    : 8
+                },
+                {
+                    SectionId   : 2,
+                    Title       : '快速减脂',
+                    ClassHour   : 12,
+                    Progress    : 7
+                }
+            ]
         }
     },
     created: function () {
-        this.sections = this.$route.query.sections;
+        //获取section
+        /*section*/
     }
 }
 </script>

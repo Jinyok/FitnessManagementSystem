@@ -1,22 +1,24 @@
 <template>
     <div class="coachhome">
         <div class="card">
-            <div style="float: left; margin-right:50px; margin-top: -14px">
+            <div style="display:flex; align-items: center;">
+            <div style="margin-right:50px;">
                 <h1 style="font-size: 35px ">Hi,&emsp;Mr.&emsp;{{ coachInfo.Name }}</h1>
             </div>
-            <div class="info grey" style="margin: -18px 0px">
+            <div class="info grey">
                 <p>ID:&emsp;{{ coachInfo.ID }}
                     <br>Email:&emsp;{{ coachInfo.Email }}
-                    <br>PhSone:&emsp;{{ coachInfo.PhoneNo }}
+                    <br>PhoneNo:&emsp;{{ coachInfo.PhoneNo }}
                 </p>
+            </div>
             </div>
             <div style="float: right">
                 <h1>{{ currentTime.hour }}:{{ currentTime.minute }}</h1>
             </div>
         </div>
         <br>
-        <div class='grey' style="margin-top:-20px; margin-bottom: -10px"><h3>{{ sectionStatus }}</h3></div>
-        <sectioncard v-if="sectionExists" :section="firstSection"></sectioncard>
+        <div class='grey' style="margin-top:-20px; margin-bottom: -10px"><h2>{{ lessonStatus }}</h2></div>
+        <sectioncard v-if="lessonExists" :section="firstSection"></sectioncard>
     </div>
 </template>
 
@@ -36,27 +38,31 @@ export default {
                 hour: '',
                 minute: ''
             },
+            //需要查
             coachInfo: {
-                ID: '',
-                Name:'',
-                Email:'',
-                PhoneNo:''
+                ID: '00000000',
+                Name: '未命名',
+                Email: 'unknown@email.com',
+                PhoneNo: '000-0000-0000' 
             },
+            //需要查
             firstSection: {
-                SectionId : '',
-                CourseId  : '',
-                CoachId   : '',
-                StartDate : '',
-                EndDate   : '',
-                SectionNumber : '',
-                Title     : '',
-                ClassHour : ''
+                SectionId   : 1,
+                Title       : '肌肉塑形后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀',
+                ClassHour   : 15,
+                Progress    : 8,
+                StartDate   : 1592614200
             },
-            sectionStatus: '近期无课程',
-            sectionExists: false
+            lessonStatus: '近期无课程',
+            lessonExists: false
         }
     },
     created: function() {
+        console.log(this.$route)
+        //获取教练数据
+        /*coachInfo*/
+
+        //设置时间
         var this_=this
         this.timer = setInterval(function () { 
             this_.currentTime.timeStamp=new Date().getTime()/1000
@@ -65,16 +71,17 @@ export default {
             if (this_.currentTime.minute < 10)
                 this_.currentTime.minute = '0' + this_.currentTime.minute 
         })
+
+        //获取第一节课课程信息
+        /*firstSection*/
         this_.currentTime.timeStamp=new Date().getTime()/1000
-        this.coachInfo=this.$route.query.info
-        this.firstSection=this.$route.query.firstSection
         if (this.firstSection != undefined) {
-            this.sectionExists=true
+            this.lessonExists=true
             if (this.firstSection.StartDate <= this.currentTime.timeStamp)
-                this.sectionStatus = '正在上课'
+                this.lessonStatus = '正在上课'
             else    {
                 var tempDate = new Date(this.firstSection.StartDate*1000)
-                this.sectionStatus = '下次课程' + (tempDate.getMonth()+1) + '月' + tempDate.getDate() + '日' + tempDate.getHours() + ' : ' + tempDate.getMinutes()
+                this.lessonStatus = '下次课程' + (tempDate.getMonth()+1) + '月' + tempDate.getDate() + '日' + tempDate.getHours() + ' : ' + tempDate.getMinutes()
             }
         }
     }
@@ -88,9 +95,12 @@ export default {
 <style>
 .card {
     overflow: hidden;
-    padding: 23px;
+    padding: 23px 30px;
     background:white;
-    font-family: "Roboto-Medium", Arial, Helvetica, sans-serif;
+    font-family: "Roboto-Medium", "HW-Bold", Arial, Helvetica, sans-serif;
+    display:flex;
+    align-items: center;
+    justify-content: space-between
 }
 
 .info {
@@ -98,7 +108,7 @@ export default {
     margin-top: -15px;
     margin-bottom: -15px;
     line-height: 30px;
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-family: "Roboto", "HW-Regular", Arial, Helvetica, sans-serif;
 }
 .grey {
     color: #929292;

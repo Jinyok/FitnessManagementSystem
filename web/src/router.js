@@ -51,6 +51,11 @@ const routes = [
                 name: 'CoachCourses',
                 component: () => import ('./components/Coach/CoachCourses.vue')
             },
+            {
+                path: 'section',
+                name: 'CoachSection',
+                component: () => import ('./components/Coach/CoachSection.vue')
+            }
         ],
     },
     {

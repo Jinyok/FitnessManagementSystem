@@ -68,6 +68,11 @@ export default {
         this.selected=false
         this.button_mouseleave()
       }
+      else {
+        this.currentcolor.background="#ffffff"
+        this.currentcolor.color=this.bgcolor_
+        this.selected=true
+      }
     }
   },
   mounted: function() {

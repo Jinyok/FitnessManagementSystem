@@ -1,15 +1,15 @@
 <template>
   <div class="asidebuttonlist">
     <div class="div_aside">
-      <h1 style="font-size: 32px">COACH<br></h1>
+      <h1 style="font-size: 35px">教练<br></h1>
     </div>
 
-    <asidebutton content="HOME" @select="reselect"></asidebutton>
-    <asidebutton content="SCHEDULE" @select="reselect"></asidebutton>
-    <asidebutton content="COURSES" @select="reselect"></asidebutton>
+    <asidebutton content="主页" @select="reselect"></asidebutton>
+    <asidebutton content="课程表" @select="reselect"></asidebutton>
+    <asidebutton content="我的课程" @select="reselect"></asidebutton>
 
     <div style="position:absolute;bottom: 10px">
-      <asidebutton content="EXIT" @select="reselect"></asidebutton>
+      <asidebutton content="退出" @select="reselect"></asidebutton>
     </div>
 
   </div>
@@ -30,7 +30,7 @@ export default {
         allasidebutton[i].reselect(con)
       }
       
-      if (con === 'EXIT')
+      if (con === '退出')
         this.$emit('exit')
 
       this.$emit('select', con)
@@ -44,6 +44,20 @@ export default {
           allasidebutton[i].button_mouseleave()
       }
       allasidebutton[0].button_click()
+  },
+  watch: {
+    $route(to, from) {
+      var content
+      switch(to.path) {
+        case '/coach/home': content='主页'; break;
+        case '/coach/schedule': content='课程表'; break;
+        case '/coach/courses': content='我的课程'; break;
+      }
+      var allasidebutton = this.$children
+      for (var i = 0; i < allasidebutton.length; i++) {
+        allasidebutton[i].reselect(content)
+      }
+    }
   }
 }
 </script>
@@ -59,7 +73,7 @@ export default {
   padding-left: 16px;
   text-align: start;
   font-size: 25px;
-  font-family: "Roboto_Medium", Arial, Helvetica, sans-serif;
+  font-family: 'Roboto-Medium', "HW-Bold", Arial, Helvetica, sans-serif;
 }
 
 html,body,#app,.el-container{

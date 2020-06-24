@@ -7,3 +7,13 @@
     font-family: 'Roboto-Medium';
     src: url('../font/Roboto-Medium.ttf');
 }
+
+@font-face {
+    font-family: 'HW-Regular';
+    src: url('../font/SourceHanSansHWSC-Regular.otf');
+}
+
+@font-face {
+    font-family: 'HW-Bold';
+    src: url('../font/SourceHanSansHWSC-Bold.otf');
+}

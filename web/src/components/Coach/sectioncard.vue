@@ -1,24 +1,35 @@
 <template>
-    <div class = "sectioncard card" style="cursor: pointer">
-        <div style="float:left">
-            <h1 style="margin-top:5px; margin-bottom: 5px; font-size: 30px">{{ section.Title }}</h1>
+    <div class = "sectioncard card" style="cursor: pointer" @click="jumpToCourse">
+        <div style="width: calc(100% - 200px)">
+            <h1 style="margin-top:5px; margin-bottom: 5px; font-size: 30px;">
+                {{ section.Title }}
+            </h1>
             <div class='grey'>
-                课时：{{ section.SectionNumber }}/{{ section.ClassHour }}
+                课时：{{ section.Progress }}/{{ section.ClassHour }}
             </div>
         </div>
-        <img src="../../assets/imgs/jumpD.png" style="max-width: 45px; float: right; margin-top: 15px">
+        <div>
+            <img src="../../assets/imgs/jumpD.png" 
+            style="max-width: 45px; margin-top: 15px">
+        </div>
     </div>
 </template>
 
 <script>
+import methods from '../../methods'
 export default {
     name: "sectioncard",
     props: {
         section: {
-            CourseId: '',
-            Title: '',
-            ClassHour: '',
-            SectionNumber: ''
+            SectionId   : '',
+            Title       : '',
+            ClassHour   : '',
+            Progress    : ''
+        }
+    },
+    methods: {
+        jumpToCourse: function () {
+            this.$router.push({ path: '/coach/section', query: {fromPath: this.$router.history.current.path} })
         }
     }
 }
@@ -29,12 +40,6 @@ export default {
 </style>
 
 <style>
-.card {
-    overflow: hidden;
-    padding: 23px;
-    background:white;
-    font-family: "Roboto-Medium", Arial, Helvetica, sans-serif;
-}
 .grey {
     color: #929292;
 }

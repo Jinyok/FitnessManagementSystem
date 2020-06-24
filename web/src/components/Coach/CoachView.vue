@@ -7,7 +7,9 @@
         </el-aside>
 
         <el-main  style="background: #E5E5E5">
-            <router-view></router-view>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
         </el-main>
     </el-container>
 </template>
@@ -23,59 +25,20 @@ export default {
     },
     data() {
         return {
-            showpage: {
-                showPageHome: true,
-                showPageSchedule: false,
-                showPageCourses: false
-            },
-            //需要查
-            coachInfo: {
-                ID: '00000000',
-                Name: '未命名',
-                Email: 'unknown@email.com',
-                PhoneNo: '000-0000-0000' 
-            },
-            //需要查
-            sections:[
-                {
-                    SectionId : 1,
-                    CourseId  : 1,
-                    CoachId   : 1,
-                    StartDate : 1592614200,
-                    EndDate   : 1592626500,
-                    SectionNumber : 10,
-                    Title     : '肌肉塑形',
-                    ClassHour : 15
-                },
-                {
-                    SectionId : 2,
-                    CourseId  : 1,
-                    CoachId   : 1,
-                    StartDate : 1592700600,
-                    EndDate   : 1592712900,
-                    SectionNumber : 6,
-                    Title     : '快速减脂',
-                    ClassHour : 8
-                }
-            
-            ],
         }
     },
     methods: {
         change: function (con) {
             switch (con) {
-                case 'HOME':
-                    this.$router.push ({ name: 'CoachHome', 
-                        query: { info: this.coachInfo, firstSection: this.sections[0] }
-                        })
+                case '主页':
+                    if (this.$router.history.current.fullPath != '/coach/home')
+                        this.$router.push ('/coach/home')
                     break;
-                case 'SCHEDULE':
+                case '课程表':
                     this.$router.push ('/coach/schedule');
                     break;
-                case 'COURSES':
-                    this.$router.push ({ name:'CoachCourses', 
-                        query: { sections: this.sections }
-                        });
+                case '我的课程':
+                    this.$router.push ('/coach/courses');
                     break;
             }
         },
