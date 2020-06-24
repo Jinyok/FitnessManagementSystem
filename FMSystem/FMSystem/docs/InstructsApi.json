@@ -1,0 +1,121 @@
+
+//用于通过会员的ID来得到会员的选课信息
+GetInstructsByMemberId
+//
+  input:
+  {
+        "MemberId": 1, // MemberId > 0,
+  }
+  output:
+  {
+         "Code": 200,
+         "Message": "成功",
+         "Data":[
+         {
+              "MemberId": 1,
+              "CoachId": 1,
+              "AttendHours": 1,
+              "TotalHours": 1
+         }
+            
+        ],
+        
+        "Code": 999,
+        "Message": "失败",
+        "Data":null
+               
+   }
+
+//通过某教练的Id获得选该教练的会员信息
+ GetInstructsByCoachId
+//
+  input:
+  {
+         "CoachId": 1 //SectionId > 0
+  }
+  output:
+  {
+         "Code": 200,
+         "Message": "成功",
+         "Data":[
+          {
+            "MemberId": 1,
+            "CoachId": 1,
+            "AttendHours": 1,
+            "TotalHours": 1
+          }
+            
+        ],
+        
+        "Code": 999,
+        "Message": "失败",
+        "Data":null
+
+}
+
+
+
+//新添加一条指导信息
+ AddInstructs
+//
+  input:
+{
+          "MemberId": 1, //MemberId > 0
+          "CoachId": 1, // CoachId > 0
+          "AttendHours": 1,
+          "TotalHours": 1
+}
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }
+
+
+//删除指定的指导信息
+ DeleteInstructs
+//
+  input:
+  {
+          "MemberId": 1,//MemberId > 0
+          "CoachId": 1//CoachId > 0
+  }
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }
+
+
+//修改指定的指导信息
+ UpdateInstructs
+//
+  input:
+{
+          "MemberId": 1,
+          "CoachId": 1,
+          "AttendHours": 1,
+          "TotalHours": 1
+
+}
+  output:
+  {
+           "Code": 200,
+           "Message": "成功",
+           "Data":null,
+          
+           "Code": 999,
+           "Message": "失败",
+           "Data": null
+  }
+
