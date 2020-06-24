@@ -1,0 +1,123 @@
+//用于通过课程的ID来得到指定的课程信息
+ GetCoursesById
+//
+  input:
+  {
+        "CourseId": 1, // CourseId > 0,
+  }
+  output:
+  {
+         "Code": 200,
+         "Message": "成功",
+         "Data":
+         {
+              "CourseId": 1,
+              "Title": "课程",
+              "Cost": 1,
+              "ClassHour": 1           
+          },
+          
+          "Code":999,
+          "Message": "失败",
+          "Data": null
+               
+   }
+
+//通过标题获得指定的课程信息
+ GetCoursesByTitle
+//
+  input:
+  {
+         "Title": "课程"
+  }
+  output:
+  {
+         "Code": 200,
+         "Message": "成功",
+         "Data":[
+         {
+              "CourseId": 1, 
+              "Title": "课程",
+              "Cost": 1,
+              "ClassHour": 1
+         }
+
+          {
+            "CourseId": 2,
+            "Title": "课程",
+            "Cost": 2,
+            "ClassHour": 2
+          }
+            
+        ],
+        
+        "Code": 999,
+        "Message": "失败",
+        "Data":null
+
+}
+
+
+
+//新添加一条课程信息
+ AddCourse
+//
+  input:
+{
+          "Title": "课程",
+          "Cost": 1,
+          "ClassHour": 1
+}
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }
+
+
+//删除指定的课程信息
+ DeleteCourse
+//
+  input:
+  {
+          "CourseId": 1 //Course > 0
+  }
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }
+
+
+//修改指定的课程信息
+ UpdateCourse
+//
+  input:
+{
+          "CourseId": 1,
+          "Title": "课程",
+          "Cost": 1,
+          "ClassHour": 1
+
+}
+  output:
+  {
+          "Code": 200,
+          "Message": "成功",
+          "Data":null,
+          
+          "Code": 999,
+          "Message": "失败",
+          "Data": null
+  }
+
