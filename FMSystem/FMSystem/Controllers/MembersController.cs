@@ -11,7 +11,7 @@ using FMSystem.Entity.fms;
 
 namespace FMSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/action")]
     [ApiController]
     public class MembersController : ControllerBase
     {
