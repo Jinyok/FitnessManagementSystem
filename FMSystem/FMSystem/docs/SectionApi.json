@@ -1,4 +1,4 @@
-//用于通过某节课的ID来得到指定的单节课的信息
+//用于通过某节课的ID来得到指定的一门课的信息
 GetSectionBySectionId
 //
   input:
@@ -23,7 +23,7 @@ GetSectionBySectionId
                
    }
 
-//通过课程ID获得指定的课程的开课信息
+//通过课程ID获得指定的一门课程的开课信息
  GetSectionByCourseId
 //
   input:
@@ -91,8 +91,26 @@ GetSectionByCoachId
 
 }
 
+//添加一门课
+  AddSection
+  //
+  input:
+  {
+         "CoachId": 1, // id > 0
+         "CourseId": 1 // id > 0
+  }
+  output
+  {
+       "Code": 200,
+       "Message": "成功",
+       "Data":null,
+       
+       "Code": 999,
+       "Message": "失败",
+       "Data": null
+  }
 
-//删除指定的一节课
+//删除指定的一门课
  DeleteSection
 //
   input:
@@ -111,7 +129,7 @@ GetSectionByCoachId
   }
 
 
-//修改指定的某节课的信息
+//修改指定的一门课的信息
  UpdateSection
 //
   input:
