@@ -64,10 +64,11 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public ResponseModel GetLessonByStartDate(DateTimeOffset startdate)
+        public ResponseModel GetLessonByStartDate(int startdate)
         {
             ResponseModel ResponseModel = new ResponseModel();
-            List<Lesson> lesson = context.Lesson.Where(l => l.StartDate == startdate).ToList();
+            DateTimeOffset date = DateTimeOffset.FromUnixTimeSeconds(startdate);
+            List<Lesson> lesson = context.Lesson.Where(l => l.StartDate == date).ToList();
             if (lesson != null)
             {
                 ResponseModel.SetSuccess();
@@ -77,21 +78,51 @@ namespace FMSystem.Service
             ResponseModel.SetFailed();
             return ResponseModel;
         }
-        public Lesson Merge(int sectionid, int coachid, DateTimeOffset startdate, DateTimeOffset enddate)
+
+        public ResponseModel GetCoachLesson(int coachid, int startdate, int num)
+        {
+            ResponseModel ResponseModel = new ResponseModel();
+            int i = 0;
+            DateTimeOffset date = DateTimeOffset.FromUnixTimeSeconds(startdate);
+            var lessons1 = context.Lesson.Where(l => l.StartDate.Value > date).ToList();
+            List<Lesson> lessons = new List<Lesson>();
+            foreach (Lesson lesson in lessons1.OrderBy(l => l.StartDate.Value))
+            {
+                if (i < num)
+                {
+                    lessons.Add(lesson);
+                    i++;
+                }
+            }
+            if(lessons != null)
+            {
+                ResponseModel.SetSuccess();
+                return ResponseModel;
+            }
+            ResponseModel.SetFailed();
+            return ResponseModel;
+        }
+        public Lesson Merge(int sectionid, int coachid, int startdate, int enddate,int state)
         {
             Lesson lesson = null;
+            DateTimeOffset sdate = DateTimeOffset.FromUnixTimeSeconds(startdate);
+            DateTimeOffset edate = DateTimeOffset.FromUnixTimeSeconds(enddate);
             lesson.SectionId = sectionid;
             lesson.CoachId = coachid;
             lesson.LessonNo = 1;//默认为第一节课
-            lesson.StartDate = startdate;
-            lesson.EndDate = enddate;
+            lesson.StartDate = sdate;
+            lesson.EndDate = edate;
+            if (state == 1)
+                lesson.State = Lesson.LessonState.Finished;
+            else
+                lesson.State = Lesson.LessonState.NotFinished;
             return lesson;
         }
 
-        public ResponseModel AddLesson(int sectionid, int coachid, DateTimeOffset startdate, DateTimeOffset enddate)
+        public ResponseModel AddLesson(int sectionid, int coachid, int startdate, int enddate, int state)
         {
             ResponseModel ResponseModel = new ResponseModel();
-            Lesson lesson = Merge(sectionid, coachid, startdate, enddate);
+            Lesson lesson = Merge(sectionid, coachid, startdate, enddate,state);
             List<Lesson> lesson1 = context.Lesson.Where(l => l.SectionId == sectionid).ToList();
             if ( lesson1 != null)
             {
@@ -143,6 +174,7 @@ namespace FMSystem.Service
                     lesson2.CoachId = lesson.CoachId;
                     lesson2.StartDate = lesson.StartDate;
                     lesson2.EndDate = lesson.EndDate;
+                    lesson2.State = lesson.State;
                     context.SaveChanges();
                     ResponseModel.SetSuccess();
                     return ResponseModel;
@@ -157,12 +189,12 @@ namespace FMSystem.Service
             var lesson = context.Lesson.Where(l => l.SectionId == sectionid).ToList();
             if(lesson != null)
             {
-                int totalhours = 0;
-                for(int i = 0; i < lesson.Count; i++)
+                double totalhours = 0;
+                for (int i = 0; i < lesson.Count; i++)
                 {
-                    totalhours +=  lesson[i].EndDate.Value.Hour - lesson[i].StartDate.Value.Hour;
+                    totalhours += (double)(lesson[i].EndDate.Value.Hour - lesson[i].StartDate.Value.Hour) + (double)(lesson[i].EndDate.Value.Minute - lesson[i].StartDate.Value.Minute) / 60;
                 }
-                ResponseModel.SetData(totalhours);
+                ResponseModel.SetData(totalhours.ToString("0.00"));
                 ResponseModel.SetSuccess();
                 return ResponseModel;
             }
