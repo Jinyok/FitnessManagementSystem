@@ -38,8 +38,10 @@ namespace FMSystem.Controllers
         [HttpDelete]
         public IActionResult DeleteSection(int id) => Ok(_sectionService.DeleteSection(id));
 
-        [HttpPost]
+        [HttpPut]
         public IActionResult UpdateSection(Section section) => Ok(_sectionService.UpdateSection(section));
+        [HttpPost]
+        public IActionResult AddSection(int coachid, int courseid) => Ok(_sectionService.AddSection(coachid, courseid));
 
         [HttpGet]
         public IActionResult GetLessonBySectionId(int id) => Ok(_lessonService.GetLessonBySectionId(id));
@@ -51,10 +53,10 @@ namespace FMSystem.Controllers
         public IActionResult GetLessonByCoachId(int id) => Ok(_lessonService.GetLessonByCoachId(id));
 
         [HttpGet]
-        public IActionResult GetLessonByStartDate(int startdate) => Ok(_lessonService.GetLessonByStartDate(DateTimeOffset.FromUnixTimeSeconds(startdate)));
+        public IActionResult GetLessonByStartDate(int startdate) => Ok(_lessonService.GetLessonByStartDate(startdate));
 
         [HttpPost]
-        public IActionResult AddLesson(int sectionid, int coachid, int startdate, int enddate) => Ok(_lessonService.AddLesson(sectionid, coachid, DateTimeOffset.FromUnixTimeSeconds(startdate), DateTimeOffset.FromUnixTimeSeconds(enddate)));
+        public IActionResult AddLesson(int sectionid, int coachid, int startdate, int enddate, int state) => Ok(_lessonService.AddLesson(sectionid, coachid, startdate, enddate, state));
 
         [HttpDelete]
         public IActionResult DeleteLesson(int sectionid, int lessonno) => Ok(_lessonService.DeleteLesson(sectionid, lessonno));
@@ -64,6 +66,9 @@ namespace FMSystem.Controllers
 
         [HttpGet]
         public IActionResult GetCourseProcess(int sectionid) => Ok(_lessonService.GetCourseProcess(sectionid));
+
+        [HttpGet]
+        public IActionResult GetCoachLesson(int coachid, int startdate, int num) => Ok(_lessonService.GetCoachLesson(coachid, startdate, num));
 
 
     }

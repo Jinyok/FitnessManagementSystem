@@ -30,8 +30,8 @@ namespace FMSystem.Entity.fms
 
 
 
-        [Column(TypeName = "date")]
-        public DateTime? CreateTime { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTimeOffset? CreateTime { get; set; }
 
         public enum UserRole
         {
