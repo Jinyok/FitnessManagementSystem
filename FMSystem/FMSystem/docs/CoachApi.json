@@ -1,29 +1,35 @@
-
 //用于通过教练的ID来得到指定的教练信息
- GetCoachesById
+GetCoachesById
 //
-  input:
-  {
-        "CoachId": 1, // CoachId > 0,
-  }
-  output:
-  {
-         "Code": 200,
-         "Message": "成功",
-         "Data":
-         {
-              "CoachId": 1,
-              "Name": "教练",
-              "PhoneNo": 1,
-              "Email": "123456@qq.com",
-              "State": "InOffice"
-          },
+input:
+{
+        /*输入：教练ID*/
+        "CoachId": 1,
+}
+output:
+{
+        /*输出教练的基本信息*/
+        "Code": 200,
+        "Message": "成功",
+        "Data":
+        {
+                "CoachId"       : "00000001",
+                "Name"          : "教练",
+                "PhoneNo"       : "000-0000-0000",
+                "Email"         : "123456@qq.com",
+                "State"         : "InOffice"
+        },
           
-          "Code":999,
-          "Message": "失败",
-          "Data": null
+        "Code":999,
+        "Message": "失败",
+        "Data": null
                
-   }
+}
+
+
+
+/****/
+
 
 //通过名字获得指定的教练信息
  GetCoachesByName

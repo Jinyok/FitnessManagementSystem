@@ -1,3 +1,97 @@
+//查询某一教练的第一节课的课程信息
+GetFirstLessonByCoachId
+   input:
+   {
+      /*输入：教练ID*/
+      "CoachId": 1 
+   }
+   output:
+   {
+      "Code": 200,
+      "Message": "成功",
+      "Data": {
+         /*对于第一个满足Lesson.EndDate > CurrentTime的Lesson实例，
+         输出它所对应的Course.Title, Course.ClassHour, 
+         Section.SectionId, Section已经完成的时长AttendedHours
+         以及Lesson的开始时间Lesson.StartDate */
+         "Title"           : "肌肉塑形后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀",
+         "ClassHour"       : 15,
+         "SectionId"       : 1,
+         "AttendedHours"   : 8,
+         "StartDate"       : 1592614200
+         }
+      },
+
+
+      "Code":999,
+      "Message": "失败",
+      "Data": null
+   }
+
+
+//获取某一教练的某一时间点后的指定数量的课程信息,结果按日期分组
+GetCoachLessons
+   input: {
+      //输入：教练ID，起始时间点，需要返回的Lesson数量
+      "CoachId"   : 1,
+      "StartDate" : 1592614200, //output.LessonList[0].Lessons[0].EndDate > input.StartDate
+      "Number"    : 4 
+   }
+   output: {
+      "Code": 200,
+      "Message": "成功",
+      "Data": {
+         /*输出一个数组LessonList，其每个元素是对所有Lesson按日期分组的结果，每个元素包括
+         表示该分组所对应日期是周几的Week，表示日期的Date以及按时间排序的Lesson列表Lessons*/
+         "LessonList": [
+            {
+               "Week": "周日",
+               "Date": "1月22日",
+               "Lessons": [
+                  {
+                     "LessonId"    : 1,
+                     "SectionId"   : 1,
+                     "Title"       : "这是课程1",
+                     "StartDate"   : 1592614200,
+                     "EndDate"     : 1592634200
+                  },
+                  {
+                     "LessonId"    : 2,
+                     "SectionId"   : 2,
+                     "Title"       : "这是课程2",
+                     "StartDate"   : 1592634200,
+                     "EndDate"     : 1592674200
+                  },
+               ]
+            },
+            {
+               "Week": "周一",
+               "Date": "1月23日",
+               "Lessons": [
+                  {
+                     "LessonId"    : 4,
+                     "SectionId"   : 2,
+                     "Title"       : "这是课程2",
+                     "StartDate"   : 1592614700,
+                     "EndDate"     : 1592635200
+                  },
+                  {
+                     "LessonId"    : 5,
+                     "SectionId"   : 4,
+                     "Title"       : "这是课程4",
+                     "StartDate"   : 1592635200,
+                     "EndDate"     : 1592685200
+                  },
+               ]
+            },
+         ]
+      }
+   }
+      
+
+/****/
+
+
 //通过SectionId获取Lesson
   GetLessonBySectionId
   //
@@ -26,7 +120,7 @@
           "EndDate"     : 1592634200,
           "LessonState": "NotFinish"
        }
-    ]
+    ],
        "Code":999,
        "Message": "失败",
        "Data": null

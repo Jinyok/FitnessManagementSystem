@@ -1,5 +1,43 @@
+//èŽ·å–æŸä¸€æ•™ç»ƒçš„æ‰€æœ‰ç§æ•™è¯¾ç¨‹
+GetInstructsByCoachId
+  input:
+  {
+    /*è¾“å…¥ï¼šæ•™ç»ƒID*/
+    "CoachId": 1
+  }
+  output:
+  {
+    "Code": 200,
+    "Message": "ï¿½É¹ï¿½",
+    "Data": {
+      /*å¯¹äºŽè¯¥æ•™ç»ƒçš„æ¯ä¸€ä¸ªç§æ•™è¯¾ç¨‹ï¼Œè¾“å‡ºå…¶å¯¹åº”å­¦å‘˜çš„Member.MemberId, Member.Name, Member.PhoneNo
+      è¯¥ç§æ•™è¯¾ç¨‹Instructs.TotalHours, Instructs.AttendedHours*/
+      "Members": [
+        {
+          "MemberId"    : "00000000",
+          "Name"        : "äºšåŽ†å±±å¤§å˜çŸ³",
+          "PhoneNo"     : "000-0000-0000",
+          "TotalHours"  : 15,
+          "AttendedHours" : 7
+        },
+        {
+          "MemberId"    : "00000001",
+          "Name"        : "åœ†ç²’é‡‘åˆšçŸ³",
+          "PhoneNo"     : "000-0000-0000",
+          "TotalHours"  : 7,
+          "AttendedHours" : 1
+        },
+      ]
+    },
+            
+    "Code": 999,
+    "Message": "Ê§ï¿½ï¿½",
+    "Data":null
+  }
 
-//ÓÃÓÚÍ¨¹ý»áÔ±µÄIDÀ´µÃµ½»áÔ±µÄÑ¡¿ÎÐÅÏ¢
+
+
+//ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½IDï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ï¢
 GetInstructsByMemberId
 //
   input:
@@ -9,7 +47,7 @@ GetInstructsByMemberId
   output:
   {
          "Code": 200,
-         "Message": "³É¹¦",
+         "Message": "ï¿½É¹ï¿½",
          "Data":[
          {
               "MemberId": 1,
@@ -21,41 +59,14 @@ GetInstructsByMemberId
         ],
         
         "Code": 999,
-        "Message": "Ê§°Ü",
+        "Message": "Ê§ï¿½ï¿½",
         "Data":null
                
    }
 
-//Í¨¹ýÄ³½ÌÁ·µÄId»ñµÃÑ¡¸Ã½ÌÁ·µÄ»áÔ±ÐÅÏ¢
- GetInstructsByCoachId
-//
-  input:
-  {
-         "CoachId": 1 //SectionId > 0
-  }
-  output:
-  {
-         "Code": 200,
-         "Message": "³É¹¦",
-         "Data":[
-          {
-            "MemberId": 1,
-            "CoachId": 1,
-            "AttendHours": 1,
-            "TotalHours": 1
-          }
-            
-        ],
-        
-        "Code": 999,
-        "Message": "Ê§°Ü",
-        "Data":null
-
-}
 
 
-
-//ÐÂÌí¼ÓÒ»ÌõÖ¸µ¼ÐÅÏ¢
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ï¢
  AddInstructs
 //
   input:
@@ -68,16 +79,16 @@ GetInstructsByMemberId
   output:
   {
           "Code": 200,
-          "Message": "³É¹¦",
+          "Message": "ï¿½É¹ï¿½",
           "Data":null,
           
           "Code": 999,
-          "Message": "Ê§°Ü",
+          "Message": "Ê§ï¿½ï¿½",
           "Data": null
   }
 
 
-//É¾³ýÖ¸¶¨µÄÖ¸µ¼ÐÅÏ¢
+//É¾ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ï¢
  DeleteInstructs
 //
   input:
@@ -88,16 +99,16 @@ GetInstructsByMemberId
   output:
   {
           "Code": 200,
-          "Message": "³É¹¦",
+          "Message": "ï¿½É¹ï¿½",
           "Data":null,
           
           "Code": 999,
-          "Message": "Ê§°Ü",
+          "Message": "Ê§ï¿½ï¿½",
           "Data": null
   }
 
 
-//ÐÞ¸ÄÖ¸¶¨µÄÖ¸µ¼ÐÅÏ¢
+//ï¿½Þ¸ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ï¢
  UpdateInstructs
 //
   input:
@@ -111,11 +122,11 @@ GetInstructsByMemberId
   output:
   {
            "Code": 200,
-           "Message": "³É¹¦",
+           "Message": "ï¿½É¹ï¿½",
            "Data":null,
           
            "Code": 999,
-           "Message": "Ê§°Ü",
+           "Message": "Ê§ï¿½ï¿½",
            "Data": null
   }
 
