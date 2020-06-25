@@ -55,6 +55,16 @@ const routes = [
                 path: 'section',
                 name: 'CoachSection',
                 component: () => import ('./components/Coach/CoachSection.vue')
+            },
+            {
+                path: 'instruct',
+                name: 'CoachInstruct',
+                component: () => import ('./components/Coach/CoachInstruct.vue')
+            },
+            {
+                path: 'instructdetail',
+                name: 'CoachInstructDetail',
+                component: () => import ('./components/Coach/CoachInstructDetail.vue')
             }
         ],
     },

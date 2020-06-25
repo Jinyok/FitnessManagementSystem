@@ -1,6 +1,7 @@
 <template>
-    <div class = "sectioncard card" style="cursor: pointer" @click="jumpToCourse">
-        <div style="width: calc(100% - 200px)">
+    <div class = "sectioncard card" style="cursor: pointer; justify-content: space-between" 
+    @click="jumpToCourse">
+        <div style="width: calc(80% - 40px)">
             <h1 style="margin-top:5px; margin-bottom: 5px; font-size: 30px;">
                 {{ section.Title }}
             </h1>
@@ -29,7 +30,7 @@ export default {
     },
     methods: {
         jumpToCourse: function () {
-            this.$router.push({ path: '/coach/section', query: {fromPath: this.$router.history.current.path} })
+            this.$router.push({ path: '/coach/section', query: {} })
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="coachhome">
-        <div class="card">
+        <div class="card" style="justify-content: space-between">
             <div style="display:flex; align-items: center;">
             <div style="margin-right:50px;">
                 <h1 style="font-size: 35px ">Hi,&emsp;Mr.&emsp;{{ coachInfo.Name }}</h1>
@@ -100,7 +100,10 @@ export default {
     font-family: "Roboto-Medium", "HW-Bold", Arial, Helvetica, sans-serif;
     display:flex;
     align-items: center;
-    justify-content: space-between
+}
+
+.font_light {
+    font-family: "Roboto", "HW-Regular", Arial, Helvetica, sans-serif;
 }
 
 .info {
@@ -111,6 +114,6 @@ export default {
     font-family: "Roboto", "HW-Regular", Arial, Helvetica, sans-serif;
 }
 .grey {
-    color: #929292;
+    color: #B0B0B0;
 }
 </style>

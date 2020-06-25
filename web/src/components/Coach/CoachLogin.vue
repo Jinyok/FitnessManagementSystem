@@ -74,7 +74,7 @@ export default {
   left: 50%;
   margin-left: -200px;
   text-align:center;
-  font-family: "HW-Bold", Arial, Helvetica, sans-serif;
+  font-family: "Roboto-Medium","HW-Bold", Arial, Helvetica, sans-serif;
 }
 html,body,#app,.el-container{
     /*设置内部填充为0*/

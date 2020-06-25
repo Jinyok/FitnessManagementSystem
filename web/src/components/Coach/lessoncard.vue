@@ -1,6 +1,6 @@
 <template>
-    <div class = 'lessoncard'>
-        <div style="float: left; font-size: 23px; width: calc(100% - 300px)">{{ lesson.Title }}</div>
+    <div class = 'lessoncard' @click="jumpToCourse">
+        <div style="float: left; font-size: 23px; width: calc(80% - 100px)">{{ lesson.Title }}</div>
         <div style="float: right; font-size: 20px; padding-top:5px">{{ timeSlot }} </div>
     </div>
 </template>
@@ -32,6 +32,11 @@ export default {
         if (eHour < 10)   eHour = '0' + eHour
         if (eMin < 10)    eMin = '0' + eMin
         this.timeSlot = sHour + ' : ' + sMin + ' - ' + eHour + ' : ' + eMin
+    },
+    methods: {
+        jumpToCourse: function () {
+            this.$router.push({ path: '/coach/section', query: {} })
+        }
     }
 }
 </script>

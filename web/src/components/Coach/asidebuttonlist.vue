@@ -7,6 +7,7 @@
     <asidebutton content="主页" @select="reselect"></asidebutton>
     <asidebutton content="课程表" @select="reselect"></asidebutton>
     <asidebutton content="我的课程" @select="reselect"></asidebutton>
+    <asidebutton content="私人指导" @select="reselect"></asidebutton>
 
     <div style="position:absolute;bottom: 10px">
       <asidebutton content="退出" @select="reselect"></asidebutton>
@@ -52,6 +53,7 @@ export default {
         case '/coach/home': content='主页'; break;
         case '/coach/schedule': content='课程表'; break;
         case '/coach/courses': content='我的课程'; break;
+        case '/coach/instruct': content='私人指导'; break;
       }
       var allasidebutton = this.$children
       for (var i = 0; i < allasidebutton.length; i++) {

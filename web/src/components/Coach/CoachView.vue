@@ -40,6 +40,9 @@ export default {
                 case '我的课程':
                     this.$router.push ('/coach/courses');
                     break;
+                case '私人指导':
+                    this.$router.push ('/coach/instruct');
+                    break;
             }
         },
         exit: function () {
