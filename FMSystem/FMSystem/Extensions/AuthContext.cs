@@ -25,7 +25,7 @@ namespace FMSystem.Extensions
             get
             {
                 var user = new User();
-                user.Userid = Convert.ToInt64(Current.User.FindFirstValue("Id"));
+                user.UserId = Convert.ToInt64(Current.User.FindFirstValue("Id"));
                 user.UserName = Current.User.FindFirstValue(ClaimTypes.Name);
                 user.Role = (User.UserRole)Convert.ToInt32(Current.User.FindFirstValue("UserRole"));
                 return user;

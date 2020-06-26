@@ -49,7 +49,7 @@ namespace FMSystem.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(long id, User user)
         {
-            if (id != user.Userid)
+            if (id != user.UserId)
             {
                 return BadRequest();
             }
@@ -88,7 +88,7 @@ namespace FMSystem.Controllers
             }
             catch (DbUpdateException)
             {
-                if (UserExists(user.Userid))
+                if (UserExists(user.UserId))
                 {
                     return Conflict();
                 }
@@ -98,7 +98,7 @@ namespace FMSystem.Controllers
                 }
             }
 
-            return CreatedAtAction("GetUser", new { id = user.Userid }, user);
+            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
         // DELETE: api/Users/5
@@ -119,7 +119,7 @@ namespace FMSystem.Controllers
 
         private bool UserExists(long id)
         {
-            return dbcontext.User.Any(e => e.Userid == id);
+            return dbcontext.User.Any(e => e.UserId == id);
         }
     }
 }

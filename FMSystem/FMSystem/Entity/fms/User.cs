@@ -10,7 +10,7 @@ namespace FMSystem.Entity.fms
     {
 
         [Key]
-        public long Userid { get; set; }
+        public long UserId { get; set; }
 
         [Column(TypeName = "varchar(30)")]
         [Required]

@@ -12,6 +12,6 @@ namespace FMSystem.ViewModels
         public int CoachId { get; set; }
         public int StartDate { get; set; }
         public int EndDate { get; set; }
-        public string State;
+        public string State { get; set; }
     }
 }

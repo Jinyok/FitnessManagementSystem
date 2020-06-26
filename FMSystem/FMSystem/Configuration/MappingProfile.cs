@@ -41,7 +41,8 @@ namespace FMSystem.Configuration
                 .ReverseMap()
                 .ForMember(dest => dest.State, opt => opt.MapFrom(s => s.State.ToString()));
 
-            CreateMap<CoachViewModel, Coach>()
+            CreateMap<CourseViewModel, Course>()
+                .ForMember(dest=>dest.Section,opt=>opt.Ignore())
                 .ReverseMap();
 
             CreateMap<Lesson, LessonViewModel>()
@@ -52,6 +53,9 @@ namespace FMSystem.Configuration
                 .ForMember(dest => dest.StartDate, opt => opt.MapFrom(s => DateTimeOffset.FromUnixTimeSeconds(s.StartDate)))
                 .ForMember(dest => dest.EndDate, opt => opt.MapFrom(s => DateTimeOffset.FromUnixTimeSeconds(s.EndDate)))
                 .ForMember(dest => dest.State, opt => opt.MapFrom(s => Enum.Parse(typeof(Lesson.LessonState), s.State)));
+
+            CreateMap<User, UserViewModel>()
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(s =>s.Role.ToString()));
         }
     }
 }
