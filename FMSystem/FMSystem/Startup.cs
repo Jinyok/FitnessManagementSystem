@@ -29,6 +29,7 @@ using FMSystem.Service;
 using FMSystem.Entity.fms;
 using AutoMapper;
 using FMSystem.Configuration;
+using FMSystem.Controllers;
 
 namespace FMSystem
 {
@@ -100,6 +101,8 @@ namespace FMSystem
             services.AddScoped<ITakeService, TakeService>();
             services.AddScoped<SectionService>();
             services.AddScoped<LessonService>();
+            services.AddScoped<CourseService>();
+            services.AddScoped<CoachService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
