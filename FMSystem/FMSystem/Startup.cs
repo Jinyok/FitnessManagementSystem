@@ -74,6 +74,7 @@ namespace FMSystem
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
                 c.SchemaFilter<SwaggerExcludeFilter>();
+                c.ParameterFilter<SwaggerParameterFilterFilter>();
             });
 
             services.AddLogging(logger =>

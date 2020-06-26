@@ -36,7 +36,7 @@ namespace FMSystem.Controllers
         public IActionResult GetCoursesByTitle(string title) => Ok(_courseService.GetCoursesByTitle(title));
 
         [HttpPost]
-        public IActionResult AddCourse(string title, int cost, int classhour) => Ok(_courseService.AddCourse(title, cost, classhour));
+        public IActionResult AddCourse(CourseViewModel course) => Ok(_courseService.AddCourse(course.Title, course.Cost, course.ClassHour));
 
         [HttpDelete]
         public IActionResult DeleteCourse(int id) => Ok(_courseService.DeleteCourse(id));

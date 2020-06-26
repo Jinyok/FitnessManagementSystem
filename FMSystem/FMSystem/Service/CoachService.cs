@@ -60,6 +60,9 @@ namespace FMSystem.Service
             if (coaches.Any(c => c != null))
             {
                 var coachesModel = mapper.Map<List<CoachViewModel>>(coaches);
+                foreach (var x in coachesModel)
+                    x.PhoneNo = FormatPhoneNo(x.PhoneNo);
+                
                 ResponseModel.SetData(coachesModel);
                 ResponseModel.SetSuccess();
                 return ResponseModel;

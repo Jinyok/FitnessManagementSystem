@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace FMSystem.Configuration
 {
-    public class SwaggerOperationFilter : IParameterFilter
+    public class SwaggerParameterFilterFilter : IParameterFilter
     {
         public void Apply(OpenApiParameter parameter, ParameterFilterContext context)
         {
+            
         }
     }
 }
