@@ -10,15 +10,18 @@ using Microsoft.Extensions.DependencyInjection;
 using FMSystem.Service;
 using FMSystem.Entity.fms;
 using FMSystem.Interface;
+using AutoMapper;
 
 namespace FMSystem.Service
 {
-    public class SectionService:ISectionService
+    public class SectionService : ISectionService
     {
         private fmsContext context;
-        public SectionService(fmsContext context)
+        private IMapper mapper;
+        public SectionService(fmsContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
         public ResponseModel GetSectionBySectionId(int id)
         {
@@ -42,12 +45,25 @@ namespace FMSystem.Service
 
             var sections = context.Section.Where(s => s.CourseId == id).ToList();
 
-            ResponseModel.SetData(sections);
 
             if (sections == null)
                 ResponseModel.SetFailed();
             else
+            {
+                var sectionviewmodels = new List<object>();
+                foreach (var x in sections)
+                {
+                    sectionviewmodels.Add(new
+                    {
+                        SectionId = x.SectionId,
+                        CoachId=x.Coach.CoachId,
+                        ClassHour = x.Lesson.Count,
+                        AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
+                    });
+                }
+                ResponseModel.SetData(sections);
                 ResponseModel.SetSuccess();
+            }
 
             return ResponseModel;
         }
@@ -62,6 +78,17 @@ namespace FMSystem.Service
                 ResponseModel.SetFailed();
             else
             {
+                var sectionviewmodels = new List<object>();
+                foreach (var x in sections)
+                {
+                    sectionviewmodels.Add(new
+                    {
+                        SectionId = x.SectionId,
+                        Title = x.Course.Title,
+                        ClassHour = x.Lesson.Count,
+                        AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
+                    });
+                }
                 ResponseModel.SetData(sections);
                 ResponseModel.SetSuccess();
             }
@@ -123,7 +150,7 @@ namespace FMSystem.Service
                     return ResponseModel;
                 }
             }
-            ResponseModel.SetSuccess();
+            ResponseModel.SetFailed("Id must be greater than 0");
             return ResponseModel;
 
         }

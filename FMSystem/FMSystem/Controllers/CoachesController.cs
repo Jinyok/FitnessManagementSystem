@@ -10,6 +10,7 @@ using FMSystem.Entity;
 using FMSystem.Entity.fms;
 using FMSystem.Interface;
 using FMSystem.Service;
+using FMSystem.ViewModels;
 
 namespace FMSystem.Controllers
 {
@@ -39,6 +40,6 @@ namespace FMSystem.Controllers
         public IActionResult DeleteCoach(int id) => Ok(_coachService.DeleteCoach(id));
 
         [HttpPut]
-        public IActionResult UpdateCoach(Coach coach) => Ok(_coachService.UpdateCoach(coach));
+        public IActionResult UpdateCoach([Bind("CoachId Name PhoneNo")]CoachViewModel coach) => Ok(_coachService.UpdateCoach(coach));
     }
 }

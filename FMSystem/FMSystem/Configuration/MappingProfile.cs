@@ -13,7 +13,7 @@ namespace FMSystem.Configuration
     {
         public MappingProfile()
         {
-            CreateMap<SectionViewModel, Section>()
+            CreateMap<SectionCreateViewModel, Section>()
                 .ForMember(dest => dest.Lesson, opt => opt.MapFrom<ICollection<Lesson>>((s, d) =>
                 {
                     List<Lesson> lessons = new List<Lesson>();
@@ -33,9 +33,19 @@ namespace FMSystem.Configuration
                     return lessons;
                 }));
 
+            CreateMap<Section, SectionViewModel>()
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(s => s.Course.Title));
+
             CreateMap<CoachViewModel, Coach>()
                 .ForMember(dest => dest.State, opt => opt.MapFrom(s => Enum.Parse(typeof(Coach.CoachState), s.State)))
-                .ForMember(dest=>dest.PhoneNo,opt=>opt.MapFrom(s=>long.Parse(s.PhoneNo)));
+                .ReverseMap()
+                .ForMember(dest => dest.State, opt => opt.MapFrom(s => s.State.ToString()));
+
+            CreateMap<CoachViewModel, Coach>()
+                .ReverseMap();
+
+            CreateMap<Lesson, LessonViewModel>()
+                .ForMember(dest => dest.StartDate, opt => opt.MapFrom(s => s.StartDate.Value.ToUnixTimeSeconds()));
         }
     }
 }

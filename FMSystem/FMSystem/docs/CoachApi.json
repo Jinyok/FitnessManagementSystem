@@ -75,7 +75,7 @@ output:
   input:
   { 
          "Name": "教练",
-         "PhoneNo": 123456,
+         "PhoneNo": "123456",
          "Email": "123456@qq.com",
          "State": "InOffice"
   }

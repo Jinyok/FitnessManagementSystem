@@ -46,11 +46,11 @@ namespace FMSystem.Controllers
         [HttpPut]
         public IActionResult UpdateSection(Section section) => Ok(_sectionService.UpdateSection(section));
         [HttpPost]
-        public IActionResult AddSection(SectionViewModel section)
+        public IActionResult AddSection(SectionCreateViewModel section)
         {
             ResponseModel ResponseModel = new ResponseModel();
-            section.SectionId = _context.Section.Max(s => s.SectionId) + 1;
-            var _section = mapper.Map<SectionViewModel, Section>(section);
+            section.SectionId = _context.Section.DefaultIfEmpty().Max(s => s == null ? 0 : s.SectionId) + 1;
+            var _section = mapper.Map<SectionCreateViewModel, Section>(section);
             _context.Add(_section);
             try
             {
@@ -98,6 +98,35 @@ namespace FMSystem.Controllers
         [HttpGet]
         public IActionResult GetCoachLesson(int coachid, int startdate, int num) => Ok(_lessonService.GetCoachLesson(coachid, startdate, num));
 
+        [HttpGet]
+        public IActionResult GetFirstLessonByCoachId(int CoachId)
+        {
+            var response = new ResponseModel();
+            //var course = _context.Course.Single(x => x.Section.Single(s => s.Lesson.Where(l => l.CoachId == CoachId).OrderBy(c => c.StartDate).First()));
+            var lessonquery = from l in _context.Lesson
+                              where l.CoachId == CoachId
+                              select l;
+            if (lessonquery.Any())
+            {
+                var lesson = lessonquery.OrderBy(l => l.StartDate).First();
+                var section = (from s in _context.Section where s.SectionId == lesson.SectionId select s).First();
+                var data = new
+                {
+                    Title = from s in _context.Section where s.SectionId == lesson.SectionId select s.Course.Title,
+                    ClassHour = section.Lesson.Count,
+                    Sectionid = section.SectionId,
+                    AttendedHours = section.Lesson.Where(l => l.State == Lesson.LessonState.Finished),
+                    StartDate = lesson.StartDate
+                };
+                response.SetSuccess();
+                response.SetData(data);
+            }
+            else
+            {
+                response.SetFailed("教练无课");
+            }
+            return Ok(response);
+        }
 
     }
 }

@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace FMSystem.ViewModels
 {
-    public class CourseViewModel
+    public class SectionCreateViewModel
     {
+        [BindNever]
+        public int SectionId { get; set; }
         public int CourseId { get; set; }
-
-        public string Title { get; set; }
-
-        public int Cost { get; set; }
-        public int ClassHour { get; set; }
+        public int CoachId { get; set; }
+        public List<TimeSlice> TimeSlices { get; set; }
     }
 }

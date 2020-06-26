@@ -12,8 +12,6 @@ namespace FMSystem.Entity.fms
         [Key]
         public long Userid { get; set; }
 
-
-
         [Column(TypeName = "varchar(30)")]
         [Required]
         public string UserName { get; set; }
@@ -28,10 +26,11 @@ namespace FMSystem.Entity.fms
         [Required]
         public UserRole Role { get; set; }
 
-
+        public int Number { get; set; }
 
         [Column(TypeName = "datetime")]
         public DateTimeOffset? CreateTime { get; set; }
+
 
         public enum UserRole
         {

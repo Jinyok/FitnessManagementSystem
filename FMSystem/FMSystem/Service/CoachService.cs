@@ -10,37 +10,39 @@ using Microsoft.Extensions.DependencyInjection;
 using FMSystem.Service;
 using FMSystem.Entity.fms;
 using FMSystem.Interface;
+using AutoMapper;
+using FMSystem.ViewModels;
 
 namespace FMSystem.Service
 {
 
-    public class CoachService:ICoachService
+    public class CoachService : ICoachService
     {
         private fmsContext context;
-        public CoachService(fmsContext context)
+        private IMapper mapper;
+        public CoachService(fmsContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
-        public Coach Package(Coach coaches)
+        public string FormatPhoneNo(string PhoneNo)
         {
-            long no = Convert.ToInt64(coaches.PhoneNo);
-            coaches.PhoneNo = string.Format("{0:###-####-####}", no);
-            return coaches;
+            long no = Convert.ToInt64(PhoneNo);
+            return string.Format("{0:###-####-####}", no);
         }
 
         public ResponseModel GetCoachesById(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            Coach coaches = null;
+            Coach coach = context.Coach.Where(c => c.CoachId == id).FirstOrDefault();
 
-            coaches = context.Coach.Where(c => c.CoachId == id).FirstOrDefault();
-
-            if (coaches != null)
+            if (coach != null)
             {
-                coaches = Package(coaches);
-                ResponseModel.SetData(coaches);
+                var coacheModels = mapper.Map<CoachViewModel>(coach);
+                coacheModels.PhoneNo = FormatPhoneNo(coacheModels.PhoneNo);
+                ResponseModel.SetData(coacheModels);
                 ResponseModel.SetSuccess();
                 return ResponseModel;
             }
@@ -54,15 +56,11 @@ namespace FMSystem.Service
 
             List<Coach> coaches = context.Coach.Where(c => c.Name == name).ToList();
 
-            List<Coach> coaches1 = new List<Coach>();
-            
-            if (coaches.Any(c=>c != null))
+
+            if (coaches.Any(c => c != null))
             {
-                foreach (Coach coach in coaches)
-                {
-                    coaches1.Add(Package(coach));
-                }
-                ResponseModel.SetData(coaches1);
+                var coachesModel = mapper.Map<List<CoachViewModel>>(coaches);
+                ResponseModel.SetData(coachesModel);
                 ResponseModel.SetSuccess();
                 return ResponseModel;
             }
@@ -91,6 +89,7 @@ namespace FMSystem.Service
             if (context.Coach.Where(c => c.CoachId == coach.CoachId).FirstOrDefault() != null)
             {
                 ResponseModel.SetSuccess();
+                ResponseModel.SetData(coach.CoachId);
                 return ResponseModel;
             }
             ResponseModel.SetFailed();
@@ -112,34 +111,21 @@ namespace FMSystem.Service
                     return ResponseModel;
                 }
             }
-            ResponseModel.SetFailed();
+            ResponseModel.SetFailed("Id must be greater than 0");
             return ResponseModel;
         }
 
-        public ResponseModel UpdateCoach(Coach coach)
+        public ResponseModel UpdateCoach(CoachViewModel coachmodel)
         {
             ResponseModel ResponseModel = new ResponseModel();
-
+            var coach = mapper.Map<Coach>(coachmodel);
             if (coach.CoachId > 0)
             {
-                Coach temp = context.Coach.Where(c => c.CoachId == coach.CoachId).FirstOrDefault();
-                if (temp != null)
-                {
-                    temp.CoachId = coach.CoachId;
+                var s = context.Coach.Update(coach);
+                context.SaveChanges();
+                ResponseModel.SetSuccess();
+                return ResponseModel;
 
-                    temp.Name = coach.Name;
-
-                    temp.Email = coach.Email;
-
-                    temp.PhoneNo = coach.PhoneNo;
-
-                    temp.State = coach.State;
-
-                    context.SaveChanges();
-
-                    ResponseModel.SetSuccess();
-                    return ResponseModel;
-                }
             }
             ResponseModel.SetFailed();
             return ResponseModel;
