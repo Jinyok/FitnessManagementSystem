@@ -8,32 +8,36 @@ using Microsoft.EntityFrameworkCore;
 using FMSystem.Models;
 using FMSystem.Entity;
 using FMSystem.Entity.fms;
+using AutoMapper;
+using FMSystem.ViewModels;
 
 namespace FMSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly fmsContext dbcontext;
+        private readonly fmsContext context;
+        private readonly IMapper mapper;
 
-        public UsersController(fmsContext context)
+        public UsersController(fmsContext context,IMapper mapper)
         {
-            dbcontext = context;
+            this.context = context;
+            this.mapper = mapper;
         }
 
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            return await dbcontext.User.ToListAsync();
+            return await context.User.ToListAsync();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(string id)
+        public async Task<ActionResult<User>> GetUser(long id)
         {
-            var user = await dbcontext.User.FindAsync(id);
+            var user = await context.User.FindAsync(id);
 
             if (user == null)
             {
@@ -54,11 +58,11 @@ namespace FMSystem.Controllers
                 return BadRequest();
             }
 
-            dbcontext.Entry(user).State = EntityState.Modified;
+            context.Entry(user).State = EntityState.Modified;
 
             try
             {
-                await dbcontext.SaveChangesAsync();
+                await context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -79,47 +83,43 @@ namespace FMSystem.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser(UserCreateModel usermodel)
         {
-            dbcontext.User.Add(user);
-            try
+            var response = new ResponseModel();
+            var user = mapper.Map<User>(usermodel);
+            user.CreateTime = DateTimeOffset.Now;
+            context.User.Add(user);
+            if(context.User.Any(x=>x.Role==user.Role&&x.Number==user.Number))
             {
-                await dbcontext.SaveChangesAsync();
+                //TODO
+                response.SetFailed("对应Number与角色已经存在");
+                return Ok(response);
             }
-            catch (DbUpdateException)
-            {
-                if (UserExists(user.UserId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            await context.SaveChangesAsync();
+            response.SetSuccess();
+            response.SetData(new { user.UserId });
+            return Ok(response);
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(string id)
         {
-            var user = await dbcontext.User.FindAsync(id);
+            var user = await context.User.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            dbcontext.User.Remove(user);
-            await dbcontext.SaveChangesAsync();
+            context.User.Remove(user);
+            await context.SaveChangesAsync();
 
             return user;
         }
 
         private bool UserExists(long id)
         {
-            return dbcontext.User.Any(e => e.UserId == id);
+            return context.User.Any(e => e.UserId == id);
         }
     }
 }

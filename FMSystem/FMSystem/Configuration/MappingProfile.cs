@@ -56,6 +56,8 @@ namespace FMSystem.Configuration
 
             CreateMap<User, UserViewModel>()
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(s =>s.Role.ToString()));
+            CreateMap<UserCreateModel, User>()
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(s => Enum.Parse(typeof(User.UserRole), s.Role)));
         }
     }
 }

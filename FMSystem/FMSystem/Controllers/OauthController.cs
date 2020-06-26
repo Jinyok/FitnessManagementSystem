@@ -4,11 +4,13 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
+using AutoMapper;
 using FMSystem.Controllers.Binder;
 using FMSystem.Entity;
 using FMSystem.Entity.fms;
 using FMSystem.Extensions;
 using FMSystem.Models;
+using FMSystem.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -24,9 +26,11 @@ namespace Controllers
     {
 
         private readonly fmsContext _context;
-        public OauthController(fmsContext context)
+        private readonly IMapper mapper;
+        public OauthController(fmsContext context, IMapper mapper)
         {
             _context = context;
+            this.mapper = mapper;
         }
 
         /// <summary>
@@ -34,21 +38,21 @@ namespace Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Login([ModelBinder(typeof(BodyFormModelBinder))] User user)
+        public async Task<IActionResult> Login([FromBody] JsonElement userjobj)
         {
-            string username = user.UserName;
-            string password = user.Password;
-            if (username == null || password == null)
-                return Ok(new { result = false, msg = $"{username} {password}" });
+            long UserId = long.Parse(userjobj.GetProperty(nameof(UserId)).GetString());
+            string PassWord = userjobj.GetProperty(nameof(PassWord)).GetString();
+            var response = new ResponseModel();
 
-            if (username.Equals("admin") && password.Equals("123456"))
+            var User = _context.User.Single(u => u.UserId == UserId);
+            if (User != null && User.Password == PassWord)
             {
 
                 var claims = new List<Claim>(){
-                    new Claim("Id",0.ToString()),
-                    new Claim(ClaimTypes.Name,username),
-                    new Claim("UserRole",((int)FMSystem.Entity.fms.User.UserRole.Root).ToString())
-
+                    new Claim("Id",UserId.ToString()),
+                    new Claim(ClaimTypes.Name,User.UserName),
+                    new Claim("UserRole",((int)User.Role).ToString()),
+                    new Claim("Number",User.Number.ToString())
                 };
 
                 var userPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims, "Customer"));
@@ -59,10 +63,12 @@ namespace Controllers
                     IsPersistent = false,
                     AllowRefresh = false
                 });
-
-                return Redirect("/Home/Index");
+                response.SetSuccess();
+                response.SetData(mapper.Map<UserViewModel>(User));
+                return Ok(response);
             }
-            return Ok(new { result = false, msg = "用户名密码错误!" });
+            response.SetFailed("用户名或密码错误");
+            return Ok(response);
         }
 
         [HttpPost, Authorize]
@@ -70,8 +76,9 @@ namespace Controllers
         {
 
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-            return Redirect("/Home/Login");
+            var r = new ResponseModel();
+            r.SetSuccess();
+            return Ok(r);
 
         }
         [HttpGet]
