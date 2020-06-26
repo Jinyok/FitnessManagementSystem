@@ -97,6 +97,7 @@ namespace FMSystem.Service
             if(lessons != null)
             {
                 ResponseModel.SetSuccess();
+                ResponseModel.SetData(lessons);
                 return ResponseModel;
             }
             ResponseModel.SetFailed();
@@ -104,7 +105,7 @@ namespace FMSystem.Service
         }
         public Lesson Merge(int sectionid, int coachid, int startdate, int enddate,int state)
         {
-            Lesson lesson = null;
+            Lesson lesson = new Lesson();
             DateTimeOffset sdate = DateTimeOffset.FromUnixTimeSeconds(startdate);
             DateTimeOffset edate = DateTimeOffset.FromUnixTimeSeconds(enddate);
             lesson.SectionId = sectionid;
@@ -130,8 +131,10 @@ namespace FMSystem.Service
             }
             context.Lesson.Add(lesson);
             context.SaveChanges();
-            if(lesson1.Any(l=>l.LessonNo==lesson.LessonNo))
+            lesson1 = context.Lesson.Where(l => l.SectionId == sectionid).ToList();
+            if (lesson1.Any(l=>l.LessonNo==lesson.LessonNo))
             {
+
                 ResponseModel.SetSuccess();
                 return ResponseModel;
             }

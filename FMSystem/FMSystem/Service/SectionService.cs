@@ -58,12 +58,13 @@ namespace FMSystem.Service
 
             var sections = context.Section.Where(s => s.CoachId == id).ToList();
 
-            ResponseModel.SetData(sections);
-
             if (sections == null)
                 ResponseModel.SetFailed();
             else
+            {
+                ResponseModel.SetData(sections);
                 ResponseModel.SetSuccess();
+            }
 
             return ResponseModel;
         }
@@ -86,7 +87,7 @@ namespace FMSystem.Service
 
         public Section Merge(int coachid, int courseid)
         {
-            Section section = null;
+            Section section = new Section();
             section.CoachId = coachid;
             section.CourseId = courseid;
             return section;

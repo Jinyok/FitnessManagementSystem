@@ -57,7 +57,7 @@ namespace FMSystem.Service
 
         public Coach Merge(string name, long phoneno, string email)
         {
-            Coach coach = null;
+            Coach coach = new Coach();
             coach.Name = name;
             coach.Email = email;
             coach.State = Coach.CoachState.InOffice;

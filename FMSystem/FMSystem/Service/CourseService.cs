@@ -56,7 +56,7 @@ namespace FMSystem.Service
 
         public Course Merge(string title, int cost, int classhour)
         {
-            Course course = null;
+            Course course = new Course();
             course.Title = title;
             course.Cost = cost;
             course.ClassHour = classhour;
