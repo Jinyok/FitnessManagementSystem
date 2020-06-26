@@ -32,6 +32,10 @@ namespace FMSystem.Configuration
                     }
                     return lessons;
                 }));
+
+            CreateMap<CoachViewModel, Coach>()
+                .ForMember(dest => dest.State, opt => opt.MapFrom(s => Enum.Parse(typeof(Coach.CoachState), s.State)))
+                .ForMember(dest=>dest.PhoneNo,opt=>opt.MapFrom(s=>long.Parse(s.PhoneNo)));
         }
     }
 }
