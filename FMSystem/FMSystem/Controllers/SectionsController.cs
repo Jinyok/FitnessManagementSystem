@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using FMSystem.Entity;
 using FMSystem.Entity.fms;
 using FMSystem.Service;
+using FMSystem.ViewModels;
+using FMSystem.Models;
+using AutoMapper;
 
 namespace FMSystem.Controllers
 {
@@ -18,12 +21,14 @@ namespace FMSystem.Controllers
         private readonly fmsContext _context;
         private readonly SectionService _sectionService;
         private readonly LessonService _lessonService;
+        private readonly IMapper mapper;
 
-        public SectionsController(fmsContext context, SectionService sectionService, LessonService lessonService)
+        public SectionsController(fmsContext context, SectionService sectionService, LessonService lessonService, IMapper mapper)
         {
             _context = context;
             _sectionService = sectionService;
             _lessonService = lessonService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -41,7 +46,30 @@ namespace FMSystem.Controllers
         [HttpPut]
         public IActionResult UpdateSection(Section section) => Ok(_sectionService.UpdateSection(section));
         [HttpPost]
-        public IActionResult AddSection(int coachid, int courseid) => Ok(_sectionService.AddSection(coachid, courseid));
+        public IActionResult AddSection(SectionViewModel section)
+        {
+            ResponseModel ResponseModel = new ResponseModel();
+            section.SectionId = _context.Section.Count() + 1;
+            var _section = mapper.Map<SectionViewModel, Section>(section);
+            _context.Add(_section);
+            try
+            {
+                _context.SaveChanges();
+                ResponseModel.SetData(new { section.SectionId });
+                ResponseModel.SetSuccess();
+            }
+            catch(DbUpdateConcurrencyException)
+            {
+                ResponseModel.SetFailed();
+                if (!_context.Coach.Any(x => x.CoachId == section.CoachId))
+                    ResponseModel.Message = $"CoachId doesn't exist: {section.CoachId}";
+                else if(!_context.Course.Any(x=>x.CourseId==section.CourseId))
+                    ResponseModel.Message = $"CourseId doesn't exist: {section.CourseId}";
+
+            }
+
+            return Ok(ResponseModel);
+        }
 
         [HttpGet]
         public IActionResult GetLessonBySectionId(int id) => Ok(_lessonService.GetLessonBySectionId(id));

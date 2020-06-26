@@ -27,6 +27,7 @@ using FMSystem.Entity;
 using FMSystem.Interface;
 using FMSystem.Service;
 using FMSystem.Entity.fms;
+using AutoMapper;
 
 namespace FMSystem
 {
@@ -89,6 +90,7 @@ namespace FMSystem
 
             services.AddLogDashboard();
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             //
             services.AddScoped<ICoachService, CoachService>();
             services.AddScoped<IMemberService, MemberService>();
