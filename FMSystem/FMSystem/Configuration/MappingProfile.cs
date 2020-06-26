@@ -47,7 +47,7 @@ namespace FMSystem.Configuration
             CreateMap<Lesson, LessonViewModel>()
                 .ForMember(dest => dest.StartDate, opt => opt.MapFrom(s => s.StartDate.Value.ToUnixTimeSeconds()))
                 .ForMember(dest => dest.EndDate, opt => opt.MapFrom(s => s.EndDate.Value.ToUnixTimeSeconds()))
-                .ForMember(dest => dest.StartDate, opt => opt.MapFrom(s => s.State.ToString()))
+                .ForMember(dest => dest.State, opt => opt.MapFrom(s => s.State.ToString()))
                 .ReverseMap()
                 .ForMember(dest => dest.StartDate, opt => opt.MapFrom(s => DateTimeOffset.FromUnixTimeSeconds(s.StartDate)))
                 .ForMember(dest => dest.EndDate, opt => opt.MapFrom(s => DateTimeOffset.FromUnixTimeSeconds(s.EndDate)))
