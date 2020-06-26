@@ -10,8 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using FMSystem.Service;
 using FMSystem.Entity.fms;
 using FMSystem.Interface;
-using FMSystem.ViewModels;
-using AutoMapper;
 
 namespace FMSystem.Service
 {
@@ -19,26 +17,23 @@ namespace FMSystem.Service
     public class CourseService : ICourseService
     {
         private fmsContext context;
-        private IMapper mapper;
-        public CourseService(fmsContext context, IMapper mapper)
+        public CourseService(fmsContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
 
         public ResponseModel GetCoursesById(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            Course course = context.Course.AsNoTracking().Single(c => c.CourseId == id);
+            Course courses = context.Course.Where(c => c.CourseId == id).FirstOrDefault();
 
-            if (course != null)
-            {
-                ResponseModel.SetData(mapper.Map<CourseViewModel>(course));
-                ResponseModel.SetSuccess();
-            }
-            else
+            ResponseModel.SetData(courses);
+
+            if (courses == null)
                 ResponseModel.SetFailed();
+            else
+                ResponseModel.SetSuccess();
 
             return ResponseModel;
         }
@@ -48,13 +43,10 @@ namespace FMSystem.Service
 
             List<Course> courses = context.Course.Where(c => c.Title == title).ToList();
 
+            ResponseModel.SetData(courses);
 
-
-            if (courses.Any(c => c != null))
-            {
-                ResponseModel.SetData(mapper.Map<List<CourseViewModel>>(courses));
+            if (courses.Any(c=>c !=null))
                 ResponseModel.SetSuccess();
-            }
             else
                 ResponseModel.SetFailed();
 
@@ -100,11 +92,11 @@ namespace FMSystem.Service
                     return ResponseModel;
                 }
             }
-            ResponseModel.SetFailed("Id not found");
+            ResponseModel.SetSuccess();
             return ResponseModel;
         }
 
-        public ResponseModel UpdateCourse(CourseViewModel course)
+        public ResponseModel UpdateCourse(Course course)
         {
             ResponseModel ResponseModel = new ResponseModel();
 

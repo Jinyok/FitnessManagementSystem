@@ -10,24 +10,21 @@ using Microsoft.Extensions.DependencyInjection;
 using FMSystem.Service;
 using FMSystem.Entity.fms;
 using FMSystem.Interface;
-using AutoMapper;
 
 namespace FMSystem.Service
 {
-    public class SectionService : ISectionService
+    public class SectionService:ISectionService
     {
         private fmsContext context;
-        private IMapper mapper;
-        public SectionService(fmsContext context, IMapper mapper)
+        public SectionService(fmsContext context)
         {
             this.context = context;
-            this.mapper = mapper;
         }
         public ResponseModel GetSectionBySectionId(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            Section section = context.Section.Single(s => s.SectionId == id);
+            Section section = context.Section.Where(s => s.SectionId == id).FirstOrDefault();
 
             ResponseModel.SetData(section);
 
@@ -45,25 +42,12 @@ namespace FMSystem.Service
 
             var sections = context.Section.Where(s => s.CourseId == id).ToList();
 
+            ResponseModel.SetData(sections);
 
-            if (sections == null)
+            if (sections.Any(s=>s != null))
                 ResponseModel.SetFailed();
             else
-            {
-                var sectionviewmodels = new List<object>();
-                foreach (var x in sections)
-                {
-                    sectionviewmodels.Add(new
-                    {
-                        SectionId = x.SectionId,
-                        CoachId=x.Coach.CoachId,
-                        ClassHour = x.Lesson.Count,
-                        AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
-                    });
-                }
-                ResponseModel.SetData(sections);
                 ResponseModel.SetSuccess();
-            }
 
             return ResponseModel;
         }
@@ -74,21 +58,10 @@ namespace FMSystem.Service
 
             var sections = context.Section.Where(s => s.CoachId == id).ToList();
 
-            if (sections == null)
+            if (sections.Any(s => s != null))
                 ResponseModel.SetFailed();
             else
             {
-                var sectionviewmodels = new List<object>();
-                foreach (var x in sections)
-                {
-                    sectionviewmodels.Add(new
-                    {
-                        SectionId = x.SectionId,
-                        Title = x.Course.Title,
-                        ClassHour = x.Lesson.Count,
-                        AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
-                    });
-                }
                 ResponseModel.SetData(sections);
                 ResponseModel.SetSuccess();
             }
@@ -127,7 +100,7 @@ namespace FMSystem.Service
                 Section section = Merge(coachid, courseid);
                 context.Section.Add(section);
                 context.SaveChanges();
-                if (GetSectionBySectionId(section.SectionId) != null)
+                if (context.Section.Where(s => s.SectionId == section.SectionId).FirstOrDefault() != null)
                     ResponseModel.SetSuccess();
                 return ResponseModel;
             }
@@ -141,7 +114,7 @@ namespace FMSystem.Service
 
             if (id > 0)
             {
-                Section section = context.Section.Single(s => s.SectionId == id);
+                Section section = context.Section.Where(s => s.SectionId == id).FirstOrDefault();
                 if (section != null)
                 {
                     context.Section.Remove(section);
@@ -150,7 +123,7 @@ namespace FMSystem.Service
                     return ResponseModel;
                 }
             }
-            ResponseModel.SetFailed("Id must be greater than 0");
+            ResponseModel.SetSuccess();
             return ResponseModel;
 
         }
@@ -161,7 +134,7 @@ namespace FMSystem.Service
 
             if (section.SectionId > 0)
             {
-                Section temp = context.Section.Single(s => s.SectionId == section.SectionId);
+                Section temp = context.Section.Where(s => s.SectionId == section.SectionId).FirstOrDefault();
                 if (temp != null)
                 {
                     temp.SectionId = section.SectionId;
