@@ -33,7 +33,7 @@ namespace FMSystem.Controllers
         public IActionResult GetCoachesByName(string name) => Ok(_coachService.GetCoachesByName(name));
 
         [HttpPost]
-        public IActionResult AddCoach(string name, long phoneno, string email) => Ok(_coachService.AddCoach(name, phoneno, email));
+        public IActionResult AddCoach(string name, string phoneno, string email) => Ok(_coachService.AddCoach(name, phoneno, email));
 
         [HttpDelete]
         public IActionResult DeleteCoach(int id) => Ok(_coachService.DeleteCoach(id));
