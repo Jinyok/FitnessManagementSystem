@@ -25,17 +25,11 @@ namespace FMSystem.Service
             this.mapper = mapper;
         }
 
-        public long FormatDate(DateTimeOffset? date)
-        {
-            long datetime = date.Value.ToUnixTimeSeconds();
-            return datetime;
-        }
-
         public ResponseModel GetLessonBySectionId(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
             List<Lesson> lesson = context.Lesson.Where(l => l.SectionId == id).ToList();
-            if (lesson.Any(l=>l!=null))
+            if (lesson.Any(l => l != null))
             {
                 var lessonModels = mapper.Map<List<LessonViewModel>>(lesson);
                 ResponseModel.SetSuccess();
@@ -72,7 +66,7 @@ namespace FMSystem.Service
                 ResponseModel.SetData(lessonModels);
                 return ResponseModel;
             }
-            
+
             ResponseModel.SetFailed();
             return ResponseModel;
         }
@@ -108,7 +102,7 @@ namespace FMSystem.Service
                     i++;
                 }
             }
-            if(lessons.Any(l => l != null))
+            if (lessons.Any(l => l != null))
             {
                 var lessonModels = mapper.Map<List<LessonViewModel>>(lessons);
                 ResponseModel.SetSuccess();
@@ -118,7 +112,7 @@ namespace FMSystem.Service
             ResponseModel.SetFailed();
             return ResponseModel;
         }
-        public Lesson Merge(int sectionid, int coachid,long startdate, long enddate,int state)
+        public Lesson Merge(int sectionid, int coachid, long startdate, long enddate, int state)
         {
             Lesson lesson = new Lesson();
             DateTimeOffset sdate = DateTimeOffset.FromUnixTimeSeconds(startdate);
@@ -138,9 +132,9 @@ namespace FMSystem.Service
         public ResponseModel AddLesson(int sectionid, int coachid, long startdate, long enddate, int state)
         {
             ResponseModel ResponseModel = new ResponseModel();
-            Lesson lesson = Merge(sectionid, coachid, startdate, enddate,state);
+            Lesson lesson = Merge(sectionid, coachid, startdate, enddate, state);
             List<Lesson> lesson1 = context.Lesson.Where(l => l.SectionId == sectionid).ToList();
-            if ( lesson1 != null)
+            if (lesson1 != null)
             {
                 lesson.LessonNo = lesson1.Count() + 1;//计算已经上了几节课并在此基础上+1
             }
@@ -148,7 +142,7 @@ namespace FMSystem.Service
             context.Lesson.Add(lesson);
             context.SaveChanges();
             lesson1 = context.Lesson.Where(l => l.SectionId == sectionid).ToList();
-            if (lesson1.Any(l=>l.LessonNo==lesson.LessonNo))
+            if (lesson1.Any(l => l.LessonNo == lesson.LessonNo))
             {
 
                 ResponseModel.SetSuccess();
@@ -162,10 +156,10 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
             var lesson = context.Lesson.Where(l => l.SectionId == sectionid).ToList();
-            if(lesson.Any(l => l != null))
+            if (lesson.Any(l => l != null))
             {
                 var lesson1 = lesson.Where(l => l.LessonNo == lessonno).FirstOrDefault();
-                if(lesson1 != null)
+                if (lesson1 != null)
                 {
                     int j = lesson1.LessonNo;
                     if (lesson.Count > 2)
@@ -185,7 +179,7 @@ namespace FMSystem.Service
                         lesson[0].CoachId = lesson[1].CoachId;
                         lesson[0].State = lesson[1].State;
                     }
-                    int m = lesson.Max(l=>l.LessonNo);
+                    int m = lesson.Max(l => l.LessonNo);
                     lesson1 = context.Lesson.Where(l => l.LessonNo == m).FirstOrDefault();
                     context.Lesson.Remove(lesson1);
                     context.SaveChanges();
@@ -201,7 +195,7 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
             var lesson1 = context.Lesson.Where(l => l.SectionId == lesson.SectionId).ToList();
-            if(lesson1.Any(l => l != null))
+            if (lesson1.Any(l => l != null))
             {
                 var lesson2 = lesson1.Where(l => l.LessonNo == lesson.LessonNo).FirstOrDefault();
                 if (lesson2 != null)
@@ -222,7 +216,7 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
             var lesson = context.Lesson.Where(l => l.SectionId == sectionid).ToList();
-            if(lesson.Any(l => l != null))
+            if (lesson.Any(l => l != null))
             {
                 double totalhours = 0;
                 for (int i = 0; i < lesson.Count; i++)
