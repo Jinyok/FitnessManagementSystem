@@ -28,6 +28,7 @@ using FMSystem.Interface;
 using FMSystem.Service;
 using FMSystem.Entity.fms;
 using AutoMapper;
+using FMSystem.Configuration;
 
 namespace FMSystem
 {
@@ -71,6 +72,7 @@ namespace FMSystem
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+                c.SchemaFilter<SwaggerExcludeFilter>();
             });
 
             services.AddLogging(logger =>
