@@ -49,7 +49,7 @@ namespace FMSystem.Controllers
         public IActionResult AddSection(SectionViewModel section)
         {
             ResponseModel ResponseModel = new ResponseModel();
-            section.SectionId = _context.Section.Count() + 1;
+            section.SectionId = _context.Section.Max(s => s.SectionId) + 1;
             var _section = mapper.Map<SectionViewModel, Section>(section);
             _context.Add(_section);
             try
@@ -58,12 +58,12 @@ namespace FMSystem.Controllers
                 ResponseModel.SetData(new { section.SectionId });
                 ResponseModel.SetSuccess();
             }
-            catch(DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException)
             {
                 ResponseModel.SetFailed();
                 if (!_context.Coach.Any(x => x.CoachId == section.CoachId))
                     ResponseModel.Message = $"CoachId doesn't exist: {section.CoachId}";
-                else if(!_context.Course.Any(x=>x.CourseId==section.CourseId))
+                else if (!_context.Course.Any(x => x.CourseId == section.CourseId))
                     ResponseModel.Message = $"CourseId doesn't exist: {section.CourseId}";
 
             }

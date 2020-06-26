@@ -13,7 +13,7 @@ output:
         "Message": "成功",
         "Data":
         {
-                "CoachId"       : "00000001",
+                "CoachId"       : 1,
                 "Name"          : "教练",
                 "PhoneNo"       : "000-0000-0000",
                 "Email"         : "123456@qq.com",

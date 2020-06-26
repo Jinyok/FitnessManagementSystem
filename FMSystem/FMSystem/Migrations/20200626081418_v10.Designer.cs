@@ -3,14 +3,16 @@ using System;
 using FMSystem.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FMSystem.Migrations
 {
     [DbContext(typeof(fmsContext))]
-    partial class fmsContextModelSnapshot : ModelSnapshot
+    [Migration("20200626081418_v10")]
+    partial class v10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

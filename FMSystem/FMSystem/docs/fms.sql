@@ -15,15 +15,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Dumping data for table `__efmigrationshistory`
---
 
-LOCK TABLES `__efmigrationshistory` WRITE;
-/*!40000 ALTER TABLE `__efmigrationshistory` DISABLE KEYS */;
-INSERT INTO `__efmigrationshistory` VALUES ('20200611011234_init','3.1.5'),('20200613070211_v2','3.1.5'),('20200613150228_take','3.1.5'),('20200615124212_v3','3.1.5'),('20200617123702_v4','3.1.5'),('20200617172708_v5','3.1.5'),('20200622023720_v6','3.1.5'),('20200623143928_v7','3.1.5'),('20200623164136_v8','3.1.5');
-/*!40000 ALTER TABLE `__efmigrationshistory` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Dumping data for table `coach`
@@ -31,7 +23,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `coach` WRITE;
 /*!40000 ALTER TABLE `coach` DISABLE KEYS */;
-INSERT INTO `coach` VALUES (1,'刘能',13060648195,'1506493779@qq.com',0),(2,'玛里苟斯',13535507207,'2506493779@qq.com',0),(3,'马睿',23535507207,'3506493779@qq.com',0),(4,'赵三',33535507207,'4506493779@qq.com',0),(5,'李四',43535507207,'5506493779@qq.com',1);
+INSERT INTO `coach` VALUES (1,'刘能',"13060648195",'1506493779@qq.com',0),(2,'玛里苟斯',"13535507207",'2506493779@qq.com',0),(3,'马睿',"23535507207",'3506493779@qq.com',0),(4,'赵三',"33535507207",'4506493779@qq.com',0),(5,'李四',"43535507207",'5506493779@qq.com',1);
 /*!40000 ALTER TABLE `coach` ENABLE KEYS */;
 UNLOCK TABLES;
 

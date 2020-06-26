@@ -17,7 +17,8 @@ namespace FMSystem.Entity.fms
         public int CoachId { get; set; }
         [Column(TypeName = "varchar(45)")]
         public string Name { get; set; }
-        public long? PhoneNo { get; set; }
+        [Column(TypeName ="varchar(20)")]
+        public string PhoneNo { get; set; }
 
         [Column(TypeName = "varchar(30)")]
         public string Email { get; set; }
