@@ -9,6 +9,7 @@ using FMSystem.Models;
 using FMSystem.Entity;
 using FMSystem.Entity.fms;
 using FMSystem.Interface;
+using FMSystem.Service;
 
 namespace FMSystem.Controllers
 {
@@ -17,99 +18,27 @@ namespace FMSystem.Controllers
     public class CoachesController : ControllerBase
     {
         private readonly fmsContext _context;
-        private readonly ICoachService _coachService;
+        private readonly CoachService _coachService;
 
-        public CoachesController(fmsContext context,ICoachService coachService)
+        public CoachesController(fmsContext context, CoachService coachService)
         {
             _context = context;
             _coachService = coachService;
         }
 
-        // GET: api/Coaches
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Coach>>> GetCoach()
-        {
-            return await _context.Coach.ToListAsync();
-        }
+        public IActionResult GetCoachesById(int id) => Ok(_coachService.GetCoachesById(id));
 
-        // GET: api/Coaches/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Coach>> GetCoach(int id)
-        {
-            var coach = await _context.Coach.FindAsync(id);
+        [HttpGet]
+        public IActionResult GetCoachesByName(string name) => Ok(_coachService.GetCoachesByName(name));
 
-            if (coach == null)
-            {
-                return NotFound();
-            }
-
-            return coach;
-        }
-
-        // PUT: api/Coaches/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCoach(int id, Coach coach)
-        {
-            if (id != coach.CoachId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(coach).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CoachExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Coaches
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Coach>> PostCoach(Coach coach)
-        {
-            _context.Coach.Add(coach);
-            await _context.SaveChangesAsync();
+        public IActionResult AddCoach(string name, long phoneno, string email) => Ok(_coachService.AddCoach(name, phoneno, email));
 
-            return CreatedAtAction("GetCoach", new { id = coach.CoachId }, coach);
-        }
+        [HttpDelete]
+        public IActionResult DeleteCoach(int id) => Ok(_coachService.DeleteCoach(id));
 
-        // DELETE: api/Coaches/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Coach>> DeleteCoach(int id)
-        {
-            var coach = await _context.Coach.FindAsync(id);
-            if (coach == null)
-            {
-                return NotFound();
-            }
-
-            _context.Coach.Remove(coach);
-            await _context.SaveChangesAsync();
-
-            return coach;
-        }
-        
-
-        private bool CoachExists(int id)
-        {
-            return _context.Coach.Any(e => e.CoachId == id);
-        }
+        [HttpPut]
+        public IActionResult UpdateCoach(Coach coach) => Ok(_coachService.UpdateCoach(coach));
     }
 }

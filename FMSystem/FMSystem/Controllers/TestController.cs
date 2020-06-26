@@ -36,5 +36,12 @@ namespace FMSystem.Controllers
             var ResponseModel = new ResponseModel();
             return Ok(ResponseModel);
         }
+        [HttpPost]
+        public IActionResult PostTest(int section,int from, int to)
+        {
+            var response = new ResponseModel();
+            response.SetData(section + from + to);
+            return Ok(response);
+        }
     }
 }
