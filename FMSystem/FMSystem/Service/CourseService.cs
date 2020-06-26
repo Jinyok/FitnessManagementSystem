@@ -26,7 +26,7 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            Course courses = context.Course.Single(c => c.CourseId == id);
+            Course courses = context.Course.Where(c => c.CourseId == id).FirstOrDefault();
 
             ResponseModel.SetData(courses);
 
@@ -45,10 +45,10 @@ namespace FMSystem.Service
 
             ResponseModel.SetData(courses);
 
-            if (courses == null)
-                ResponseModel.SetFailed();
-            else
+            if (courses.Any(c=>c !=null))
                 ResponseModel.SetSuccess();
+            else
+                ResponseModel.SetFailed();
 
             return ResponseModel;
 
@@ -69,7 +69,7 @@ namespace FMSystem.Service
             Course course = Merge(title, cost, classhour);
             context.Course.Add(course);
             context.SaveChanges();
-            if (GetCoursesById(course.CourseId) != null)
+            if (context.Course.Where(c => c.CourseId == course.CourseId).FirstOrDefault() != null)
             {
                 ResponseModel.SetSuccess();
                 return ResponseModel;
@@ -102,7 +102,7 @@ namespace FMSystem.Service
 
             if (course.CourseId > 0)
             {
-                Course temp = context.Course.Single(c => c.CourseId == course.CourseId);
+                Course temp = context.Course.Where(c => c.CourseId == course.CourseId).FirstOrDefault();
                 if (temp != null)
                 {
                     temp.CourseId = course.CourseId;

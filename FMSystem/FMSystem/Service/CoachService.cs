@@ -22,19 +22,29 @@ namespace FMSystem.Service
             this.context = context;
         }
 
+        public Coach Package(Coach coaches)
+        {
+            long no = Convert.ToInt64(coaches.PhoneNo);
+            coaches.PhoneNo = string.Format("{0:###-####-####}", no);
+            return coaches;
+        }
+
         public ResponseModel GetCoachesById(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            Coach coaches = context.Coach.Single(c => c.CoachId == id);
+            Coach coaches = null;
 
-            ResponseModel.SetData(coaches);
+            coaches = context.Coach.Where(c => c.CoachId == id).FirstOrDefault();
 
-            if (coaches == null)
-                ResponseModel.SetFailed();
-            else
+            if (coaches != null)
+            {
+                coaches = Package(coaches);
+                ResponseModel.SetData(coaches);
                 ResponseModel.SetSuccess();
-
+                return ResponseModel;
+            }
+            ResponseModel.SetFailed();
             return ResponseModel;
         }
 
@@ -44,33 +54,41 @@ namespace FMSystem.Service
 
             List<Coach> coaches = context.Coach.Where(c => c.Name == name).ToList();
 
-            ResponseModel.SetData(coaches);
-
-            if (coaches == null)
-                ResponseModel.SetFailed();
-            else
+            List<Coach> coaches1 = new List<Coach>();
+            
+            if (coaches.Any(c=>c != null))
+            {
+                foreach (Coach coach in coaches)
+                {
+                    coaches1.Add(Package(coach));
+                }
+                ResponseModel.SetData(coaches1);
                 ResponseModel.SetSuccess();
+                return ResponseModel;
+            }
 
+            ResponseModel.SetFailed();
             return ResponseModel;
 
         }
 
-        public Coach Merge(string name, long phoneno, string email)
+        public Coach Merge(string name, string phoneno, string email)
         {
             Coach coach = new Coach();
             coach.Name = name;
             coach.Email = email;
+            coach.PhoneNo = phoneno;
             coach.State = Coach.CoachState.InOffice;
             return coach;
         }
 
-        public ResponseModel AddCoach(string name, long phoneno, string email)
+        public ResponseModel AddCoach(string name, string phoneno, string email)
         {
             ResponseModel ResponseModel = new ResponseModel();
             Coach coach = Merge(name, phoneno, email);
             context.Coach.Add(coach);
             context.SaveChanges();
-            if (GetCoachesById(coach.CoachId) != null)
+            if (context.Coach.Where(c => c.CoachId == coach.CoachId).FirstOrDefault() != null)
             {
                 ResponseModel.SetSuccess();
                 return ResponseModel;
@@ -85,7 +103,7 @@ namespace FMSystem.Service
             ResponseModel ResponseModel = new ResponseModel();
             if (id > 0)
             {
-                Coach coach = context.Coach.Single(c => c.CoachId == id);
+                Coach coach = context.Coach.Where(c => c.CoachId == id).FirstOrDefault();
                 if (coach != null)
                 {
                     coach.State = Coach.CoachState.LeaveOffice;
@@ -94,7 +112,7 @@ namespace FMSystem.Service
                     return ResponseModel;
                 }
             }
-            ResponseModel.SetSuccess();
+            ResponseModel.SetFailed();
             return ResponseModel;
         }
 
@@ -104,7 +122,7 @@ namespace FMSystem.Service
 
             if (coach.CoachId > 0)
             {
-                Coach temp = context.Coach.Single(c => c.CoachId == coach.CoachId);
+                Coach temp = context.Coach.Where(c => c.CoachId == coach.CoachId).FirstOrDefault();
                 if (temp != null)
                 {
                     temp.CoachId = coach.CoachId;

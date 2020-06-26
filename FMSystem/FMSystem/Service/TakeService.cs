@@ -29,10 +29,10 @@ namespace FMSystem.Service
 
             ResponseModel.SetData(takes);
 
-            if (takes == null)
-                ResponseModel.SetFailed();
-            else
+            if (takes.Any(t=>t != null))
                 ResponseModel.SetSuccess();
+            else
+                ResponseModel.SetFailed();
 
             return ResponseModel;
         }
@@ -45,10 +45,10 @@ namespace FMSystem.Service
 
             ResponseModel.SetData(takes);
 
-            if (takes == null)
-                ResponseModel.SetFailed();
-            else
+            if (takes.Any(t => t != null))
                 ResponseModel.SetSuccess();
+            else
+                ResponseModel.SetFailed();
 
             return ResponseModel;
         }

@@ -26,7 +26,7 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
             List<Lesson> lesson = context.Lesson.Where(l => l.SectionId == id).ToList();
-            if (lesson != null)
+            if (lesson.Any(l=>l!=null))
             {
                 ResponseModel.SetSuccess();
                 ResponseModel.SetData(lesson);
@@ -40,7 +40,7 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
             List<Lesson> lesson = context.Lesson.Where(l => l.LessonNo == no).ToList();
-            if (lesson != null)
+            if (lesson.Any(l => l != null))
             {
                 ResponseModel.SetSuccess();
                 ResponseModel.SetData(lesson);
@@ -54,7 +54,7 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
             List<Lesson> lesson = context.Lesson.Where(l => l.CoachId == id).ToList();
-            if (lesson != null)
+            if (lesson.Any(l => l != null))
             {
                 ResponseModel.SetSuccess();
                 ResponseModel.SetData(lesson);
@@ -69,7 +69,7 @@ namespace FMSystem.Service
             ResponseModel ResponseModel = new ResponseModel();
             DateTimeOffset date = DateTimeOffset.FromUnixTimeSeconds(startdate);
             List<Lesson> lesson = context.Lesson.Where(l => l.StartDate == date).ToList();
-            if (lesson != null)
+            if (lesson.Any(l => l != null))
             {
                 ResponseModel.SetSuccess();
                 ResponseModel.SetData(lesson);
@@ -94,7 +94,7 @@ namespace FMSystem.Service
                     i++;
                 }
             }
-            if(lessons != null)
+            if(lessons.Any(l => l != null))
             {
                 ResponseModel.SetSuccess();
                 ResponseModel.SetData(lessons);
@@ -146,9 +146,9 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
             var lesson = context.Lesson.Where(l => l.SectionId == sectionid).ToList();
-            if(lesson != null)
+            if(lesson.Any(l => l != null))
             {
-                var lesson1 = lesson.Single(l => l.LessonNo == lessonno);
+                var lesson1 = lesson.Where(l => l.LessonNo == lessonno).FirstOrDefault();
                 if(lesson1 != null)
                 {
                     for(int i = lesson.Count - 1; i > lesson1.LessonNo; i--)
@@ -169,9 +169,9 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
             var lesson1 = context.Lesson.Where(l => l.SectionId == lesson.SectionId).ToList();
-            if(lesson1 != null)
+            if(lesson1.Any(l => l != null))
             {
-                var lesson2 = lesson1.Single(l => l.LessonNo == lesson.LessonNo);
+                var lesson2 = lesson1.Where(l => l.LessonNo == lesson.LessonNo).FirstOrDefault();
                 if (lesson2 != null)
                 {
                     lesson2.CoachId = lesson.CoachId;
@@ -190,7 +190,7 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
             var lesson = context.Lesson.Where(l => l.SectionId == sectionid).ToList();
-            if(lesson != null)
+            if(lesson.Any(l => l != null))
             {
                 double totalhours = 0;
                 for (int i = 0; i < lesson.Count; i++)

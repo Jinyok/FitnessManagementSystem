@@ -28,10 +28,10 @@ namespace FMSystem.Service
 
             ResponseModel.SetData(instructs);
 
-            if (instructs == null)
-                ResponseModel.SetFailed();
-            else
+            if (instructs.Any(i=>i != null))
                 ResponseModel.SetSuccess();
+            else
+                ResponseModel.SetFailed();
 
             return ResponseModel;
         }
@@ -45,10 +45,10 @@ namespace FMSystem.Service
 
             ResponseModel.SetData(instructs);
 
-            if (instructs == null)
-                ResponseModel.SetFailed();
-            else
+            if (instructs.Any(i => i != null))
                 ResponseModel.SetSuccess();
+            else
+                ResponseModel.SetFailed();
 
             return ResponseModel;
         }
@@ -60,7 +60,7 @@ namespace FMSystem.Service
             {
                 var instruct = context.Instructs.Where(i => i.MemberId == instructs.MemberId).ToList();
                 var instruct1 = context.Instructs.Where(i => i.CoachId == instructs.CoachId).ToList();
-                if (instruct == null && instruct1 == null)
+                if (instruct.Any(i => i != null) && instruct1.Any(i => i != null))
                 {
                     context.Instructs.Add(instructs);
                     context.SaveChanges();
