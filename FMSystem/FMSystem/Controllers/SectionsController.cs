@@ -118,11 +118,11 @@ namespace FMSystem.Controllers
                 var section = (from s in _context.Section where s.SectionId == lesson.SectionId select s).First();
                 var data = new
                 {
-                    Title = from s in _context.Section where s.SectionId == lesson.SectionId select s.Course.Title,
+                    Title = (from c in _context.Course where c.CourseId == section.CourseId select c.Title).First(),
                     ClassHour = section.Lesson.Count,
                     Sectionid = section.SectionId,
-                    AttendedHours = section.Lesson.Where(l => l.State == Lesson.LessonState.Finished),
-                    StartDate = lesson.StartDate
+                    AttendedHours = section.Lesson.Where(l => l.State == Lesson.LessonState.Finished).Count(),
+                    StartDate = lesson.StartDate.Value.ToUnixTimeSeconds()
                 };
                 response.SetSuccess();
                 response.SetData(data);
