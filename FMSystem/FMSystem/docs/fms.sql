@@ -35,7 +35,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,'减肥',1000,10),(2,'私教',2400,8),(3,'私教',4000,16),(4,'增肌',1000,10);
+INSERT INTO `course` VALUES (1,'减肥',1000,10),(2,'增肌',1000,10);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 

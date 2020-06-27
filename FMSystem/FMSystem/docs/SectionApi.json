@@ -128,7 +128,6 @@ output
         "SectionId": 1,//SectionId > 0
         "CourseId" : 1,//CourseId > 0
         "CoachId"  : 1,//CoachId > 0
-        "Slot"     : { "Start": 1592700600, "End": 1592712900 }
 
   }
   output:
@@ -138,6 +137,6 @@ output
           "Data":null,
           
           "Code": 999,
-          "Message": "失败",
+          "Message": "Section不存在",
           "Data": null
   }

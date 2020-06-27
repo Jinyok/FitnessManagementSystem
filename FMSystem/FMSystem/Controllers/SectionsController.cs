@@ -45,7 +45,7 @@ namespace FMSystem.Controllers
         public IActionResult DeleteSection(int id) => Ok(_sectionService.DeleteSection(id));
 
         [HttpPut]
-        public IActionResult UpdateSection(Section section) => Ok(_sectionService.UpdateSection(section));
+        public IActionResult UpdateSection(SectionViewModel section) => Ok(_sectionService.UpdateSection(section));
         [HttpPost]
         public IActionResult AddSection(SectionCreateViewModel section)
         {

@@ -34,7 +34,7 @@ namespace FMSystem.Configuration
                 }));
 
             CreateMap<Section, SectionViewModel>()
-                .ForMember(dest => dest.Title, opt => opt.MapFrom(s => s.Course.Title));
+                .ReverseMap();
 
             CreateMap<CoachViewModel, Coach>()
                 .ForMember(dest => dest.State, opt => opt.MapFrom(s => Enum.Parse(typeof(Coach.CoachState), s.State)))

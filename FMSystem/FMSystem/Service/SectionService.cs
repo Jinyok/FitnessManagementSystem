@@ -11,6 +11,7 @@ using FMSystem.Service;
 using FMSystem.Entity.fms;
 using FMSystem.Interface;
 using AutoMapper;
+using FMSystem.ViewModels;
 
 namespace FMSystem.Service
 {
@@ -170,32 +171,21 @@ namespace FMSystem.Service
 
         }
 
-        public ResponseModel UpdateSection(Section section)
+        public ResponseModel UpdateSection(SectionViewModel sectionmodel)
         {
             ResponseModel ResponseModel = new ResponseModel();
-
-            if (section.SectionId > 0)
+            var section = mapper.Map<Section>(sectionmodel);
+            context.Section.Update(section);
+            try
             {
-                Section temp = context.Section.Single(s => s.SectionId == section.SectionId);
-                if (temp != null)
-                {
-                    temp.SectionId = section.SectionId;
-
-                    //temp.StartDate = section.StartDate;
-
-                    //temp.EndDate = section.EndDate;
-
-                    temp.CourseId = section.CourseId;
-
-                    temp.CoachId = section.CoachId;
-
-                    context.SaveChanges();
-
-                    ResponseModel.SetSuccess();
-                    return ResponseModel;
-                }
+                context.SaveChanges();
+                ResponseModel.SetSuccess();
             }
-            ResponseModel.SetFailed();
+            catch(DbUpdateException)
+            {
+                ResponseModel.SetFailed("Section不存在");
+            }
+
             return ResponseModel;
         }
     }

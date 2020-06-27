@@ -8,8 +8,7 @@ namespace FMSystem.ViewModels
     public class SectionViewModel
     {
         public int SectionId { get; set; }
-        public string Title { get; set; }
-        public int ClassHour { get; set; }
-        public int AttendedHours { get; set; }
+        public int? CourseId { get; set; }
+        public int CoachId { get; set; }
     }
 }
