@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using FMSystem.Service;
 using FMSystem.Entity.fms;
 using FMSystem.Interface;
+using AutoMapper;
+using FMSystem.ViewModels;
 
 namespace FMSystem.Service
 {
@@ -17,23 +19,26 @@ namespace FMSystem.Service
     public class CourseService : ICourseService
     {
         private fmsContext context;
-        public CourseService(fmsContext context)
+        private IMapper mapper;
+        public CourseService(fmsContext context,IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         public ResponseModel GetCoursesById(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            Course courses = context.Course.Where(c => c.CourseId == id).FirstOrDefault();
+            Course course = context.Course.AsNoTracking().Single(c => c.CourseId == id);
 
-            ResponseModel.SetData(courses);
-
-            if (courses == null)
-                ResponseModel.SetFailed();
-            else
+            if (course != null)
+            {
+                ResponseModel.SetData(mapper.Map<CourseViewModel>(course));
                 ResponseModel.SetSuccess();
+            }
+            else
+                ResponseModel.SetFailed();
 
             return ResponseModel;
         }
@@ -43,10 +48,11 @@ namespace FMSystem.Service
 
             List<Course> courses = context.Course.Where(c => c.Title == title).ToList();
 
-            ResponseModel.SetData(courses);
-
-            if (courses.Any(c=>c !=null))
+            if (courses.Any(c => c != null))
+            {
                 ResponseModel.SetSuccess();
+                ResponseModel.SetData(mapper.Map<List<CourseViewModel>>(courses));
+            }
             else
                 ResponseModel.SetFailed();
 
@@ -92,7 +98,7 @@ namespace FMSystem.Service
                     return ResponseModel;
                 }
             }
-            ResponseModel.SetSuccess();
+            ResponseModel.SetFailed("Id not found");
             return ResponseModel;
         }
 

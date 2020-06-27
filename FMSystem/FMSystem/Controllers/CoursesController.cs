@@ -130,20 +130,17 @@ namespace FMSystem.Controllers
         public IActionResult UpdatePersonalCourse(PersonalCourseViewModel model)
         {
             var response = new ResponseModel();
-            var state = _context.Update(mapper.Map<Instructs>(model));
-            if(state.State==EntityState.Added)
+
+            _context.Update(mapper.Map<Instructs>(model));
+            try
             {
-                response.SetFailed("私教课程不存在");
-                return Ok(response);
-            }
-            else if(state.State==EntityState.Modified)
-            {
-                
                 _context.SaveChanges();
                 response.SetSuccess();
-                return Ok(response);
             }
-            response.SetFailed();
+            catch(DbUpdateException)
+            {
+                response.SetFailed("私教课程不存在");
+            }
             return Ok(response);
         }
     }

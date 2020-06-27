@@ -24,7 +24,7 @@ GetFirstLessonByCoachId
 
 
       "Code":999,
-      "Message": "失败",
+      "Message": "教练无课",
       "Data": null
    }
 
@@ -97,7 +97,7 @@ GetCoachLessons
   //
   input
   {
-      "SectionId": 1 // id > 0
+      "SectionId": 1,// id > 0
   }
   output
   {
@@ -131,7 +131,7 @@ GetCoachLessons
   //
   input
   {
-        "LessonNo": 1 //no > 0
+        "LessonNo": 1,//no > 0
   }
   output
   {
@@ -154,7 +154,8 @@ GetCoachLessons
            "EndDate"     : 1592634200,
            "LessonState": "NotFinish"
         }
-     ]
+     ],
+
         "Code":999,
         "Message": "失败",
         "Data": null
@@ -165,7 +166,7 @@ GetCoachLessons
   //
   input
   {
-        "CoachId": 1 // id > 0
+        "CoachId": 1,// id > 0
   }
   output
   {
@@ -188,7 +189,8 @@ GetCoachLessons
            "EndDate"     : 1592634200,
            "LessonState": "NotFinish"
         }
-     ]
+     ],
+
          "Code":999,
          "Message": "失败",
          "Data": null
@@ -201,7 +203,7 @@ GetCoachLessons
   {
    "CoachId"   : 1,
    "StartDate" : 1592614200, //output.LessonList[0].Lessons[0].EndDate > input.StartDate
-   "Number"    : 4 //返回前4个lessons
+   "Number"    : 4//返回前4个lessons
   }
   output
   {
@@ -247,6 +249,14 @@ GetCoachLessons
           "Data":null,
             
           "Code": 999,
+          "Message": "SectionId不存在",
+          "Data": null,
+
+          "Code": 999,
+          "Message": "CoachId不存在",
+          "Data": null,
+
+          "Code": 999,
           "Message": "失败",
           "Data": null
   }
@@ -275,11 +285,12 @@ GetCoachLessons
   //
   input
   {
-            "SectionId": 1,// id > 0
-            "LessonNo" : 1,// no > 0
-            "CoachId"  : 1,// id > 0
+            "SectionId"   : 1,// id > 0
+            "LessonNo"    : 1,// no > 0
+            "CoachId"     : 1,// id > 0
             "StartDate"   : 1592614200,
             "EndDate"     : 1592634200,
+            "State"       : "Finished"
   }
   output
   {
@@ -288,7 +299,7 @@ GetCoachLessons
             "Data":null,
                 
             "Code": 999,
-            "Message": "失败",
+            "Message": "Lesson不存在",
             "Data": null
   }
 
@@ -297,7 +308,7 @@ GetCoachLessons
   //
   input
   {
-      "SectionId":1 // id > 0
+      "SectionId":1// id > 0
   }
   output
   {

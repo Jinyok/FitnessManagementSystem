@@ -85,7 +85,7 @@
 //
   input:
   {
-          "CourseId": 1 //Course > 0
+          "CourseId": 1,//Course > 0
   }
   output:
   {

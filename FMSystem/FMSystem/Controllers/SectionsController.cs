@@ -81,22 +81,27 @@ namespace FMSystem.Controllers
         public IActionResult GetLessonByCoachId(int id) => Ok(_lessonService.GetLessonByCoachId(id));
 
         [HttpGet]
-        public IActionResult GetLessonByStartDate(int startdate) => Ok(_lessonService.GetLessonByStartDate(startdate));
+        public IActionResult GetLessonByStartDate(long startdate) => Ok(_lessonService.GetLessonByStartDate(startdate));
 
         [HttpPost]
-        public IActionResult AddLesson(int sectionid, int coachid, int startdate, int enddate, int state) => Ok(_lessonService.AddLesson(sectionid, coachid, startdate, enddate, state));
+        public IActionResult AddLesson(LessonViewModel lesson) => 
+            Ok(_lessonService.AddLesson(lesson));
 
         [HttpDelete]
         public IActionResult DeleteLesson(int sectionid, int lessonno) => Ok(_lessonService.DeleteLesson(sectionid, lessonno));
 
         [HttpPut]
-        public IActionResult UpdateLesson(Lesson lesson) => Ok(_lessonService.UpdateLesson(lesson));
+        public IActionResult UpdateLesson(LessonViewModel lessonmodel)
+        {
+            var lesson = mapper.Map<Lesson>(lessonmodel);
+            return Ok(_lessonService.UpdateLesson(lesson));
+        }
 
         [HttpGet]
         public IActionResult GetCourseProcess(int sectionid) => Ok(_lessonService.GetCourseProcess(sectionid));
 
         [HttpGet]
-        public IActionResult GetCoachLesson(int coachid, int startdate, int num) => Ok(_lessonService.GetCoachLesson(coachid, startdate, num));
+        public IActionResult GetCoachLesson(int coachid, long startdate, int num) => Ok(_lessonService.GetCoachLesson(coachid, startdate, num));
 
         [HttpGet]
         public IActionResult GetFirstLessonByCoachId(int CoachId)
