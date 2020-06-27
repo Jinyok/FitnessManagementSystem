@@ -115,7 +115,8 @@ namespace FMSystem.Controllers
             if (lessonquery.Any())
             {
                 var lesson = lessonquery.OrderBy(l => l.StartDate).First();
-                var section = (from s in _context.Section where s.SectionId == lesson.SectionId select s).First();
+                //var section = (from s in _context.Section where s.SectionId == lesson.SectionId select s).First();
+                var section = _context.Section.AsNoTracking().Include(e => e.Lesson).Where(e => e.SectionId == lesson.SectionId).First();
                 var data = new
                 {
                     Title = (from c in _context.Course where c.CourseId == section.CourseId select c.Title).First(),
