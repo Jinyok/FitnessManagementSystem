@@ -24,7 +24,7 @@ namespace FMSystem.Service
             this.context = context;
             this.mapper = mapper;
         }
-        public ResponseModel GetSectionBySectionId(int id)
+        public ResponseModel GetSectionBySectionId(int SectionId)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -32,7 +32,7 @@ namespace FMSystem.Service
                 .AsNoTracking()
                 .Include(e => e.Course)
                 .Include(e => e.Lesson)
-                .Where(e => e.SectionId == id)
+                .Where(e => e.SectionId == SectionId)
                 .Select(x => new
                 {
                     SectionId = x.SectionId,
@@ -53,7 +53,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public ResponseModel GetSectionByCourseId(int id)
+        public ResponseModel GetSectionByCourseId(int CourseId)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
@@ -61,7 +61,7 @@ namespace FMSystem.Service
                 .AsNoTracking()
                 .Include(e => e.Course)
                 .Include(e => e.Lesson)
-                .Where(e => e.CoachId == id)
+                .Where(e => e.CourseId == CourseId)
                 .Select(x => new
                 {
                     SectionId = x.SectionId,
@@ -69,11 +69,11 @@ namespace FMSystem.Service
                     ClassHour = x.Lesson.Count,
                     AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
                 });
-            
+
             //var sqlstring=query.toq
             var sections = query.ToList();
 
-            if (sections.Count==0)
+            if (sections.Count == 0)
                 ResponseModel.SetFailed();
             else
             {
@@ -84,27 +84,30 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public ResponseModel GetSectionByCoachId(int id)
+        public ResponseModel GetSectionByCoachId(int CoachId)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            var sections = context.Section.Where(s => s.CoachId == id).ToList();
+            var query = context.Section
+                .AsNoTracking()
+                .Include(e => e.Course)
+                .Include(e => e.Lesson)
+                .Where(e => e.CoachId == CoachId)
+                .Select(x => new
+                {
+                    SectionId = x.SectionId,
+                    Title = x.Course.Title,
+                    ClassHour = x.Lesson.Count,
+                    AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
+                });
 
-            if (sections == null)
+            //var sqlstring=query.toq
+            var sections = query.ToList();
+
+            if (sections.Count == 0)
                 ResponseModel.SetFailed();
             else
             {
-                var sectionviewmodels = new List<object>();
-                foreach (var x in sections)
-                {
-                    sectionviewmodels.Add(new
-                    {
-                        SectionId = x.SectionId,
-                        Title = x.Course.Title,
-                        ClassHour = x.Lesson.Count,
-                        AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
-                    });
-                }
                 ResponseModel.SetData(sections);
                 ResponseModel.SetSuccess();
             }
@@ -181,7 +184,7 @@ namespace FMSystem.Service
                 context.SaveChanges();
                 ResponseModel.SetSuccess();
             }
-            catch(DbUpdateException)
+            catch (DbUpdateException)
             {
                 ResponseModel.SetFailed("Section不存在");
             }
