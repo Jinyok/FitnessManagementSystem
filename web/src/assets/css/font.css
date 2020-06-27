@@ -1,19 +1,23 @@
 @font-face {
     font-family: 'Roboto';
+    font-weight: normal;
     src: url('../font/Roboto.ttf');
 }
 
 @font-face {
-    font-family: 'Roboto-Medium';
+    font-family: 'Roboto';
+    font-weight: bold;
     src: url('../font/Roboto-Medium.ttf');
 }
 
 @font-face {
-    font-family: 'HW-Regular';
+    font-family: 'SourceHan';
+    font-weight: normal;
     src: url('../font/SourceHanSansHWSC-Regular.otf');
 }
 
 @font-face {
-    font-family: 'HW-Bold';
+    font-family: 'SourceHan';
+    font-weight: bold;
     src: url('../font/SourceHanSansHWSC-Bold.otf');
 }

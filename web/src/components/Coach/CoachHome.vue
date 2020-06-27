@@ -102,13 +102,13 @@ export default {
     overflow: hidden;
     padding: 23px 30px;
     background:white;
-    font-family: "Roboto-Medium", "HW-Bold", Arial, Helvetica, sans-serif;
+    font-family: "Roboto", "SourceHan", Arial, Helvetica, sans-serif;
     display:flex;
     align-items: center;
 }
 
 .font_light {
-    font-family: "Roboto", "HW-Regular", Arial, Helvetica, sans-serif;
+    font-family: "Roboto", "SourceHan", Arial, Helvetica, sans-serif;
 }
 
 .info {
@@ -116,7 +116,7 @@ export default {
     margin-top: -15px;
     margin-bottom: -15px;
     line-height: 30px;
-    font-family: "Roboto", "HW-Regular", Arial, Helvetica, sans-serif;
+    font-family: "Roboto", "SourceHan", Arial, Helvetica, sans-serif;
 }
 .color_grey {
     color: #B0B0B0;
