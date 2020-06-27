@@ -101,7 +101,7 @@ namespace FMSystem.Controllers
         public IActionResult GetCourseProcess(int sectionid) => Ok(_lessonService.GetCourseProcess(sectionid));
 
         [HttpGet]
-        public IActionResult GetCoachLesson(int coachid, long startdate, int num) => Ok(_lessonService.GetCoachLesson(coachid, startdate, num));
+        public IActionResult GetCoachLesson(int coachid, long startdate, int num) => Ok(_lessonService.GetCoachLessons(coachid, startdate, num));
 
         [HttpGet]
         public IActionResult GetFirstLessonByCoachId(int CoachId)

@@ -43,7 +43,12 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            var sections = context.Section.Where(s => s.CourseId == id).ToList();
+            var sections = context.Section
+                .AsNoTracking()
+                .Include(e => e.Coach)
+                .Include(e => e.Lesson)
+                .Where(e => e.CoachId == id)
+                .ToList();
 
 
             if (sections == null)
@@ -61,7 +66,7 @@ namespace FMSystem.Service
                         AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
                     });
                 }
-                ResponseModel.SetData(sections);
+                ResponseModel.SetData(sectionviewmodels);
                 ResponseModel.SetSuccess();
             }
 

@@ -88,7 +88,7 @@ namespace FMSystem.Service
             return ResponseModel;
         }
 
-        public ResponseModel GetCoachLesson(int coachid, long startdate, int num)
+        public ResponseModel GetCoachLessons(int coachid, long startdate, int num)
         {
             ResponseModel ResponseModel = new ResponseModel();
             //int i = 0;
@@ -117,7 +117,7 @@ namespace FMSystem.Service
                            select new { lesson = l, c.Title }).ToList();
 
             if (lessons.Count == 0)
-                ResponseModel.SetFailed("无课");
+                ResponseModel.SetFailed("教练无课");
             else
             {
                 var list = new List<object>();
