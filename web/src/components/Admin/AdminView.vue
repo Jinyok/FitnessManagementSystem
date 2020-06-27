@@ -7,53 +7,34 @@
         </el-aside>
 
         <el-main  style="background: #E5E5E5">
-            <pagehome v-show="showpage.showPageHome"></pagehome>
-            <pageschedule v-show="showpage.showPageSchedule"></pageschedule>
-            <pagecourses v-show="showpage.showPageCourses"></pagecourses>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
         </el-main>
     </el-container>
 </template>
 
 <script>
 import asidebuttonlist from './asidebuttonlist.vue'
-import pagehome from './PageHome.vue'
-import pageschedule from './PageSchedule'
-import pagecourses from './PageCourses'
 
 export default {
     name: 'AdminView',
     components: {
-        asidebuttonlist,
-        pagehome,
-        pageschedule,
-        pagecourses
+        asidebuttonlist
     },
     data() {
         return {
-            showpage: {
-                showPageHome: true,
-                showPageSchedule: false,
-                showPageCourses: false
-            }
         }
     },
     methods: {
         change: function (con) {
-            if (con=='HOME') {
-                this.$set(this.showpage, 'showPageHome', true)
-                this.$set(this.showpage, 'showPageSchedule', false)
-                this.$set(this.showpage, 'showPageCourses', false)
+            switch (con) {
+                case '账户管理': 
+                    this.$router.push({ path:'/admin/users' }); break;
+                case '注册账户':
+                    this.$router.push({ path:'/admin/register' }); break;
             }
-            else if (con=='SCHEDULE') {
-                this.$set(this.showpage, 'showPageHome', false)
-                this.$set(this.showpage, 'showPageSchedule', true)
-                this.$set(this.showpage, 'showPageCourses', false)
-            }
-            else if (con=='COURSES') {
-                this.$set(this.showpage, 'showPageHome', false)
-                this.$set(this.showpage, 'showPageSchedule', false)
-                this.$set(this.showpage, 'showPageCourses', true)
-            }
+
         },
         exit: function () {
             this.$router.push({ path: '/admin/login' })
@@ -73,8 +54,21 @@ html,body,.el-container{
     height: 100%;
   }
 .grey {
-    background-color: #929292;
+    background: #929292;
     color: #ffffff;
   }
+
+.card {
+    overflow: hidden;
+    padding: 23px 30px;
+    background:white;
+    font-family: "Roboto-Medium", "HW-Bold", Arial, Helvetica, sans-serif;
+    display:flex;
+    align-items: center;
+}
+
+.font_light {
+    font-family: "Roboto", "HW-Regular", Arial, Helvetica, sans-serif;
+}
 
 </style>

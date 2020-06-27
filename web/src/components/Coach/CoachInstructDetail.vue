@@ -8,7 +8,7 @@
         <br>
         <div class = 'card' style="flex-direction: column; align-items: flex-start;">
             <div style="font-size: 48px;">{{ member.Name }}</div>
-            <div class='grey font_light' style="font-size: 24px; display:flex; margin-top: 8px;">
+            <div class='color_grey font_light' style="font-size: 24px; display:flex; margin-top: 8px;">
                 <div style="margin-right: 20px"> ID:&emsp;{{ member.MemberId }}</div>
                 <div>Phone:&emsp;{{ member.PhoneNo }}</div>
             </div>

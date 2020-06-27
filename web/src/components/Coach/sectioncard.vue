@@ -5,8 +5,8 @@
             <h1 style="margin-top:5px; margin-bottom: 5px; font-size: 30px;">
                 {{ section.Title }}
             </h1>
-            <div class='grey'>
-                课时：{{ section.Progress }}/{{ section.ClassHour }}
+            <div class='color_grey'>
+                课时：{{ section.AttendedHours }}/{{ section.ClassHour }}
             </div>
         </div>
         <div>
@@ -25,7 +25,7 @@ export default {
             SectionId   : '',
             Title       : '',
             ClassHour   : '',
-            Progress    : ''
+            AttendedHours    : ''
         }
     },
     methods: {

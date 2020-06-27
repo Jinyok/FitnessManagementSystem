@@ -5,8 +5,8 @@
             <div style="margin-right:50px;">
                 <h1 style="font-size: 35px ">Hi,&emsp;Mr.&emsp;{{ coachInfo.Name }}</h1>
             </div>
-            <div class="info grey">
-                <p>ID:&emsp;{{ coachInfo.ID }}
+            <div class="info color_grey">
+                <p>ID:&emsp;{{ coachInfo.CoachId }}
                     <br>Email:&emsp;{{ coachInfo.Email }}
                     <br>PhoneNo:&emsp;{{ coachInfo.PhoneNo }}
                 </p>
@@ -17,13 +17,14 @@
             </div>
         </div>
         <br>
-        <div class='grey' style="margin-top:-20px; margin-bottom: -10px"><h2>{{ lessonStatus }}</h2></div>
+        <div class='color_grey' style="margin-top:-20px; margin-bottom: -10px"><h2>{{ lessonStatus }}</h2></div>
         <sectioncard v-if="lessonExists" :section="firstSection"></sectioncard>
     </div>
 </template>
 
 <script>
 import sectioncard from './sectioncard.vue'
+import methods from '../../methods'
 
 export default {
     name: 'coachhome',
@@ -32,6 +33,7 @@ export default {
     },
     data() {
         return {
+            coachId: 1,
             timer: '',
             currentTime: {
                 timeStamp: '',
@@ -39,19 +41,22 @@ export default {
                 minute: ''
             },
             //需要查
-            coachInfo: {
-                ID: '00000000',
+            coachInfo: { /*
+                CoachId: '00000000',
                 Name: '未命名',
                 Email: 'unknown@email.com',
                 PhoneNo: '000-0000-0000' 
+                State : "InOffice"*/
             },
             //需要查
             firstSection: {
+                /*
                 SectionId   : 1,
                 Title       : '肌肉塑形后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀',
                 ClassHour   : 15,
                 Progress    : 8,
                 StartDate   : 1592614200
+                */
             },
             lessonStatus: '近期无课程',
             lessonExists: false
@@ -60,7 +65,7 @@ export default {
     created: function() {
         console.log(this.$route)
         //获取教练数据
-        /*coachInfo*/
+        this.coachInfo = methods.getCoachesById(this.coachId).Data
 
         //设置时间
         var this_=this
@@ -73,7 +78,7 @@ export default {
         })
 
         //获取第一节课课程信息
-        /*firstSection*/
+        this.firstSection = methods.GetFirstLessonByCoachId(this.coachId).Data
         this_.currentTime.timeStamp=new Date().getTime()/1000
         if (this.firstSection != undefined) {
             this.lessonExists=true
@@ -113,7 +118,7 @@ export default {
     line-height: 30px;
     font-family: "Roboto", "HW-Regular", Arial, Helvetica, sans-serif;
 }
-.grey {
+.color_grey {
     color: #B0B0B0;
 }
 </style>

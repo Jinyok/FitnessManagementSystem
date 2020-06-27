@@ -9,6 +9,7 @@
 
 <script>
 import sectioncard from "./sectioncard.vue"
+import methods from '../../methods'
 
 export default {
     name: 'pagecourses',
@@ -17,25 +18,25 @@ export default {
     },
     data() {
         return {
-        sections: [
+        coachId: 1,
+        sections: [/*
                 {
                     SectionId   : 1,
                     Title       : '肌肉塑形',
                     ClassHour   : 15,
-                    Progress    : 8
+                    AttendedHours    : 8
                 },
                 {
                     SectionId   : 2,
                     Title       : '快速减脂',
                     ClassHour   : 12,
-                    Progress    : 7
-                }
+                    AttendedHours    : 7
+                }*/
             ]
         }
     },
     created: function () {
-        //获取section
-        /*section*/
+        this.sections = methods.GetSectionByCoachId(this.coachId).Data.Sections
     }
 }
 </script>

@@ -9,6 +9,7 @@
 
 <script>
 import instructcard from "./instructcard.vue"
+import methods from "../../methods.js"
 
 export default {
     name: 'pageinstruct',
@@ -17,7 +18,8 @@ export default {
     },
     data() {
         return {
-        Members: [
+        coachId: 1,
+        Members: [/*
                 {
                     MemberId    : '00000000',
                     CoachId     : '00000001',
@@ -33,13 +35,13 @@ export default {
                     PhoneNo     : '000-0000-0000',
                     TotalHours  : 7,
                     AttendedHours : 1
-                },
+                },*/
             ]
         }
     },
     created: function () {
         //获取section
-        /*section*/
+        this.Members = methods.GetInstructsByCoachId(this.coachId).Data.Members
     }
 }
 </script>

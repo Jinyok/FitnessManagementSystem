@@ -1,15 +1,14 @@
 <template>
   <div class="asidebuttonlist">
     <div class="div_aside">
-      <h1 style="font-size: 32px">ADMIN<br></h1>
+      <h1 style="font-size: 32px">管理员<br></h1>
     </div>
 
-    <asidebutton content="HOME" @select="reselect"></asidebutton>
-    <asidebutton content="SCHEDULE" @select="reselect"></asidebutton>
-    <asidebutton content="COURSES" @select="reselect"></asidebutton>
+    <asidebutton content="账户管理" @select="reselect"></asidebutton>
+    <asidebutton content="注册账户" @select="reselect"></asidebutton>
 
     <div style="position:absolute;bottom: 10px">
-      <asidebutton content="EXIT" @select="reselect"></asidebutton>
+      <asidebutton content="退出" @select="reselect"></asidebutton>
     </div>
 
   </div>
@@ -30,7 +29,7 @@ export default {
         allasidebutton[i].reselect(con)
       }
       
-      if (con === 'EXIT')
+      if (con === '退出')
         this.$emit('exit')
 
       this.$emit('select', con)
@@ -44,6 +43,18 @@ export default {
           allasidebutton[i].button_mouseleave()
       }
       allasidebutton[0].button_click()
+  },
+  watch: {
+    $route(to, from) {
+      var content
+      switch(to.path) {
+        case '/admin/users': content = '账户管理'; break;
+        case '/admin/register': content = '注册账户'; break;
+      }
+      var allasidebutton = this.$children
+      for (var i = 0; i < allasidebutton.length; i++)
+        allasidebutton[i].reselect(content)
+    }
   }
 }
 </script>

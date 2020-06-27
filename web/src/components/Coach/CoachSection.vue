@@ -14,17 +14,17 @@
                 <div style="padding-left:7px; padding-right: 100px;">
                     课程总时长:&emsp;{{ sections.ClassHour }}
                 </div>
-                <div>参与时长:&emsp;{{ sections.Progress }}</div>
+                <div>参与时长:&emsp;{{ sections.AttendedHours }}</div>
             </div>
         </div>
         <br>
         <div class="card" style="flex-direction: column; align-items: flex-start;">
-            <div class='grey' style="font-size: 30px; padding-bottom: 5px">课程学员</div>
+            <div class='color_grey' style="font-size: 30px; padding-bottom: 5px">课程学员</div>
             <div v-for="member in sections.Member" :key="member.MemberId" 
             style="padding-top: 7px; display:flex; flex-direction: row; align-items: flex-end;">
                 <div style="font-size:25px; min-width: 110px; padding-right: 30px">{{ member.Name }}</div>
-                <div class="grey" style="padding-right: 20px">ID:&emsp;{{ member.MemberId }}</div>
-                <div class="grey">Phone:&emsp;{{ member.PhoneNo }}</div>
+                <div class="color_grey" style="padding-right: 20px">ID:&emsp;{{ member.MemberId }}</div>
+                <div class="color_grey">Phone:&emsp;{{ member.PhoneNo }}</div>
             </div>
         </div> 
     </div>
@@ -32,15 +32,17 @@
 
 <script>
 import methods from '../../methods'
+
 export default {
     name: 'coachsection',
     data () {
         return {
-            sections: {
+            sectionId: 1,
+            sections: { /*
                 SectionId   : 1,
                 Title       : '三个月瘦身速成不瘦不要钱后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀',
                 ClassHour   : 15,
-                Progress    : 12,
+                AttendedHours    : 12,
                 Member      : [
                     {
                         MemberId    : '01222010',
@@ -72,7 +74,7 @@ export default {
                         Name        : '爱因斯坦',
                         PhoneNo     : '139-3425-9335'
                     },
-                ]
+                ] */
             }
         }
     },
@@ -80,6 +82,9 @@ export default {
         goBack: function () {
             javascript:history.back(-1);
         }
+    },
+    created: function() {
+        this.sections = methods.GetSectionBySectionId(this.sectionId).Data
     }
 }
 </script>

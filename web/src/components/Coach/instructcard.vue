@@ -5,7 +5,7 @@
             <h1 style="margin-top:5px; margin-bottom: 5px; font-size: 30px;">
                 学员：{{ member.Name }}
             </h1>
-            <div class='grey'>
+            <div class='color_grey'>
                 课时：{{ member.AttendedHours }}/{{ member.TotalHours }}
             </div>
         </div>
@@ -21,13 +21,13 @@ import methods from '../../methods'
 export default {
     name: "instructcard",
     props: {
-        member: {
+        member: { /*
             MemberId    : '00000000',
             CoachId     : '00000001',
             Name        : '亚历山大变石',
             PhoneNo     : '000-0000-0000',
-            TotalHours  : 15,
-            AttendedHours : 7
+            TotalHours  : 15, 
+            AttendedHours : 7 */
             },
     },
     methods: {

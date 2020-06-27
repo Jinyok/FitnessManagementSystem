@@ -77,6 +77,23 @@ const routes = [
         path: '/admin',
         name: 'Admin',
         component: () => import ('./components/Admin/AdminView.vue'),
+        children: [
+            {
+                path: 'users',
+                name: 'AdminUsers',
+                component: () => import ('./components/Admin/AdminUsers.vue')
+            },
+            {
+                path: 'register',
+                name: 'AdminRegister',
+                component: () => import ('./components/Admin/AdminRegister.vue')
+            },
+            {
+                path: 'usersdetail',
+                name: 'AdminUsersDetail',
+                component: () => import ('./components/Admin/AdminUsersDetail.vue')
+            },
+        ]
     },
     {
         path: '/admin/login',

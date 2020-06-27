@@ -19,12 +19,12 @@
             </el-input>
         </div>
         <div class="div_content" style="margin-top: 140px" @click="routeToView">
-            <el-button type="danger" round>登 录</el-button>
+            <el-button type="danger" round>登&emsp;录</el-button>
         </div>
         <div class="div_content" style="bottom: 50px">
             <el-link type="info" @click="routeToReception">会员登陆</el-link>
             <span style="color:#909399;">&emsp;/&emsp;</span>
-            <el-link type="info" @click="routeToManager">教练登录</el-link>
+            <el-link type="info" @click="routeToManager">经理登录</el-link>
             <span style="color:#909399">&emsp;/&emsp;</span>
             <el-link type="info" @click="routeToAdmin">管理员登录</el-link>
         </div>

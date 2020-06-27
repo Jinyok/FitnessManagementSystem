@@ -17,6 +17,7 @@
 
 <script>
 import lessoncard from './lessoncard.vue'
+import methods from '../../methods.js'
 
 export default {
     name: 'pageschedule',
@@ -25,7 +26,8 @@ export default {
         },
     data() {
         return {
-            lessonList: [
+            coachId: 1,
+            lessonList: [ /*
                 {
                 Week: "周日",
                 Date: "1月22日",
@@ -33,24 +35,10 @@ export default {
                         {
                             LessonId    : 1,
                             SectionId   : 1,
-                            Title       : "这是课程1后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀",
+                            Title       : "这是课程1",
                             StartDate   : 1592614200,
                             EndDate     : 1592634200
-                        },
-                        {
-                            LessonId    : 2,
-                            SectionId   : 2,
-                            Title       : "这是课程2后缀后缀后缀后缀后缀后缀",
-                            StartDate   : 1592634200,
-                            EndDate     : 1592674200
-                        },
-                        {
-                            LessonId    : 3,
-                            SectionId   : 3,
-                            Title       : "这是课程3后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀",
-                            StartDate   : 1592674200,
-                            EndDate     : 1592679200
-                        },
+                        }
                     ]
                 },
                 {
@@ -60,55 +48,25 @@ export default {
                         {
                             LessonId    : 4,
                             SectionId   : 2,
-                            Title       : "这是课程2后缀后缀后缀后缀后缀后缀后缀后缀后缀",
+                            Title       : "这是课程2",
                             StartDate   : 1592614700,
                             EndDate     : 1592635200
                         },
                         {
                             LessonId    : 5,
                             SectionId   : 4,
-                            Title       : "这是课程4后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀",
+                            Title       : "这是课程4",
                             StartDate   : 1592635200,
                             EndDate     : 1592685200
                         },
                     ]
-                },
-                {
-                Week: "周二",
-                Date: "1月24日",
-                Lessons: [
-                        {
-                            LessonId    : 6,
-                            SectionId   : 5,
-                            Title       : "这是课程5后缀后缀",
-                            StartDate   : 1592611200,
-                            EndDate     : 1592634200
-                        },
-                        {
-                            LessonId    : 7,
-                            SectionId   : 6,
-                            Title       : "这是课程6后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀",
-                            StartDate   : 1592634200,
-                            EndDate     : 1592674200
-                        },
-                        {
-                            LessonId    : 8,
-                            SectionId   : 1,
-                            Title       : "这是课程1后缀后缀后缀后缀后缀后缀后缀",
-                            StartDate   : 1592674200,
-                            EndDate     : 1592679200
-                        },
-                        {
-                            LessonId    : 9,
-                            SectionId   : 3,
-                            Title       : "这是课程3后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀",
-                            StartDate   : 1592679200,
-                            EndDate     : 1592679800
-                        },
-                    ]
-                },
+                },*/
             ]
         }
+    },
+    created: function() {
+        var currentTime = new Date().getTime()/1000
+        this.lessonList = methods.GetCoachLessons(this.coachId, currentTime, 100).Data.LessonList
     }
 }
 </script>
