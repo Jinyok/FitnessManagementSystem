@@ -41,11 +41,11 @@ namespace Controllers
         public async Task<IActionResult> Login([FromBody] JsonElement userjobj)
         {
             long UserId = long.Parse(userjobj.GetProperty(nameof(UserId)).GetString());
-            string PassWord = userjobj.GetProperty(nameof(PassWord)).GetString();
+            string Password = userjobj.GetProperty(nameof(Password)).GetString();
             var response = new ResponseModel();
 
             var User = _context.User.Single(u => u.UserId == UserId);
-            if (User != null && User.Password == PassWord)
+            if (User != null && User.Password == Password)
             {
 
                 var claims = new List<Claim>(){
@@ -87,12 +87,20 @@ namespace Controllers
         {
             return AuthContext.CurrentUser;
         }
+
         //public FileResult excel()
         //{
         //    var s = System.IO.File.OpenRead("E:/html/DncZeus-2.0.0.1/DncZeus.App/src/config/index.js");
         //    return File(s, "text/plain", "hh.txt");
         //}
-
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            ResponseModel response = new ResponseModel();
+            response.SetFailed("未登陆");
+            response.Code = 401;
+            return Ok(response);
+        }
     }
 
 }

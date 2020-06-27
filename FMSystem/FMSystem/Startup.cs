@@ -61,8 +61,16 @@ namespace FMSystem
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
             {
-                o.LoginPath = new PathString("/Home/Login");
-                o.AccessDeniedPath = new PathString("/Home/Privacy");
+                o.LoginPath = new PathString("/api/Oauth/AccessDenied");
+                o.AccessDeniedPath = new PathString("/api/Oauth/AccessDenied");
+                //o.Events = new CookieAuthenticationEvents
+                //{
+                //    OnRedirectToAccessDenied = redirectContext =>
+                //      {
+                //          redirectContext.HttpContext.Response.StatusCode = 401;
+                //          return Task.CompletedTask;
+                //      }
+                //};
 
             });
             //mysql
@@ -94,8 +102,8 @@ namespace FMSystem
                     //new NodeInfo() {
                     //    XPath = "/log4net/appender[@name='SQLAppender']/connectionString",
                     //    Attributes = new Dictionary<string, string> { { "value", $"{builder.ConnectionString}" } } },
-                    new NodeInfo { 
-                        XPath = "/log4net/appender/file[last()]", 
+                    new NodeInfo {
+                        XPath = "/log4net/appender/file[last()]",
                         Attributes = new Dictionary<string, string> { { "value", $"{AppContext.BaseDirectory}LogFiles/" } } }
                 };
                 logger.AddLog4Net(options);

@@ -1,0 +1,38 @@
+//登陆
+Login
+  input
+  {
+      "UserId":"1",
+      "Password":"123456"
+  }
+  output
+  {
+      "code": 200,
+      "message": "成功",
+      "data": {
+          "userId": 1,
+          "userName": "root",
+          "role": "Root",
+          "number": 1
+      }
+  }
+
+//只有已经登陆用户才能Logout
+Logout
+  input
+  {
+
+  }
+  output
+  {
+    "code": 200,
+    "message": "成功",
+    "data": null
+  }
+
+//以未登陆状态访问需要登陆的api时返回
+  {
+    "code": 401,
+    "message": "未登录",
+    "data": null
+  }

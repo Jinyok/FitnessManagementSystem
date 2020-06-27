@@ -6,25 +6,8 @@
   <Class Name="FMSystem.Controllers.CoachesController">
     <Position X="11.25" Y="5.25" Width="4.25" />
     <TypeIdentifier>
-      <HashCode>IAAAAAgAAAAABAAAAAAAAAIAAAEAQAABAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAgAAAAABAAABAACAAAAAAAAAAQBAAAAAAAAAAA=</HashCode>
       <FileName>Controllers\CoachesController.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="_context" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="FMSystem.Controllers.HomeController">
-    <Position X="8.75" Y="13.25" Width="4.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAIAAAAQAAAAEQAAAAAAA=</HashCode>
-      <FileName>Controllers\HomeController.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="FMSystem.Controllers.MembersController">
-    <Position X="5.5" Y="4.5" Width="5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAACgAAABEAAAAAAAACAAAAAAAAAACAAAAAAAAA=</HashCode>
-      <FileName>Controllers\MembersController.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="_context" />
@@ -33,12 +16,9 @@
   <Class Name="FMSystem.Controllers.UsersController">
     <Position X="15" Y="8.75" Width="4" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAQAEAQAAAAAAAAAAAAAAMAAAAAAAAAA=</HashCode>
+      <HashCode>AgACAAAAAAAIAQAEAAAAAAAAAAAAAAAAMAAAAAAAAAA=</HashCode>
       <FileName>Controllers\UsersController.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="dbcontext" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="FMSystem.Controllers.Binder.BodyFormModelBinder" BaseTypeListCollapsed="true">
     <Position X="14.25" Y="0.75" Width="4.5" />
@@ -51,7 +31,7 @@
   <Class Name="Controllers.OauthController">
     <Position X="0.5" Y="4.25" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAABAAAAAACAAIAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAIBAAAAAACAAIAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>Controllers\OauthController.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -96,7 +76,7 @@
   <Class Name="FMSystem.Entity.fms.Section">
     <Position X="45.75" Y="4" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAACAAAIAAAAAgAgAAAAAAAAAAAkAQAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAACAAAIAACAAAAgAAAAAAAAAAAgAQAAA=</HashCode>
       <FileName>Entity\fms\Section.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -117,7 +97,7 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAAAAAEAAAAAAAAAEAAAACAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAEEAAAAgAAAEAAAACAQAAAAAAAAA=</HashCode>
       <FileName>Entity\fms\User.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -191,7 +171,7 @@
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAABAAAAAAAQAAAAEIAAAAAAEgAIAAAAAAEAAIAAAAA=</HashCode>
+      <HashCode>AAABAAAAAAAQAAAAEIAACAAAEgAIAAAAAAEAAIAAAAA=</HashCode>
       <FileName>Entity\fmsContext.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -224,7 +204,7 @@
   <Class Name="FMSystem.Service.CoachService">
     <Position X="20" Y="9.25" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>AAACAAgAAAAAAAAABAACAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAgAAAAIAAAABAACAAAAAAAAAQQAAAAAAAAAAAA=</HashCode>
       <FileName>Service\CoachService.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -234,18 +214,8 @@
   </Class>
   <Class Name="FMSystem.Service.MemberService">
     <Position X="35" Y="9.75" Width="3.75" />
-    <AssociationLine Name="context" Type="FMSystem.Entity.fmsContext" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="36.875" Y="9.75" />
-        <Point X="36.875" Y="7.265" />
-        <Point X="31.927" Y="7.265" Type="JumpStart" />
-        <Point X="31.76" Y="7.265" Type="JumpEnd" />
-        <Point X="28.188" Y="7.265" />
-        <Point X="28.188" Y="4.32" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAQAAAAAAAAAACAAQAICAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAQAAAAAAAAAACAAQAICQAAAAAAAAAAAAA=</HashCode>
       <FileName>Service\MemberService.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -256,7 +226,7 @@
   <Class Name="FMSystem.Service.SectionService">
     <Position X="25.25" Y="9.25" Width="4" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAIAQAAAAgAAAAAAAAAAgQAgCAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAIAYAAAAgAAAAAAAAAAgQQACAAAAAAAAAAA=</HashCode>
       <FileName>Service\SectionService.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -274,13 +244,6 @@
       <Field Name="context" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="FMSystem.ViewModels.ErrorViewModel">
-    <Position X="40.25" Y="10.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ViewModels\ErrorViewModel.cs</FileName>
-    </TypeIdentifier>
   </Class>
   <Class Name="FMSystem.Program">
     <Position X="22" Y="14" Width="3.5" />
@@ -300,6 +263,90 @@
     <Position X="20.25" Y="0.5" Width="8.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FMSystem.Entity.fms.Lesson">
+    <Position X="42" Y="6.75" Width="3" />
+    <NestedTypes>
+      <Enum Name="FMSystem.Entity.fms.Lesson.LessonState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Entity\fms\Lesson.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAgAAAAEAAAAAAABEAQAAA=</HashCode>
+      <FileName>Entity\fms\Lesson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FMSystem.ViewModels.CoachViewModel">
+    <Position X="0.5" Y="11.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAACAAAAAAAAQAAAAQAAAAAAAABAAAAAA=</HashCode>
+      <FileName>ViewModels\CoachViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FMSystem.ViewModels.CourseViewModel">
+    <Position X="3.5" Y="11.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEACAAAAAAAEAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\CourseViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FMSystem.ViewModels.ErrorViewModel">
+    <Position X="6.5" Y="11.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ErrorViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FMSystem.ViewModels.LessonViewModel">
+    <Position X="9.5" Y="11.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAgAAAAEAAAAAAABEAQAAA=</HashCode>
+      <FileName>ViewModels\LessonViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FMSystem.ViewModels.PersonalCourseViewModel">
+    <Position X="0.5" Y="14.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACCAAAAAAAQAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>ViewModels\PersonalCourseViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FMSystem.ViewModels.SectionCreateViewModel">
+    <Position X="3.25" Y="14.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAEAEAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>ViewModels\SectionCreateViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FMSystem.ViewModels.SectionViewModel">
+    <Position X="6.75" Y="14.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>ViewModels\SectionViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FMSystem.ViewModels.TimeSlice">
+    <Position X="9.5" Y="14.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\TimeSlice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FMSystem.ViewModels.UserCreateModel">
+    <Position X="0.5" Y="16.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEEAAAAAAAAAAAAACAQAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\UserCreateModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FMSystem.ViewModels.UserViewModel">
+    <Position X="3.5" Y="16.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEEAAAAgAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\UserViewModel.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Interface Name="Microsoft.AspNetCore.Http.IHttpContextAccessor" Collapsed="true">
     <Position X="15" Y="12.25" Width="1.5" />
