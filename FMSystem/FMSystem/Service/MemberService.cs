@@ -55,7 +55,7 @@ namespace FMSystem.Service
 
         }
 
-        public Member Merge(long phoneno, string name)
+        public Member Merge(string phoneno, string name)
         {
             Member member = null;
             member.PhoneNo = phoneno;
@@ -63,7 +63,7 @@ namespace FMSystem.Service
             return member;
         }
 
-        public ResponseModel AddMember(long phoneno, string name)
+        public ResponseModel AddMember(string phoneno, string name)
         {
             ResponseModel ResponseModel = new ResponseModel();
             Member member = Merge(phoneno, name);

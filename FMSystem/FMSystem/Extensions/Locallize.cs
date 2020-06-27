@@ -36,5 +36,10 @@ namespace FMSystem.Extensions
             }
             return day;
         }
+        public static string FormatPhoneNo(this string PhoneNo)
+        {
+            long no = Convert.ToInt64(PhoneNo);
+            return string.Format("{0:###-####-####}", no);
+        }
     }
 }

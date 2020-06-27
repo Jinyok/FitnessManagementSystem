@@ -12,6 +12,7 @@ using FMSystem.Entity.fms;
 using FMSystem.Interface;
 using AutoMapper;
 using FMSystem.ViewModels;
+using FMSystem.Extensions;
 
 namespace FMSystem.Service
 {
@@ -26,12 +27,6 @@ namespace FMSystem.Service
             this.mapper = mapper;
         }
 
-        public string FormatPhoneNo(string PhoneNo)
-        {
-            long no = Convert.ToInt64(PhoneNo);
-            return string.Format("{0:###-####-####}", no);
-        }
-
         public ResponseModel GetCoachesById(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
@@ -41,7 +36,7 @@ namespace FMSystem.Service
             if (coach != null)
             {
                 var coacheModels = mapper.Map<CoachViewModel>(coach);
-                coacheModels.PhoneNo = FormatPhoneNo(coacheModels.PhoneNo);
+                coacheModels.PhoneNo = coacheModels.PhoneNo.FormatPhoneNo();
                 ResponseModel.SetData(coacheModels);
                 ResponseModel.SetSuccess();
                 return ResponseModel;
@@ -61,7 +56,7 @@ namespace FMSystem.Service
             {
                 var coachesModel = mapper.Map<List<CoachViewModel>>(coaches);
                 foreach (var x in coachesModel)
-                    x.PhoneNo = FormatPhoneNo(x.PhoneNo);
+                    x.PhoneNo = x.PhoneNo.FormatPhoneNo();
                 
                 ResponseModel.SetData(coachesModel);
                 ResponseModel.SetSuccess();

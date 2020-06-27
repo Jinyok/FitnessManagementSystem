@@ -27,14 +27,27 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            Section section = context.Section.Single(s => s.SectionId == id);
-
-            ResponseModel.SetData(section);
+            var query = context.Section
+                .AsNoTracking()
+                .Include(e => e.Course)
+                .Include(e => e.Lesson)
+                .Where(e => e.SectionId == id)
+                .Select(x => new
+                {
+                    SectionId = x.SectionId,
+                    Title = x.Course.Title,
+                    ClassHour = x.Lesson.Count,
+                    AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
+                });
+            var section = query.Single();
 
             if (section == null)
                 ResponseModel.SetFailed();
             else
+            {
                 ResponseModel.SetSuccess();
+                ResponseModel.SetData(section);
+            }
 
             return ResponseModel;
         }
@@ -43,30 +56,27 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            var sections = context.Section
+            var query = context.Section
                 .AsNoTracking()
-                .Include(e => e.Coach)
+                .Include(e => e.Course)
                 .Include(e => e.Lesson)
                 .Where(e => e.CoachId == id)
-                .ToList();
+                .Select(x => new
+                {
+                    SectionId = x.SectionId,
+                    Title = x.Course.Title,
+                    ClassHour = x.Lesson.Count,
+                    AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
+                });
+            
+            //var sqlstring=query.toq
+            var sections = query.ToList();
 
-
-            if (sections == null)
+            if (sections.Count==0)
                 ResponseModel.SetFailed();
             else
             {
-                var sectionviewmodels = new List<object>();
-                foreach (var x in sections)
-                {
-                    sectionviewmodels.Add(new
-                    {
-                        SectionId = x.SectionId,
-                        CoachId = x.Coach.CoachId,
-                        ClassHour = x.Lesson.Count,
-                        AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
-                    });
-                }
-                ResponseModel.SetData(sectionviewmodels);
+                ResponseModel.SetData(sections);
                 ResponseModel.SetSuccess();
             }
 
@@ -132,7 +142,7 @@ namespace FMSystem.Service
                 Section section = Merge(coachid, courseid);
                 context.Section.Add(section);
                 context.SaveChanges();
-                if (GetSectionBySectionId(section.SectionId) != null)
+                if (GetSectionBySectionId(section.SectionId).Code == 200)
                     ResponseModel.SetSuccess();
                 return ResponseModel;
             }

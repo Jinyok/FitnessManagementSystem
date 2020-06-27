@@ -11,6 +11,7 @@ using FMSystem.Service;
 using FMSystem.ViewModels;
 using FMSystem.Models;
 using AutoMapper;
+using FMSystem.Extensions;
 
 namespace FMSystem.Controllers
 {
@@ -84,7 +85,7 @@ namespace FMSystem.Controllers
         public IActionResult GetLessonByStartDate(long startdate) => Ok(_lessonService.GetLessonByStartDate(startdate));
 
         [HttpPost]
-        public IActionResult AddLesson(LessonViewModel lesson) => 
+        public IActionResult AddLesson(LessonViewModel lesson) =>
             Ok(_lessonService.AddLesson(lesson));
 
         [HttpDelete]
@@ -129,6 +130,31 @@ namespace FMSystem.Controllers
             else
             {
                 response.SetFailed("教练无课");
+            }
+            return Ok(response);
+        }
+
+        [HttpGet]
+        public IActionResult GetSectionMembers(int SectionId)
+        {
+            var response = new ResponseModel();
+            var query = from s in _context.Section.AsNoTracking()
+                        join t in _context.Take on s.SectionId equals t.SectionId
+                        join m in _context.Member on t.MemberId equals m.MemberId
+                        where (s.SectionId == SectionId)
+                        select new 
+                        {
+                            MemberId=m.MemberId,
+                            Name=m.Name,
+                            PhoneNo=m.PhoneNo.FormatPhoneNo()
+                        };
+            var Members = query.ToList();
+            if (Members.Count == 0)
+                response.SetFailed("无人报名课程");
+            else
+            {
+                response.SetSuccess();
+                response.SetData(Members);
             }
             return Ok(response);
         }

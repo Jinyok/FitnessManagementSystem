@@ -54,103 +54,32 @@ output:
               "Title"       : "三个月瘦身速成不瘦不要钱",
               "ClassHour"   : 15,
               "AttendedHours"    : 12,
-              "Member"      : [
-                     {
-                            "MemberId"    : "01222010",
-                            "Name"        : "爱丽丝",
-                            "PhoneNo"     : "180-1072-1101"
-                     },
-                     {
-                            "MemberId"    : "01222011",
-                            "Name"        : "比尔",
-                            "PhoneNo"     : "138-1232-2132"
-                     },
-                     {
-                            "MemberId"    : "01222012",
-                            "Name"        : "莱纳",
-                            "PhoneNo"     : "180-1013-3242"
-                     },
-                     {
-                            "MemberId"    : "01222013",
-                            "Name"        : "阿亮",
-                            "PhoneNo"     : "180-4657-9435"
-                     },
-                     {
-                            "MemberId"    : "01222014",
-                            "Name"        : "布朗",
-                            "PhoneNo"     : "131-1455-1762"
-                     },
-                     {
-                            "MemberId"    : "01222015",
-                            "Name"        : "爱因斯坦",
-                            "PhoneNo"     : "139-3425-9335"
-                     },
-              ]
        }
 }
 
-/****/
 
-
-//用于通过某节课的ID来得到指定的一门课的信息
-GetSectionBySectionId
-//
-  input:
-  {
-        "SectionId": 1, // SectionId > 0,
-  }
-  output:
-  {
-         "Code": 200,
-         "Message": "成功",
-         "Data":
-         {
-              "SectionId": 1,
-              "CourseId" : 1,
-              "CoachId"  : 1,
-              "Slot"     : { "Start": 1592700600, "End": 1592712900 }
-          },
-          
-          "Code":999,
-          "Message": "失败",
-          "Data": null
-               
-   }
-
-//通过课程ID获得指定的一门课程的开课信息
- GetSectionByCourseId
-//
-  input:
-  {
-         "CourseId": 1//CourseId > 0
-  }
-  output:
-  {
-         "Code": 200,
-         "Message": "成功",
-         "Data":[
-         {
-                "SectionId": 1,
-                "CourseId" : 1,
-                "CoachId"  : 1,
-                "Slot"     : { "Start": 1592700600, "End": 1592712900 }
-         }
-        
-         {
-                "SectionId": 2,
-                "CourseId" : 1,
-                "CoachId"  : 2,
-                "Slot"     : { "Start": 1592700600, "End": 1592712900 }
-         }
-            
-        ],
-        
-        "Code": 999,
-        "Message": "失败",
-        "Data":null
-
+GetSectionMembers
+input:
+{
+    "SectionId":1
 }
-
+output
+{
+    "Code":200,
+    "Message":"成功",
+    "Data":[
+            {
+                   "MemberId"    : 1222010,
+                   "Name"        : "爱丽丝",
+                   "PhoneNo"     : "180-1072-1101"
+            },
+            {
+                   "MemberId"    : 1222011,
+                   "Name"        : "比尔",
+                   "PhoneNo"     : "138-1232-2132"
+            },
+    ]
+}
 
 
 //添加一门课
@@ -159,7 +88,7 @@ GetSectionBySectionId
   input:
   {
          "CoachId": 1, // id > 0
-         "CourseId": 1 // id > 0
+         "CourseId": 1,// id > 0
   }
   output
   {
@@ -177,7 +106,7 @@ GetSectionBySectionId
 //
   input:
   {
-          "SectionId": 1 //SectionId > 0
+          "SectionId": 1,//SectionId > 0
   }
   output:
   {
