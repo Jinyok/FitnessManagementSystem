@@ -45,6 +45,15 @@ namespace FMSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("cors",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                );
+            });
+
             services.AddControllersWithViews();
 
             services.AddHttpContextAccessor();
@@ -126,6 +135,8 @@ namespace FMSystem
 
             app.UseRouting();
 
+            app.UseCors("cors");
+
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -133,7 +144,7 @@ namespace FMSystem
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}").RequireCors("cors");
             });
 
             //swagger
