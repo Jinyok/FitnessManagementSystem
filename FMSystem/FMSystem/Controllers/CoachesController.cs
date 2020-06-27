@@ -41,5 +41,6 @@ namespace FMSystem.Controllers
 
         [HttpPut]
         public IActionResult UpdateCoach([Bind("CoachId Name PhoneNo")]CoachViewModel coach) => Ok(_coachService.UpdateCoach(coach));
+
     }
 }

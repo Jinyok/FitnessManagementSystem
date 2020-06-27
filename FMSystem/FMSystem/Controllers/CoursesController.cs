@@ -64,5 +64,87 @@ namespace FMSystem.Controllers
             return Ok(response);
 
         }
+
+        [HttpGet]
+        public IActionResult GetPersonalCoursesByCoachId(int CoachId)
+        {
+            var response = new ResponseModel();
+            var PersonalCourses = _context.Instructs.AsNoTracking()
+                .Where(t => t.CoachId == CoachId)
+                .Select(t => new
+                {
+                    t.MemberId,
+                    t.Member.Name,
+                    t.Member.PhoneNo,
+                    t.TotalHours,
+                    t.AttendedHours
+                }).ToList();
+            if (PersonalCourses.Count == 0)
+            {
+                response.SetFailed("教练无私教课程");
+                return Ok(response);
+            }
+            response.SetData(new { Members = PersonalCourses });
+            return Ok(response);
+        }
+
+        [HttpPost]
+        public IActionResult AddPersonalCourse(PersonalCourseViewModel model)
+        {
+            var response = new ResponseModel();
+            model.AttendedHours = 0;
+            var instruct = mapper.Map<Instructs>(model);
+            _context.Add(instruct);
+            try
+            {
+                _context.SaveChanges();
+                response.SetSuccess();
+            }
+            catch (DbUpdateException)
+            {
+                if (!_context.Course.Any(e => e.CourseId == instruct.CoachId))
+                    response.SetFailed("教练Id不存在");
+                else if (!_context.Member.Any(e => e.MemberId == instruct.MemberId))
+                    response.SetFailed("会员Id不存在");
+                response.SetFailed();
+            }
+            return Ok(response);
+        }
+        [HttpDelete]
+        public IActionResult DeletePersonalCourse(int MemberId,int CoachId)
+        {
+            var response = new ResponseModel();
+            var instructs = _context.Instructs.Single(e => e.MemberId == MemberId && e.CoachId == CoachId);
+            if(instructs==null)
+            {
+                response.SetFailed("私教课程不存在");
+                return Ok(response);
+            }
+            _context.Remove(instructs);
+            _context.SaveChanges();
+            response.SetSuccess();
+            return Ok(response);
+        }
+
+        [HttpPut]
+        public IActionResult UpdatePersonalCourse(PersonalCourseViewModel model)
+        {
+            var response = new ResponseModel();
+            var state = _context.Update(mapper.Map<Instructs>(model));
+            if(state.State==EntityState.Added)
+            {
+                response.SetFailed("私教课程不存在");
+                return Ok(response);
+            }
+            else if(state.State==EntityState.Modified)
+            {
+                
+                _context.SaveChanges();
+                response.SetSuccess();
+                return Ok(response);
+            }
+            response.SetFailed();
+            return Ok(response);
+        }
     }
 }

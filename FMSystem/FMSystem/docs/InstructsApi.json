@@ -1,5 +1,5 @@
 //获取某一教练的所有私教课程
-GetInstructsByCoachId
+GetPersonalCoursesByCoachId
   input:
   {
     /*输入：教练ID*/
@@ -8,7 +8,7 @@ GetInstructsByCoachId
   output:
   {
     "Code": 200,
-    "Message": "�ɹ�",
+    "Message": "成功",
     "Data": {
       /*对于该教练的每一个私教课程，输出其对应学员的Member.MemberId, Member.Name, Member.PhoneNo
       该私教课程Instructs.TotalHours, Instructs.AttendedHours*/
@@ -31,43 +31,14 @@ GetInstructsByCoachId
     },
             
     "Code": 999,
-    "Message": "ʧ��",
+    "Message": "教练无私教课程",
     "Data":null
   }
 
 
 
-//����ͨ����Ա��ID���õ���Ա��ѡ����Ϣ
-GetInstructsByMemberId
 //
-  input:
-  {
-        "MemberId": 1, // MemberId > 0,
-  }
-  output:
-  {
-         "Code": 200,
-         "Message": "�ɹ�",
-         "Data":[
-         {
-              "MemberId": 1,
-              "CoachId": 1,
-              "AttendHours": 1,
-              "TotalHours": 1
-         }
-            
-        ],
-        
-        "Code": 999,
-        "Message": "ʧ��",
-        "Data":null
-               
-   }
-
-
-
-//������һ��ָ����Ϣ
- AddInstructs
+ AddPersonalCourse
 //
   input:
 {
@@ -79,17 +50,25 @@ GetInstructsByMemberId
   output:
   {
           "Code": 200,
-          "Message": "�ɹ�",
+          "Message": "成功",
           "Data":null,
           
           "Code": 999,
-          "Message": "ʧ��",
+          "Message": "教练Id不存在",
+          "Data": null,
+
+          "Code": 999,
+          "Message": "会员Id不存在",
+          "Data": null,
+
+          "Code": 999,
+          "Message": "失败",
           "Data": null
   }
 
 
-//ɾ��ָ����ָ����Ϣ
- DeleteInstructs
+//
+ DeletePersonalCourse
 //
   input:
   {
@@ -99,17 +78,17 @@ GetInstructsByMemberId
   output:
   {
           "Code": 200,
-          "Message": "�ɹ�",
+          "Message": "成功",
           "Data":null,
           
           "Code": 999,
-          "Message": "ʧ��",
+          "Message": "私教课程不存在",
           "Data": null
   }
 
 
-//�޸�ָ����ָ����Ϣ
- UpdateInstructs
+//
+ UpdatePersonalCourse
 //
   input:
 {
@@ -122,11 +101,11 @@ GetInstructsByMemberId
   output:
   {
            "Code": 200,
-           "Message": "�ɹ�",
+           "Message": "成功",
            "Data":null,
           
            "Code": 999,
-           "Message": "ʧ��",
+           "Message": "私教课程不存在",
            "Data": null
   }
 
