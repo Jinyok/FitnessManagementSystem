@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: fms
 -- ------------------------------------------------------
--- Server version	8.0.19
+-- Server version   8.0.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -15,7 +15,9 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
+--
+-- Dumping data for table `__efmigrationshistory`
+--
 
 --
 -- Dumping data for table `coach`
@@ -23,7 +25,7 @@
 
 LOCK TABLES `coach` WRITE;
 /*!40000 ALTER TABLE `coach` DISABLE KEYS */;
-INSERT INTO `coach` VALUES (1,'刘能',"13060648195",'1506493779@qq.com',0),(2,'玛里苟斯',"13535507207",'2506493779@qq.com',0),(3,'马睿',"23535507207",'3506493779@qq.com',0),(4,'赵三',"33535507207",'4506493779@qq.com',0),(5,'李四',"43535507207",'5506493779@qq.com',1);
+INSERT INTO `coach` VALUES (1,'刘能','13060648195','1506493779@qq.com',0),(2,'玛里苟斯','13535507207','2506493779@qq.com',0),(3,'马睿','23535507207','3506493779@qq.com',0),(4,'赵三','33535507207','4506493779@qq.com',0),(5,'李四','43535507207','5506493779@qq.com',1);
 /*!40000 ALTER TABLE `coach` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,6 +63,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
+INSERT INTO `member` VALUES (1,'13060648191','柳依依'),(2,'13060648192','柳尔尔'),(3,'13060648193','柳散散');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +91,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'root','123456','2020-06-25 08:43:27',0),(2,'admin','123456','2020-06-25 08:43:27',1),(3,'liuneng','123456','2020-06-25 08:43:27',2),(4,'maligousi','123456','2020-06-25 08:43:27',2),(5,'marui','123456','2020-06-25 08:43:27',2),(6,'zhaosan','123456','2020-06-25 08:43:27',2),(7,'lisi','123456','2020-06-25 08:43:27',2),(8,'dagongzai','123456','2020-06-25 08:43:27',3),(9,'vip','123456','2020-06-25 08:43:27',4);
+INSERT INTO `user` VALUES (1,'root','123456','2020-06-25 08:43:27',0,1),(2,'admin','123456','2020-06-25 08:43:27',1,1),(3,'liuneng','123456','2020-06-25 08:43:27',2,1),(4,'maligousi','123456','2020-06-25 08:43:27',2,2),(5,'marui','123456','2020-06-25 08:43:27',2,3),(6,'zhaosan','123456','2020-06-25 08:43:27',2,4),(7,'lisi','123456','2020-06-25 08:43:27',2,5),(8,'dagongzai','123456','2020-06-25 08:43:27',3,1),(9,'vip','123456','2020-06-25 08:43:27',4,1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -101,4 +104,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-25  8:46:06
+-- Dump completed on 2020-06-27 18:32:51
