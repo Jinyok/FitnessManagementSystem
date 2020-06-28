@@ -194,7 +194,7 @@ export default {
                 break;
             }
             */
-        var coach = getCoach(this.$route.params.id);
+        var coach = this.getCoach(this.$route.params.id);
 
         // get coach sections by coachId
         /*
@@ -206,7 +206,7 @@ export default {
             { id: 1005, courseId: 1001, title: '这是一个课程名字大概有这——么长', classHour: 15, attendedHour: 8 },
         ];
         */
-       var sections = getSections(coach.id);
+       var sections = this.getSections(coach.id);
 
         // get instructs by coachId
         /*
@@ -216,7 +216,7 @@ export default {
             { id: 1002, name: '某瓦伊凡'},
         ];
         */
-        var instructs = getInstructs(coach.id);
+        var instructs = this.getInstructs(coach.id);
         return {
             info: coach,
             infoTemp: {

@@ -84,7 +84,7 @@ export default {
                 break;
             }
             */
-        var course = getCourse(this.$route.params.id);
+        var course = this.getCourse(this.$route.params.id);
         return {
             info: course,
             infoTemp: {
