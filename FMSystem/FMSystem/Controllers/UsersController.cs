@@ -129,6 +129,21 @@ namespace FMSystem.Controllers
             return user;
         }
 
+        [HttpGet]
+        public IActionResult GetCoachUserByNumber(int number)
+        {
+            var response = new ResponseModel();
+            var user = context.User.Where(e => e.Role == FMSystem.Entity.fms.User.UserRole.Coach && e.Number == number).Single();
+            if (user == null)
+                response.SetFailed("未找到");
+            else
+            {
+                response.SetSuccess();
+                response.SetData(mapper.Map<UserViewModel>(user));
+            }
+            return Ok(response);
+        }
+
         private bool UserExists(long id)
         {
             return context.User.Any(e => e.UserId == id);
