@@ -188,6 +188,7 @@ export default {
             { id: 1009, account: 'coachaccount', name: '萨卡兹百夫长', phone: '000-0000-0000', email: 'unknown@fms.com' },
             { id: 1010, account: 'coachaccount', name: '塔露拉', phone: '000-0000-0000', email: 'unknown@fms.com' },
         ];
+        var coach;
         for (var item of coaches)
             if (item.id == this.$route.params.id) {
                 coach = item;
@@ -271,6 +272,7 @@ export default {
                         name: item.name
                     });
             });
+            return instructs;
         },
         deleteCoach() {
             // deleteCoach (this.info.id): code
