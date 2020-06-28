@@ -31,7 +31,7 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            Member member = context.Member.Single(m => m.MemberId == id);
+            Member member = context.Member.SingleOrDefault(m => m.MemberId == id);
 
             if (member == null)
                 ResponseModel.SetFailed();
@@ -98,7 +98,7 @@ namespace FMSystem.Service
 
             if (id > 0)
             {
-                Member member = context.Member.Single(m => m.MemberId == id);
+                Member member = context.Member.SingleOrDefault(m => m.MemberId == id);
                 if (member != null)
                 {
                     context.Member.Remove(member);
