@@ -67,6 +67,8 @@ namespace FMSystem.Configuration
 
             CreateMap<PersonalCourseViewModel, Instructs>()
                 .ReverseMap();
+
+            CreateMap<Member, MemberViewModel>().ReverseMap();
         }
     }
 }

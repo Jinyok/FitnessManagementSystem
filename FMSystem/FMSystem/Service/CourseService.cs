@@ -75,9 +75,10 @@ namespace FMSystem.Service
             Course course = Merge(title, cost, classhour);
             context.Course.Add(course);
             context.SaveChanges();
-            if (context.Course.Where(c => c.CourseId == course.CourseId).FirstOrDefault() != null)
+            if (context.Course.Where(c => c.CourseId == course.CourseId).Any())
             {
                 ResponseModel.SetSuccess();
+                ResponseModel.SetData(new { course.CourseId });
                 return ResponseModel;
             }
             ResponseModel.SetFailed();

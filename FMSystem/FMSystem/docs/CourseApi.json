@@ -72,7 +72,9 @@
   {
           "Code": 200,
           "Message": "成功",
-          "Data":null,
+          "data": {
+            "courseId": 5
+          },
           
           "Code": 999,
           "Message": "失败",
