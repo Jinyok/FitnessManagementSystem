@@ -240,7 +240,7 @@ export default {
     },
     methods: {
         getCoach(id) {
-            var info = { id, name, phone, email };
+            var info = { id :'', name:'', phone:'', email:'' };
             methods.getCoachesById(id, (data) => {
                 info.id = data.coachId;
                 info.name = data.name;
@@ -252,6 +252,7 @@ export default {
         getSections(id) {
             var sections = [];
             methods.GetSectionByCoachId(id, (data) => {
+                console.log(data)
                 for (var item of data)
                     list.push({
                         id: item.sectionId,

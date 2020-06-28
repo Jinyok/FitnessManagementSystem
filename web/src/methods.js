@@ -3,7 +3,11 @@ var axios = require ('axios');
 var url = 'https://localhost:5001/api/'
 
 var methods = {
-    login: (account, passwd,) => {
+    login: (account, passwd, callback) => {
+        axios.post(url+'Oauth/Login', {  UserId: account, password: passwd  })
+        .then(function (response) {
+            console.log(response)
+        })
     },
     getCoachesById: (coachId, callback) => {
         axios.get(url+'Coaches/GetCoachesById', { params: { id: coachId } })
@@ -13,8 +17,9 @@ var methods = {
 
     },
     getCoaches: (callback) => {
-        axios.get(url+'Sections/GetFirstLessonByCoachId')
+        axios.get(url+'Coaches/GetCoaches')
         .then(function(response) {
+            console.log(response)
             callback(response.data.data)
         })
     },
@@ -160,7 +165,6 @@ var methods = {
                 email: ExtraInfo.email,
                 })
             .then (function (response) {
-                console.log(response)
                 axios.post(url + 'Users/PostUser', {
                     userName: UserInfo.userName,
                     password: UserInfo.password,
@@ -196,6 +200,27 @@ var methods = {
             .then (callback())
             break;
         }
+    },
+    DeleteUser: (UserInfo,callback) => {
+        switch(UserInfo.role) {
+            case 'Coach':
+            axios.delete(url + 'Coaches/DeleteCoach', { 
+                params: { id: UserInfo.number }
+                })
+            .then (function(res) {
+                console.log(res)
+            })
+            break;
+
+            case 'Member':
+            axios.delete(url + 'Members/DeleteMember', { 
+                params: { id: UserInfo.number }
+                })
+            break;
+        }
+
+        axios.delete(url + 'Users/DeleteUser/' + UserInfo.userId)
+        .then (callback())
     }
 };
 
