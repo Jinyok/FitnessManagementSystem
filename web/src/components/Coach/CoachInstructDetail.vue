@@ -64,7 +64,6 @@ export default {
                 attendedHours: this_.inputHours,
                 totalHours: this_.member.totalHours
             }, function (response) {
-                console.log(this_.$router)
                 this_.member.attendedHours = this_.inputHours
                 document.getElementById('valueChange').innerHTML=''
                 this_.$root.myEvent.$emit('instructUpdate')

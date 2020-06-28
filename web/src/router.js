@@ -174,7 +174,7 @@ const routes = [
     },
     {
         path: '/',
-        redirect: '/coach'
+        redirect: '/coach/login'
     }
 ];
 

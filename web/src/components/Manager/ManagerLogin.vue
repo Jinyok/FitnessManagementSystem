@@ -31,6 +31,7 @@ export default {
     },
     methods: {
         login: function() {
+            
             // code here
         },
         routeToView: function() {

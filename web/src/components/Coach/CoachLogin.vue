@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import methods from "../../methods.js"
+
 export default {
     name: 'CoachLogin',
     data () {
@@ -34,6 +36,7 @@ export default {
             // code here
         },
         routeToView: function() {
+            //methods.login(this.input_account, this.input_password, function() {})
             this.$router.push({ path:'/coach' })
         },
         routeToManager: function() {

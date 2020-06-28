@@ -58,6 +58,8 @@
                 <el-link :underline="false" style="font-size:20px;" @click="submit">提交修改</el-link>
                 <br>
                 <el-link :underline="false" style="font-size:20px;" @click="reset">重置修改</el-link>
+                <br>
+                <el-link :underline="false" style="font-size:20px;" @click="dele">删除账号</el-link>
             </div>
         </div>
     </div>
@@ -128,11 +130,8 @@ export default {
                     this_.showMore = true;
                     this_.showEmail = true;
                     this_.input_name = this_.ExtraInfo.name
-                    console.log(this_.ExtraInfo.phoneNo)
                     this_.input_phone = this_.convertPhoneNo( this_.ExtraInfo.phoneNo )
                     this_.input_email = this_.ExtraInfo.email
-                    console.log(this_.UserInfo)
-                    console.log(this_.ExtraInfo)
                 } )
             }
         },
@@ -174,6 +173,10 @@ export default {
             methods.SubmitUserInfo(this.UserInfo, this.ExtraInfo, function () {
                 this_.reset()
             })
+        },
+        dele: function () {
+            methods.DeleteUser(this.UserInfo, function() {alert('账号已删除')} )
+            this.$router.push('users')
         },
         convertPhoneNo: function (phoneNo) {
             var tempNo = phoneNo[0]+phoneNo[1]+phoneNo[2]+phoneNo[4]+phoneNo[5]+phoneNo[6]+phoneNo[7]+phoneNo[9]+phoneNo[10]+phoneNo[11]+phoneNo[12]

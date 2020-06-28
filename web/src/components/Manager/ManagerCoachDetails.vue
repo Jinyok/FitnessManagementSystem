@@ -252,6 +252,7 @@ export default {
         getSections(id) {
             var sections = [];
             methods.GetSectionByCoachId(id, (data) => {
+                console.log(data)
                 for (var item of data)
                     list.push({
                         id: item.sectionId,
