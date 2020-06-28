@@ -102,6 +102,7 @@ export default {
                 course.classHour = data.classHour;
                 course.cost = data.cost;
             });
+            return course;
         },
         deleteCourse() {
             /* submit to server
