@@ -1,80 +1,142 @@
 <template>
-    <el-container>
-        <el-aside class="blue" style="width: 240px">
-            <asidebuttonlist @select="change" @exit="exit"></asidebuttonlist>
-            <div style="width:2px; position:absolute; top:0; left:240px;
-            height:100%; background:#cccccc"></div>
-        </el-aside>
-
-        <el-main  style="background: #E5E5E5">
-            <pagehome v-show="showpage.showPageHome"></pagehome>
-            <pageschedule v-show="showpage.showPageSchedule"></pageschedule>
-            <pagecourses v-show="showpage.showPageCourses"></pagecourses>
-        </el-main>
-    </el-container>
+    <div class="container">
+        <sidebar
+            title="人事"
+            color="#79C1E5"
+            colorHover="#92CFED"
+            :selectedPage="selectedPage"
+            :listItems="['教练管理', '课程管理']"
+            @change="change"
+            @exit="exit"
+        />
+        <div class="main">
+            <router-view></router-view>
+        </div>
+    </div>
 </template>
 
 <script>
-import asidebuttonlist from './asidebuttonlist.vue'
-import pagehome from './PageHome.vue'
-import pageschedule from './PageSchedule'
-import pagecourses from './PageCourses'
+import methods from '../../methods.js';
+import sidebar from '../sidebar.vue';
 
 export default {
     name: 'ManagerView',
     components: {
-        asidebuttonlist,
-        pagehome,
-        pageschedule,
-        pagecourses
+        sidebar
     },
-    data() {
-        return {
-            showpage: {
-                showPageHome: true,
-                showPageSchedule: false,
-                showPageCourses: false
+    data: function () {
+        var page, index, select;
+        var subpages= [
+            { name: '教练管理', path: '/manager/coach' },
+            { name: '课程管理', path: '/manager/course' }
+        ];
+        for ([index, page] of subpages.entries ())
+        {
+            if (this.$router.currentRoute.path == page.path) {
+                select = index;
+                break;
             }
         }
+        return {
+            selectedPage: select,
+            subpages: subpages
+        };
     },
     methods: {
-        change: function (con) {
-            if (con=='HOME') {
-                this.$set(this.showpage, 'showPageHome', true)
-                this.$set(this.showpage, 'showPageSchedule', false)
-                this.$set(this.showpage, 'showPageCourses', false)
-            }
-            else if (con=='SCHEDULE') {
-                this.$set(this.showpage, 'showPageHome', false)
-                this.$set(this.showpage, 'showPageSchedule', true)
-                this.$set(this.showpage, 'showPageCourses', false)
-            }
-            else if (con=='COURSES') {
-                this.$set(this.showpage, 'showPageHome', false)
-                this.$set(this.showpage, 'showPageSchedule', false)
-                this.$set(this.showpage, 'showPageCourses', true)
-            }
+        change (index) {
+            this.$router.push (this.subpages[index].path);
         },
-        exit: function () {
-            this.$router.push({ path: '/manager/login' })
+        exit () {
+            this.$router.push ('/manager/login');
         }
-    }
+    },
 }
-
 </script>
 
 <style>
-html,body,.el-container{
-    /*设置内部填充为0*/
+@import url("../../assets/css/font.css");
+
+html, body, #app, .container{
     padding: 0px;
-     /*外部间距为0*/
     margin: 0px;
-    /*高度为100%*/
     height: 100%;
-  }
-.blue {
-    background-color: #79c1e5;
-    color: #ffffff;
-  }
+    font-family: "Roboto", "SourceHan";
+}
+
+.container {
+    display: flex;
+}
+
+.main {
+    background: #E5E5E5;
+    width: 100%;
+    padding: 16px;
+    overflow: auto;
+}
+
+.card {
+    display: flex;
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 16px 24px;
+    margin-bottom: 16px;
+    align-items: center;
+}
+
+.list-title {
+    margin: 0px;
+    color: #444444;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.list-text {
+    margin: 0px;
+    color: #444444;
+    font-size: 18px;
+}
+
+.title {
+    margin: 0px;
+    margin-bottom: 16px;
+    font-weight: bold;
+    font-size: 28px;
+    color: #444444;
+}
+
+.info {
+    margin: 8px 0px;
+    color: #b0b0b0;
+    font-size: 16px;
+}
+
+input.inputbox {
+    font-family: "Roboto", "SourceHan";
+    font-size: 16px;
+    color: #444444;
+    border: none;
+    border-bottom: 1px solid #b0b0b0;
+    width: 500px;
+    padding: 2px 8px;
+}
+
+input.inputbox:focus {
+    outline: none;
+    border-bottom: 1px solid #79C1E5;
+}
+
+select.select {
+    font-family: "Roboto", "SourceHan";
+    font-size: 16px;
+    color: #444444;
+    border: none;
+    border-bottom: 1px solid #b0b0b0;
+    padding: 2px 12px;
+}
+
+select.select:focus {
+    outline: none;
+    border-bottom: 1px solid #79C1E5;
+}
 
 </style>

@@ -9,6 +9,9 @@ const routes = [
         path: '/coach',
         name: 'Coach',
         component: () => import ('./components/Coach/CoachView.vue'),
+        meta: {
+            title: 'PageTitle'
+        },
         children:[ // sub pages
             {
                 path: 'home',
@@ -74,6 +77,48 @@ const routes = [
         component: () => import ('./components/Coach/CoachLogin.vue'),
     },
     {
+        path: '/manager',
+        name: 'Manager',
+        component: () => import ('./components/Manager/ManagerView.vue'),
+        meta: {
+            title: '人事 - 健身管理系统'
+        },
+        children: [
+            {
+                path: 'coach',
+                name: 'ManagerCoach',
+                component: () => import ('./components/Manager/ManagerCoach.vue'),
+            },
+            {
+                path: 'coach/:id',
+                name: 'ManagerCoachDetails',
+                component: () => import ('./components/Manager/ManagerCoachDetails.vue'),
+            },
+            {
+                path: 'course',
+                name: 'ManagerCourse',
+                component: () => import ('./components/Manager/ManagerCourse.vue'),
+            },
+            {
+                path: 'course/:id',
+                name: 'ManagerCourseDetails',
+                component: () => import ('./components/Manager/ManagerCourseDetails.vue'),
+            },
+        ],
+        beforeEnter: (to, from, next) => {
+            // check login
+            if (to.path == '/manager')
+                next ('/manager/coach');
+            else
+                next ();
+        }
+    },
+    {
+        path: '/manager/login',
+        name: 'ManagerLogin',
+        component: () => import ('./components/Manager/ManagerLogin.vue'),
+    },
+    {
         path: '/admin',
         name: 'Admin',
         component: () => import ('./components/Admin/AdminView.vue'),
@@ -99,26 +144,6 @@ const routes = [
         path: '/admin/login',
         name: 'AdminLogin',
         component: () => import ('./components/Admin/AdminLogin.vue'),
-    },
-    {
-        path: '/manager',
-        name: 'Manager',
-        component: () => import ('./components/Manager/ManagerView.vue'),
-    },
-    {
-        path: '/manager/login',
-        name: 'ManagerLogin',
-        component: () => import ('./components/Manager/ManagerLogin.vue'),
-    },
-    {
-        path: '/reception',
-        name: 'Reception',
-        component: () => import ('./components/Reception/ReceptionView.vue'),
-    },
-    {
-        path: '/reception/login',
-        name: 'ReceptionLogin',
-        component: () => import ('./components/Reception/ReceptionLogin.vue'),
     },
     {
         path: '/',
