@@ -88,6 +88,7 @@ export default {
                         title: item.title
                     });
             });
+            return list;
         },
         addCourse() {
         },
