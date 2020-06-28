@@ -13,6 +13,7 @@ using FMSystem.Service;
 using FMSystem.ViewModels;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using AutoMapper;
+using FMSystem.Extensions;
 
 namespace FMSystem.Controllers
 {
@@ -56,6 +57,8 @@ namespace FMSystem.Controllers
             else
             {
                 var viewmodels = mapper.Map<List<CoachViewModel>>(list);
+                foreach (var x in viewmodels)
+                    x.PhoneNo = x.PhoneNo.FormatPhoneNo();
                 response.SetSuccess();
                 response.SetData(viewmodels);
             }

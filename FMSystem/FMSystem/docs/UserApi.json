@@ -1,0 +1,17 @@
+//新增用户
+PostUser
+  input
+  {
+    "userName": "玛里苟斯",
+    "password": "123456",
+    "number": 0,//目前仅教练会用到
+    "role": "Coach"//注意大小写
+  }
+  output
+  {
+    "code": 200,
+    "message": "成功",
+    "data": {
+      "userId": 10
+    }
+  }
