@@ -3,10 +3,10 @@
     @click="jumpToDetail">
         <div style="width: calc(80% - 40px)">
             <h1 style="margin-top:5px; margin-bottom: 5px; font-size: 30px;">
-                学员：{{ member.Name }}
+                学员：{{ member.name }}
             </h1>
             <div class='color_grey'>
-                课时：{{ member.AttendedHours }}/{{ member.TotalHours }}
+                课时：{{ member.attendedHours }}/{{ member.totalHours }}
             </div>
         </div>
         <div>
@@ -21,18 +21,12 @@ import methods from '../../methods'
 export default {
     name: "instructcard",
     props: {
-        member: { /*
-            MemberId    : '00000000',
-            CoachId     : '00000001',
-            Name        : '亚历山大变石',
-            PhoneNo     : '000-0000-0000',
-            TotalHours  : 15, 
-            AttendedHours : 7 */
-            },
+        member: {},
+        coachId: ''
     },
     methods: {
         jumpToDetail: function () {
-            this.$router.push({ path: '/coach/instructdetail', query: {member: this.member}})
+            this.$router.push({ path: '/coach/instructdetail', query: {member: this.member, coachId: this.coachId}})
         }
     }
 }

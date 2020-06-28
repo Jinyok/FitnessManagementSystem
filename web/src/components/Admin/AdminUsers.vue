@@ -1,7 +1,7 @@
 <template>
     <div class="AdminUsers">
         <div class="card" style="background:#c4c4c4; height: 30px"></div>
-        <div v-for="user in AllUsers" :key='user.UserId'>
+        <div v-for="user in AllUsers" :key='user.userId'>
             <br>
             <usercard :User="user"></usercard>
         </div>
@@ -23,7 +23,11 @@ export default {
         }
     },
     created: function () {
-        this.AllUsers = methods.GetAllUsers().Data.AllUsers 
+        var this_ = this
+        methods.GetAllUsers(function(res) {
+            this_.AllUsers = res
+            console.log(this_.AllUsers)
+        })
     }
 }
 </script>

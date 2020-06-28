@@ -104,10 +104,6 @@ export default {
     align-items: center;
 }
 
-.font_light {
-    font-family: "Roboto", "SourceHan", Arial, Helvetica, sans-serif;
-}
-
 .info {
     float: left;
     margin-top: -15px;

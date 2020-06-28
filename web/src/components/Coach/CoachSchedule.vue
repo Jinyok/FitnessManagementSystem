@@ -3,11 +3,11 @@
         <div v-for="daylist in lessonList" :key='daylist.Date'>
             <br>
             <div style="cursor: default; margin-left: 10px;">
-                <div class="date" style="float: left; margin-right:30px;">{{ daylist.Week }}</div>
-                <div class="date">{{ daylist.Date }}</div>
+                <div class="date" style="float: left; margin-right:30px;">{{ daylist.week }}</div>
+                <div class="date">{{ daylist.date }}</div>
             </div>
             <br>
-            <div v-for="les in daylist.Lessons" :key="les.LessonId">
+            <div v-for="les in daylist.lessons" :key="les.lessonId">
                 <lessoncard :lesson="les"></lessoncard>
                 <br>
             </div>
@@ -26,7 +26,7 @@ export default {
         },
     data() {
         return {
-            coachId: 1,
+            coachId: '',
             lessonList: [ /*
                 {
                 Week: "周日",
@@ -65,8 +65,13 @@ export default {
         }
     },
     created: function() {
-        var currentTime = new Date().getTime()/1000
-        this.lessonList = methods.GetCoachLessons(this.coachId, currentTime, 100).Data.LessonList
+        this.coachId = this.$route.query.coachId
+
+        var currentTime = new Date()
+        var this_=this;
+        methods.GetCoachLessons(this.coachId, parseInt(currentTime.getTime()/1000), 100, function (response) {
+            this_.lessonList = response
+        })
     }
 }
 </script>

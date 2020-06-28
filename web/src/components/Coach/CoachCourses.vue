@@ -18,7 +18,7 @@ export default {
     },
     data() {
         return {
-        coachId: 1,
+        coachId: '',
         sections: [/*
                 {
                     SectionId   : 1,
@@ -36,7 +36,12 @@ export default {
         }
     },
     created: function () {
-        this.sections = methods.GetSectionByCoachId(this.coachId).Data.Sections
+        this.coachId = this.$route.query.coachId
+
+        var this_ = this
+        methods.GetSectionByCoachId(this.coachId, function (response) {
+            this_.sections = response
+        })
     }
 }
 </script>

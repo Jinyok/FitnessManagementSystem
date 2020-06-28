@@ -3,10 +3,10 @@
     @click="jumpToCourse">
         <div style="width: calc(80% - 40px)">
             <h1 style="margin-top:5px; margin-bottom: 5px; font-size: 30px;">
-                {{ section.Title }}
+                {{ section.title }}
             </h1>
             <div class='color_grey'>
-                课时：{{ section.AttendedHours }}/{{ section.ClassHour }}
+                课时：{{ section.attendedHours }}/{{ section.classHour }}
             </div>
         </div>
         <div>
@@ -22,15 +22,15 @@ export default {
     name: "sectioncard",
     props: {
         section: {
-            SectionId   : '',
-            Title       : '',
-            ClassHour   : '',
-            AttendedHours    : ''
+            sectionid   : '',
+            title       : '',
+            classHour   : '',
+            attendedHours    : ''
         }
     },
     methods: {
         jumpToCourse: function () {
-            this.$router.push({ path: '/coach/section', query: {} })
+            this.$router.push({ path: '/coach/section', query: { SectionId: this.section.sectionId } })
         }
     }
 }
