@@ -117,7 +117,7 @@ namespace FMSystem.Controllers
         public IActionResult DeletePersonalCourse(int MemberId, int CoachId)
         {
             var response = new ResponseModel();
-            var instructs = _context.Instructs.Single(e => e.MemberId == MemberId && e.CoachId == CoachId);
+            var instructs = _context.Instructs.SingleOrDefault(e => e.MemberId == MemberId && e.CoachId == CoachId);
             if (instructs == null)
             {
                 response.SetFailed("私教课程不存在");

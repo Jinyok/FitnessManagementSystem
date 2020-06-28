@@ -30,7 +30,7 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            Course course = context.Course.AsNoTracking().Single(c => c.CourseId == id);
+            Course course = context.Course.AsNoTracking().SingleOrDefault(c => c.CourseId == id);
 
             if (course != null)
             {
@@ -90,7 +90,7 @@ namespace FMSystem.Service
             ResponseModel ResponseModel = new ResponseModel();
             if (id > 0)
             {
-                Course course = context.Course.Single(c => c.CourseId == id);
+                Course course = context.Course.SingleOrDefault(c => c.CourseId == id);
                 if (course != null)
                 {
                     context.Course.Remove(course);

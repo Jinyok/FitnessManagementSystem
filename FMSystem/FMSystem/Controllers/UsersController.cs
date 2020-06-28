@@ -133,7 +133,7 @@ namespace FMSystem.Controllers
         public IActionResult GetCoachUserByNumber(int number)
         {
             var response = new ResponseModel();
-            var user = context.User.Where(e => e.Role == FMSystem.Entity.fms.User.UserRole.Coach && e.Number == number).Single();
+            var user = context.User.SingleOrDefault(e => e.Role == FMSystem.Entity.fms.User.UserRole.Coach && e.Number == number);
             if (user == null)
                 response.SetFailed("未找到");
             else

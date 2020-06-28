@@ -44,7 +44,7 @@ namespace Controllers
             string Password = userjobj.GetProperty(nameof(Password)).GetString();
             var response = new ResponseModel();
 
-            var User = _context.User.Single(u => u.UserId == UserId);
+            var User = _context.User.SingleOrDefault(u => u.UserId == UserId);
             if (User != null && User.Password == Password)
             {
 

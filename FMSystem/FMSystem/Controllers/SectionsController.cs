@@ -124,7 +124,7 @@ namespace FMSystem.Controllers
                         SectionId = e.SectionId,
                         AttendedHours = e.Lesson.Where(l => l.State == Lesson.LessonState.Finished).Count(),
                         StartDate = lesson.StartDate.Value.ToUnixTimeSeconds()
-                    }).Single();
+                    }).SingleOrDefault();
                 response.SetSuccess();
                 response.SetData(section);
             }

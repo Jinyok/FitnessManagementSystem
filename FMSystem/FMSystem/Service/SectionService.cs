@@ -37,6 +37,7 @@ namespace FMSystem.Service
                 {
                     SectionId = x.SectionId,
                     Title = x.Course.Title,
+                    CoachId=x.CoachId,
                     ClassHour = x.Lesson.Count,
                     AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
                 });
@@ -66,6 +67,7 @@ namespace FMSystem.Service
                 {
                     SectionId = x.SectionId,
                     Title = x.Course.Title,
+                    CoachId = x.CoachId,
                     ClassHour = x.Lesson.Count,
                     AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
                 });
@@ -97,6 +99,7 @@ namespace FMSystem.Service
                 {
                     SectionId = x.SectionId,
                     Title = x.Course.Title,
+                    CoachId = x.CoachId,
                     ClassHour = x.Lesson.Count,
                     AttendedHours = x.Lesson.Where(x => x.State == Lesson.LessonState.Finished).Count()
                 });
