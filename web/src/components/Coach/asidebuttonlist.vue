@@ -75,7 +75,7 @@ export default {
   padding-left: 16px;
   text-align: start;
   font-size: 25px;
-  font-family: 'Roboto-Medium', "HW-Bold", Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', "SourceHan", Arial, Helvetica, sans-serif;
 }
 
 html,body,#app,.el-container{

@@ -1,6 +1,6 @@
 <template>
     <div class="aside" :style="{backgroundColor: color}">
-        <h1 class="title">
+        <h1 class="asidetitle">
             {{ title }}
         </h1>
         <div v-for="(item, index) in menuList" :key="index">
@@ -84,7 +84,7 @@ export default {
     z-index: 0;
 }
 
-.aside .title {
+.aside .asidetitle {
     color: #ffffff;
     font-size: 32px;
     margin-top: 32px;

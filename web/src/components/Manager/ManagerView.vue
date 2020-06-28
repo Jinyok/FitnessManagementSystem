@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="manager-container">
         <sidebar
             title="人事"
             color="#79C1E5"
@@ -56,25 +56,25 @@ export default {
 <style>
 @import url("../../assets/css/font.css");
 
-html, body, #app, .container{
+html, body, #app, .manager-container{
     padding: 0px;
     margin: 0px;
     height: 100%;
     font-family: "Roboto", "SourceHan";
 }
 
-.container {
+.manager-container {
     display: flex;
 }
 
-.main {
+.manager-container .main {
     background: #E5E5E5;
     width: 100%;
     padding: 16px;
     overflow: auto;
 }
 
-.card {
+.manager-container .card {
     display: flex;
     background: #ffffff;
     border-radius: 5px;
@@ -83,20 +83,20 @@ html, body, #app, .container{
     align-items: center;
 }
 
-.list-title {
+.manager-container .list-title {
     margin: 0px;
     color: #444444;
     font-size: 24px;
     font-weight: bold;
 }
 
-.list-text {
+.manager-container .list-text {
     margin: 0px;
     color: #444444;
     font-size: 18px;
 }
 
-.title {
+.manager-container .title {
     margin: 0px;
     margin-bottom: 16px;
     font-weight: bold;
@@ -104,13 +104,13 @@ html, body, #app, .container{
     color: #444444;
 }
 
-.info {
+.manager-container .info {
     margin: 8px 0px;
     color: #b0b0b0;
     font-size: 16px;
 }
 
-input.inputbox {
+.manager-container input.inputbox {
     font-family: "Roboto", "SourceHan";
     font-size: 16px;
     color: #444444;
@@ -120,7 +120,7 @@ input.inputbox {
     padding: 2px 8px;
 }
 
-input.inputbox:focus {
+.manager-container input.inputbox:focus {
     outline: none;
     border-bottom: 1px solid #79C1E5;
 }
