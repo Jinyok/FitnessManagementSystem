@@ -3,12 +3,12 @@
         <div class="card" style="justify-content: space-between">
             <div style="display:flex; align-items: center;">
             <div style="margin-right:50px;">
-                <h1 style="font-size: 35px ">Hi,&emsp;Mr.&emsp;{{ coachInfo.Name }}</h1>
+                <h1 style="font-size: 35px ">Hi,&emsp;Mr.&emsp;{{ coachInfo.name }}</h1>
             </div>
             <div class="info color_grey">
-                <p>ID:&emsp;{{ coachInfo.CoachId }}
-                    <br>Email:&emsp;{{ coachInfo.Email }}
-                    <br>PhoneNo:&emsp;{{ coachInfo.PhoneNo }}
+                <p>ID:&emsp;{{ coachInfo.coachId }}
+                    <br>Email:&emsp;{{ coachInfo.email }}
+                    <br>PhoneNo:&emsp;{{ coachInfo.phoneNo }}
                 </p>
             </div>
             </div>
@@ -33,7 +33,7 @@ export default {
     },
     data() {
         return {
-            coachId: 1,
+            coachId: '',
             timer: '',
             currentTime: {
                 timeStamp: '',
@@ -41,34 +41,25 @@ export default {
                 minute: ''
             },
             //需要查
-            coachInfo: { /*
-                CoachId: '00000000',
-                Name: '未命名',
-                Email: 'unknown@email.com',
-                PhoneNo: '000-0000-0000' 
-                State : "InOffice"*/
+            coachInfo: {
             },
-            //需要查
             firstSection: {
-                /*
-                SectionId   : 1,
-                Title       : '肌肉塑形后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀后缀',
-                ClassHour   : 15,
-                Progress    : 8,
-                StartDate   : 1592614200
-                */
             },
             lessonStatus: '近期无课程',
             lessonExists: false
         }
     },
     created: function() {
-        console.log(this.$route)
+        this.coachId = this.$route.query.coachId
+
+        var this_=this
         //获取教练数据
-        this.coachInfo = methods.getCoachesById(this.coachId).Data
+        methods.getCoachesById(this.coachId, function(response) {
+            //console.log(response)
+            this_.coachInfo = response
+        })
 
         //设置时间
-        var this_=this
         this.timer = setInterval(function () { 
             this_.currentTime.timeStamp=new Date().getTime()/1000
             this_.currentTime.hour=new Date().getHours()
@@ -76,19 +67,25 @@ export default {
             if (this_.currentTime.minute < 10)
                 this_.currentTime.minute = '0' + this_.currentTime.minute 
         })
+        this_.currentTime.timeStamp=new Date().getTime()/1000
 
         //获取第一节课课程信息
-        this.firstSection = methods.GetFirstLessonByCoachId(this.coachId).Data
-        this_.currentTime.timeStamp=new Date().getTime()/1000
-        if (this.firstSection != undefined) {
-            this.lessonExists=true
-            if (this.firstSection.StartDate <= this.currentTime.timeStamp)
-                this.lessonStatus = '正在上课'
-            else    {
-                var tempDate = new Date(this.firstSection.StartDate*1000)
-                this.lessonStatus = '下次课程' + (tempDate.getMonth()+1) + '月' + tempDate.getDate() + '日' + tempDate.getHours() + ' : ' + tempDate.getMinutes()
-            }
+        methods.GetFirstLessonByCoachId(this.coachId, function (response) {
+            console.log(response)
+            this_.firstSection = response
+            if (this_.firstSection != undefined) {
+                this_.lessonExists=true
+                if (this_.firstSection.StartDate <= this_.currentTime.timeStamp)
+                    this_.lessonStatus = '正在上课'
+                else    {
+                    var tempDate = new Date(this_.firstSection.startDate*1000)
+                    var min = tempDate.getMinutes()
+                    if (min < 10)
+                        min = '0' + min
+                    this_.lessonStatus = '下次课程' + (tempDate.getMonth()+1) + '月' + tempDate.getDate() + '日' + tempDate.getHours() + ' : ' + min
+                }
         }
+        })
     }
 }
 </script>
@@ -105,10 +102,6 @@ export default {
     font-family: "Roboto", "SourceHan", Arial, Helvetica, sans-serif;
     display:flex;
     align-items: center;
-}
-
-.font_light {
-    font-family: "Roboto", "SourceHan", Arial, Helvetica, sans-serif;
 }
 
 .info {

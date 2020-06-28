@@ -1,6 +1,6 @@
 <template>
     <div class = 'lessoncard' @click="jumpToCourse">
-        <div style="float: left; font-size: 23px; width: calc(80% - 100px)">{{ lesson.Title }}</div>
+        <div style="float: left; font-size: 23px; width: calc(80% - 100px)">{{ lesson.title }}</div>
         <div style="float: right; font-size: 20px; padding-top:5px">{{ timeSlot }} </div>
     </div>
 </template>
@@ -10,11 +10,11 @@ export default {
     name: 'lessoncard',
     props: {
         lesson: {
-            LessonId    : '',
-            SectionId   : '',
-            Title       : '',
-            StartDate   : '',
-            EndDate     : ''
+            lessonId    : '',
+            sectionId   : '',
+            title       : '',
+            startDate   : '',
+            endDate     : ''
         },
     },
     data() {
@@ -23,10 +23,10 @@ export default {
         }
     },
     created: function() {
-        var sHour = new Date(this.lesson.StartDate*1000).getHours()
-        var sMin = new Date(this.lesson.StartDate*1000).getMinutes()
-        var eHour = new Date(this.lesson.EndDate*1000).getHours()
-        var eMin = new Date(this.lesson.EndDate*1000).getMinutes()
+        var sHour = new Date(this.lesson.startDate*1000).getHours()
+        var sMin = new Date(this.lesson.startDate*1000).getMinutes()
+        var eHour = new Date(this.lesson.endDate*1000).getHours()
+        var eMin = new Date(this.lesson.endDate*1000).getMinutes()
         if (sHour < 10)   sHour = '0' + sHour
         if (sMin < 10)    sMin = '0' + sMin
         if (eHour < 10)   eHour = '0' + eHour
@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         jumpToCourse: function () {
-            this.$router.push({ path: '/coach/section', query: {} })
+            this.$router.push({ path: '/coach/section', query: { SectionId: this.lesson.sectionId } })
         }
     }
 }

@@ -8,8 +8,9 @@
 
         <el-main  style="background: #E5E5E5">
             <keep-alive>
-                <router-view></router-view>
+                <router-view v-if="$route.meta.keepAlive"></router-view>
             </keep-alive>
+                <router-view v-if="!$route.meta.keepAlive"></router-view>
         </el-main>
     </el-container>
 </template>
@@ -25,6 +26,7 @@ export default {
     },
     data() {
         return {
+            coachId: 1
         }
     },
     methods: {
@@ -32,16 +34,16 @@ export default {
             switch (con) {
                 case '主页':
                     if (this.$router.history.current.fullPath != '/coach/home')
-                        this.$router.push ('/coach/home')
+                        this.$router.push ({ path: '/coach/home', query:{ coachId: this.coachId } })
                     break;
                 case '课程表':
-                    this.$router.push ('/coach/schedule');
+                    this.$router.push ({ path: '/coach/schedule', query:{ coachId: this.coachId } });
                     break;
                 case '我的课程':
-                    this.$router.push ('/coach/courses');
+                    this.$router.push ({ path: '/coach/courses', query:{ coachId: this.coachId } });
                     break;
                 case '私人指导':
-                    this.$router.push ('/coach/instruct');
+                    this.$router.push ({ path: '/coach/instruct', query:{ coachId: this.coachId } });
                     break;
             }
         },

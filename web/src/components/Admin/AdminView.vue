@@ -8,8 +8,9 @@
 
         <el-main  style="background: #E5E5E5">
             <keep-alive>
-                <router-view></router-view>
+                <router-view v-if="$route.meta.keepAlive"></router-view>
             </keep-alive>
+                <router-view v-if="!$route.meta.keepAlive"></router-view>
         </el-main>
     </el-container>
 </template>
@@ -62,13 +63,9 @@ html,body,.el-container{
     overflow: hidden;
     padding: 23px 30px;
     background:white;
-    font-family: "Roboto-Medium", "HW-Bold", Arial, Helvetica, sans-serif;
+    font-family: "Roboto", "SourceHan", Arial, Helvetica, sans-serif;
     display:flex;
     align-items: center;
-}
-
-.font_light {
-    font-family: "Roboto", "HW-Regular", Arial, Helvetica, sans-serif;
 }
 
 </style>
