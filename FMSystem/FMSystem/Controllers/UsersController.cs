@@ -28,7 +28,7 @@ namespace FMSystem.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<IActionResult> GetUser()
         {
             var response = new ResponseModel();
             var list = await context.User.ToListAsync();
@@ -45,7 +45,7 @@ namespace FMSystem.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        public async Task<IActionResult> GetUser(long id)
         {
             var response = new ResponseModel();
             var user = await context.User.FindAsync(id);
@@ -95,7 +95,7 @@ namespace FMSystem.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(UserCreateModel usermodel)
+        public async Task<IActionResult> PostUser(UserCreateModel usermodel)
         {
             var response = new ResponseModel();
             var user = mapper.Map<User>(usermodel);
@@ -127,6 +127,21 @@ namespace FMSystem.Controllers
             await context.SaveChangesAsync();
 
             return user;
+        }
+
+        [HttpGet]
+        public IActionResult GetCoachUserByNumber(int number)
+        {
+            var response = new ResponseModel();
+            var user = context.User.Where(e => e.Role == FMSystem.Entity.fms.User.UserRole.Coach && e.Number == number).Single();
+            if (user == null)
+                response.SetFailed("未找到");
+            else
+            {
+                response.SetSuccess();
+                response.SetData(mapper.Map<UserViewModel>(user));
+            }
+            return Ok(response);
         }
 
         private bool UserExists(long id)
