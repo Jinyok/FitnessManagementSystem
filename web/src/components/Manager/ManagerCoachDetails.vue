@@ -240,7 +240,7 @@ export default {
     },
     methods: {
         getCoach(id) {
-            var info = { id, name, phone, email };
+            var info = { id: '', name: '', phone: '', email: '' };
             methods.getCoachesById(id, (data) => {
                 info.id = data.coachId;
                 info.name = data.name;
@@ -275,7 +275,7 @@ export default {
             return instructs;
         },
         deleteCoach() {
-            // deleteCoach (this.info.id): code
+            methods.deleteCoach(coachId, (data) => {});
             this.$router.go(-1);
         },
         edit() {
@@ -285,7 +285,10 @@ export default {
             this.infoEdit = true;
         },
         submitEdit() {
-            // updateCoach (this.info.id, this.infoTemp.name, this.infoTemp.phone, this.infoTemp.email, 'InOffice'): code
+            methods.updateCoach(this.info.id, this.infoTemp.name,
+                this.infoTemp.phone, this.infoTemp.email,
+                (data) => {}
+            );
             this.info.name = this.infoTemp.name;
             this.info.phone = this.infoTemp.phone;
             this.info.email = this.infoTemp.email;
@@ -298,8 +301,14 @@ export default {
             this.addingSection = true;
         },
         submitNewSection() {
-            // addSection (this.info.id, this.sectionTemp.id): sectionId;
-            var classHour; // get course classhour
+            var sectionId;
+            methods.addSection(this.info.id, this.sectionTemp.id,
+                (data) => { sectionId = data.sectionId; }
+            );
+            var classHour;
+            methods.getCourseById(this.sectionTemp.id, (data) => {
+                classHour = data.classHour;
+            });
             var interval = 0, lessonTime = (this.sectionTemp.endTime - this.sectionTemp.startTime) * 3600000,
                 date = new Date(this.sectionTemp.startDateY, this.sectionTemp.startDateM, this.sectionTemp.startDateD,
                 this.sectionTemp.startTime, 0, 0, 0).getTime ();
@@ -308,7 +317,9 @@ export default {
             else if (this.sectionTemp.lessonInterval == 'week')
                 interval = 604800000;
             for (var i = 0; i < classHour; ++i) {
-                // new lesson: (sectionId, info.id, date, date + lessonTime, 'NotFinish')
+                methods.addLesson(sectionId, info.id, date, date + lessonTime,
+                    (data) => {}
+                );
                 date += interval;
             }
             this.addingSection = false;
@@ -331,7 +342,7 @@ export default {
             this.sectionTemp.startDateD = undefined;
         },
         deleteSection(id) {
-            // deleteSection (id): code
+            methods.deleteSection(id, (data) => {});
             this.sections = this.sections.filter((value, index, arr) => { return value.id != id});
         },
         deleteInstruct(id) {

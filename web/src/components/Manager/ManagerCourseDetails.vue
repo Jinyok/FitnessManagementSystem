@@ -105,9 +105,7 @@ export default {
             return course;
         },
         deleteCourse() {
-            /* submit to server
-             * if succeed:
-             */
+            methods.deleteCourse(this.info.id, (data) => {});
             this.$router.go(-1);
         },
         edit() {
@@ -117,12 +115,10 @@ export default {
             this.infoEdit = true;
         },
         submitEdit() {
-            /* submit to server
-             * if succeed:
-             * this.info.name = this.infoTemp.name;
-             * this.info.phone = this.infoTemp.phone;
-             * this.info.email = this.infoTemp.email;
-             */
+            methods.updateCourse(this.info.id, this.infoTemp.title,
+                this.infoTemp.cost, this.infoTemp.classHour,
+                (data) => {}
+            );
             this.infoEdit = false;
         },
         discardEdit() {

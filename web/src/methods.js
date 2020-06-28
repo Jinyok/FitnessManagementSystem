@@ -13,14 +13,21 @@ var methods = {
 
     },
     getCoaches: (callback) => {
-        axios.get(url+'Sections/GetFirstLessonByCoachId')
+        axios.get(url+'Coach/GetCoaches')
         .then(function(response) {
             callback(response.data.data)
         })
     },
     deleteCoach: (id) => {
     },
-    updateCoach: (coachId, name, phone, email) => {
+    updateCoach: (coachId, name, phone, email, callback) => {
+        axios.put(url+'Coaches/UpdateCoacah', {
+            CoachId: coachid, Name: name, PhoneNo: phone,
+            Email: email, State: 'InOffice'
+        })
+        .then(function(response) {
+            callback(response.data.data)
+        })
     },
     getCourses: (callback) => {
         axios.get(url+'Courses/GetCourses')
@@ -34,9 +41,19 @@ var methods = {
             callback(response.data.data)
         })
     },
-    addCourse: () => {
+    updateCourse: (courseId, title, cost, classHour, callback) => {
+        axios.put(url+'Courses/UpdateCourse', {
+            CourseId: courseId, Title: title, Cost: cost, ClassHour: classHour
+        })
+        .then(function(response) {
+            callback(response.data.data)
+        })
     },
-    deleteCourse: (courseId) => {
+    deleteCourse: (courseId, callback) => {
+        axios.delete(url+'Courses/DeleteCourse', { CourseId: courseId })
+        .then(function(response) {
+            callback(response.data.data)
+        })
     }, 
     updateCourse: () => {
     },
@@ -44,7 +61,20 @@ var methods = {
     },
     getCoachSections: (coachId) => {
     },
-    addSection: () => {
+    addSection: (coachId, courseId, callback) => {
+        axios.post(url+'Sections/AddSection', { CoachId: coachId, CourseId: courseId })
+        .then(function(response) {
+            callback(response.data.data)
+        });
+    },
+    addLesson(sectionId, coachId, startDate, endDate, callback) {
+        axios.post(url+'Sections/AddLesson', {
+            SectionId: sectionId, CoachId: coachId,
+            StartDate: startDate, EndDate: endDate
+        })
+        .then(function(response) {
+            callback(response.data.data)
+        });
     },
     GetFirstLessonByCoachId: (coachId, callback) => {
         axios.get(url+'Sections/GetFirstLessonByCoachId', { params: { CoachId : coachId } })
