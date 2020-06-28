@@ -10,30 +10,38 @@ using Microsoft.Extensions.DependencyInjection;
 using FMSystem.Service;
 using FMSystem.Entity.fms;
 using FMSystem.Interface;
+using FMSystem.ViewModels;
+using AutoMapper;
+using FMSystem.Extensions;
 
 namespace FMSystem.Service
 {
-    public class MemberService:IMemberService
+    public class MemberService : IMemberService
     {
 
         private fmsContext context;
+        private IMapper mapper;
 
-        public MemberService(fmsContext context)
+        public MemberService(fmsContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
         public ResponseModel GetMembersById(int id)
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            Member members = context.Member.Single(m => m.MemberId == id);
+            Member member = context.Member.Single(m => m.MemberId == id);
 
-            ResponseModel.SetData(members);
-
-            if (members == null)
+            if (member == null)
                 ResponseModel.SetFailed();
             else
+            {
                 ResponseModel.SetSuccess();
+                var res = mapper.Map<MemberViewModel>(member);
+                res.PhoneNo = res.PhoneNo.FormatPhoneNo();
+                ResponseModel.SetData(res);
+            }
 
             return ResponseModel;
         }
@@ -44,12 +52,17 @@ namespace FMSystem.Service
 
             List<Member> members = context.Member.Where(m => m.Name == name).ToList();
 
-            ResponseModel.SetData(members);
 
-            if (members == null)
+            if (members.Count == 0)
                 ResponseModel.SetFailed();
             else
+            {
+                var res = mapper.Map<List<MemberViewModel>>(members);
+                foreach (var x in res)
+                    x.PhoneNo = x.PhoneNo.FormatPhoneNo();
                 ResponseModel.SetSuccess();
+                ResponseModel.SetData(res);
+            }
 
             return ResponseModel;
 
@@ -57,7 +70,7 @@ namespace FMSystem.Service
 
         public Member Merge(string phoneno, string name)
         {
-            Member member = null;
+            Member member = new Member();
             member.PhoneNo = phoneno;
             member.Name = name;
             return member;
@@ -69,9 +82,10 @@ namespace FMSystem.Service
             Member member = Merge(phoneno, name);
             context.Member.Add(member);
             context.SaveChanges();
-            if (GetMembersById(member.MemberId) != null)
+            if (context.Member.Where(m => m.MemberId == member.MemberId).Any())
             {
                 ResponseModel.SetSuccess();
+                ResponseModel.SetData(new { member.MemberId });
                 return ResponseModel;
             }
             ResponseModel.SetFailed();
@@ -93,29 +107,21 @@ namespace FMSystem.Service
                     return ResponseModel;
                 }
             }
-            ResponseModel.SetSuccess();
+            ResponseModel.SetFailed("Id must be greater than 0");
             return ResponseModel;
         }
 
-        public ResponseModel UpdateMember(Member member)
+        public ResponseModel UpdateMember(MemberViewModel membermodel)
         {
             ResponseModel ResponseModel = new ResponseModel();
+            var member = mapper.Map<Member>(membermodel);
             if (member.MemberId > 0)
             {
-                Member temp = context.Member.Single(m => m.MemberId == member.MemberId);
-                if (temp != null)
-                {
-                    temp.MemberId = member.MemberId;
+                context.Member.Update(member);
+                context.SaveChanges();
+                ResponseModel.SetSuccess();
+                return ResponseModel;
 
-                    temp.Name = member.Name;
-
-                    temp.PhoneNo = member.PhoneNo;
-
-                    context.SaveChanges();
-
-                    ResponseModel.SetSuccess();
-                    return ResponseModel;
-                }
             }
             ResponseModel.SetFailed();
             return ResponseModel;
