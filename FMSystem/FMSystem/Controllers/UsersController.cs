@@ -28,7 +28,7 @@ namespace FMSystem.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<IActionResult> GetUser()
         {
             var response = new ResponseModel();
             var list = await context.User.ToListAsync();
@@ -45,7 +45,7 @@ namespace FMSystem.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        public async Task<IActionResult> GetUser(long id)
         {
             var response = new ResponseModel();
             var user = await context.User.FindAsync(id);
@@ -95,7 +95,7 @@ namespace FMSystem.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(UserCreateModel usermodel)
+        public async Task<IActionResult> PostUser(UserCreateModel usermodel)
         {
             var response = new ResponseModel();
             var user = mapper.Map<User>(usermodel);

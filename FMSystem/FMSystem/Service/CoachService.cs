@@ -31,7 +31,7 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            Coach coach = context.Coach.Where(c => c.CoachId == id).FirstOrDefault();
+            Coach coach = context.Coach.Single(s => s.CoachId == id);
 
             if (coach != null)
             {
