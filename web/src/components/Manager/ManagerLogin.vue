@@ -1,36 +1,23 @@
 <template>
-<div class = "ManagerLogin">
-<el-container>
-    <el-header class="blue" style="height: 370px">
-        <div class="div_content" style="top: 210px">
-            <span style="font-size: 35px; letter-spacing:18px">MANAGER</span>
-            <br>
-            <strong style="font-size: 90px; letter-spacing:15px; line-height:84px">LOGIN</strong>
+    <div class="login" style="with:100%; height: 100%">
+        <div style="display: flex; flex-direction: column; height: 50%; background: #79c1e5; color: #ffffff; justify-content: flex-end;">
+            <p style="margin: 0px; user-select: none; font-size: 40px; letter-spacing:18px">人事</p>
+            <p style="margin: 0px; margin-bottom: 12px; user-select: none; font-size: 90px; letter-spacing:15px; line-height:84px"><strong>LOGIN</strong></p>
         </div>
-    </el-header>
 
-    <el-main>
-        <div class="div_content" style="margin-top: 23px">
-            <el-input placeholder="ACCOUNT" v-model="input_account" clearable>
-            </el-input>
+        <div>
+            <div style="margin-top: 40px;">
+                <p><input placeholder="用户名" v-model="input_account" /></p>
+                <p><input type="password" placeholder="密码" v-model="input_password" /></p>
+            </div>
+            <button @click="routeToView" style="background: #79c1e5">登录</button>
+            <p style="position: absolute; margin: 0px auto; color: #aaaaaa; bottom: 50px; left: 0px; right: 0px;">
+                <span @click="routeToCoach" style="cursor: pointer">教练登录 </span>
+                <span> / </span>
+                <span type="info" @click="routeToAdmin" style="cursor: pointer">管理员登录</span>
+            </p>
         </div>
-        <div class="div_content" style="margin-top: 75px">
-            <el-input placeholder="PASSWORD" v-model="input_password" show-password>
-            </el-input>
-        </div>
-        <div class="div_content" style="margin-top: 140px" @click="routeToView">
-            <el-button type="primary" round>SIGN IN</el-button>
-        </div>
-        <div class="div_content" style="bottom: 50px">
-            <el-link type="info" @click="routeToReception">Login as reception </el-link>
-            <span style="color:#909399">/</span>
-            <el-link type="info" @click="routeToCoach">Login as coach </el-link>
-            <span style="color:#909399">/</span>
-            <el-link type="info" @click="routeToAdmin">Login as admin</el-link>
-        </div>
-    </el-main>
-</el-container>
-</div>
+    </div>
 </template>
 
 <script>
@@ -49,9 +36,6 @@ export default {
         routeToView: function() {
             this.$router.push({ path:'/manager' })
         },
-        routeToReception: function() {
-            this.$router.push({ path:'/reception/login' })
-        },
         routeToAdmin: function() {
             this.$router.push({ path:'/admin/login' })
         },
@@ -60,32 +44,47 @@ export default {
         }
     }
 };
-
 </script>
 
 <style>
 @import url("../../assets/css/font.css");
-</style>
 
-<style>
-.div_content{
-  width: 400px;
-  position: absolute;
-  left: 50%;
-  margin-left: -200px;
-  text-align:center;
-  font-family: "Roboto-Medium", Arial, Helvetica, sans-serif;
-}
-html,body,#app,.el-container{
+html,body,#app {
     /*设置内部填充为0*/
     padding: 0px;
      /*外部间距为0*/
     margin: 0px;
     /*高度为100%*/
     height: 100%;
-  }
-.blue {
-    background-color: #79c1e5;
+}
+
+.login div {
+    text-align: center;
+    font-family: "Roboto", "SourceHan", Arial, Helvetica, sans-serif;
+    user-select: none;
+}
+
+.login input {
+    font-family: "Roboto", "SourceHan", Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    width: 240px;
+    padding: 8px 16px;
+    border: 1px solid #b0b0b0;
+    border-radius: 5px;
+}
+
+.login input:focus {
+    outline: none;
+    border: 1px solid #79c1e5;
+}
+
+.login button {
+    font-family: "Roboto", "SourceHan", Arial, Helvetica, sans-serif;
+    font-size: 12px;
     color: #ffffff;
-  }
+    border: none;
+    padding: 8px 24px;
+    border-radius: 16px;
+    cursor: pointer;
+}
 </style>
