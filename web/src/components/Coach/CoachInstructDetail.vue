@@ -7,14 +7,14 @@
         </div>
         <br>
         <div class = 'card' style="flex-direction: column; align-items: flex-start;">
-            <div style="font-size: 48px;">{{ member.Name }}</div>
+            <div style="font-size: 48px;">{{ member.name }}</div>
             <div class='color_grey font_light' style="font-size: 24px; display:flex; margin-top: 8px;">
-                <div style="margin-right: 20px"> ID:&emsp;{{ member.MemberId }}</div>
-                <div>Phone:&emsp;{{ member.PhoneNo }}</div>
+                <div style="margin-right: 20px"> ID:&emsp;{{ member.memberId }}</div>
+                <div>Phone:&emsp;{{ member.phoneNo }}</div>
             </div>
             <br><br>
             <div class='font_light' style="font-size: 30px">
-                课程总学时:&emsp;<span style="font-size: 35px">{{ member.TotalHours }}</span>
+                课程总学时:&emsp;<span style="font-size: 35px">{{ member.totalHours }}</span>
             </div>
             <div class='font_light' style="font-size: 30px; display: flex; align-items: center;">
                 已完成学时:
@@ -39,15 +39,9 @@ export default {
     },
     data () {
         return {
+            coachId: '',
             inputHours: '',
-            member: {
-                MemberId    : '',
-                CoachId     : '',
-                Name        : '',
-                PhoneNo     : '',
-                TotalHours  : '',
-                AttendedHours : ''
-            }
+            member: {}
         }
     },
     methods: {
@@ -55,7 +49,7 @@ export default {
             javascript:history.back(-1);
         },
         hourPlus: function () {
-            if (this.inputHours < this.member.TotalHours)
+            if (this.inputHours < this.member.totalHours)
                 this.inputHours++
         },
         hourSub: function () {
@@ -63,20 +57,31 @@ export default {
                 this.inputHours--
         },
         checkIn: function () {
-            this.member.AttendedHours = this.inputHours
-            document.getElementById('valueChange').innerHTML=''
+            var this_ = this
+            methods.UpdateInstruct({
+                memberId: this_.member.memberId,
+                coachId: this_.coachId,
+                attendedHours: this_.inputHours,
+                totalHours: this_.member.totalHours
+            }, function (response) {
+                console.log(this_.$router)
+                this_.member.attendedHours = this_.inputHours
+                document.getElementById('valueChange').innerHTML=''
+                this_.$root.myEvent.$emit('instructUpdate')
+            })
         }
     },
-    activated: function () {
+    created: function () {
+        this.coachId = this.$route.query.coachId
         this.member = this.$route.query.member
-        this.inputHours = this.member.AttendedHours
+        this.inputHours = this.member.attendedHours
     },
     watch: {
         inputHours(val, oldval) {
-            if (val > this.member.AttendedHours)
-                document.getElementById('valueChange').innerHTML='+ ' + (val - this.member.AttendedHours)
-            else if (val < this.member.AttendedHours)
-                document.getElementById('valueChange').innerHTML='- ' + (this.member.AttendedHours - val)
+            if (val > this.member.attendedHours)
+                document.getElementById('valueChange').innerHTML='+ ' + (val - this.member.attendedHours)
+            else if (val < this.member.attendedHours)
+                document.getElementById('valueChange').innerHTML='- ' + (this.member.attendedHours - val)
             else
                 document.getElementById('valueChange').innerHTML=''
         }

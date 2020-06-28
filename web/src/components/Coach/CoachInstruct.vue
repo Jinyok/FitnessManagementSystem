@@ -1,7 +1,7 @@
 <template>
     <div class="pageinstruct">
         <div v-for="mem in Members" :key="mem.MemberId">
-            <instructcard :member="mem"></instructcard>
+            <instructcard :member="mem" :coachId="coachId"></instructcard>
             <br>
         </div>
     </div>
@@ -18,30 +18,27 @@ export default {
     },
     data() {
         return {
-        coachId: 1,
-        Members: [/*
-                {
-                    MemberId    : '00000000',
-                    CoachId     : '00000001',
-                    Name        : '亚历山大变石',
-                    PhoneNo     : '000-0000-0000',
-                    TotalHours  : 15,
-                    AttendedHours : 7
-                },
-                {
-                    MemberId    : '00000001',
-                    CoachId     : '00000001',
-                    Name        : '圆粒金刚石',
-                    PhoneNo     : '000-0000-0000',
-                    TotalHours  : 7,
-                    AttendedHours : 1
-                },*/
-            ]
+        coachId: '',
+        Members: []
         }
     },
     created: function () {
+        this.coachId = this.$route.query.coachId
+
+        var this_ = this
         //获取section
-        this.Members = methods.GetInstructsByCoachId(this.coachId).Data.Members
+        methods.GetInstructsByCoachId(this.coachId, function (response) {
+            this_.Members = response.members
+        })
+    },
+    activated: function () {
+        var this_ = this
+        this.$root.myEvent.$on('instructUpdate', function () {
+            //获取section
+            methods.GetInstructsByCoachId(this_.coachId, function (response) {
+                this_.Members = response.members
+            })
+        })
     }
 }
 </script>

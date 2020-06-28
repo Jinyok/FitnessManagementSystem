@@ -81,9 +81,11 @@ output:
   }
   output:
   {
-          "Code": 200,
-          "Message": "成功",
-          "Data":null,
+          "code": 200,
+          "message": "成功",
+          "data": {
+            "coachId": 5
+          },
           
           "Code": 999,
           "Message": "失败",
@@ -96,7 +98,7 @@ output:
 //
   input:
   {
-          "CoachId": 1 //CoachId > 0
+          "CoachId": 1,//CoachId > 0
   }
   output:
   {

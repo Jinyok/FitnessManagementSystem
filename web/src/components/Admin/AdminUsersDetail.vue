@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div>
-                <el-link :underline="false" style="font-size:20px;">提交修改</el-link>
+                <el-link :underline="false" style="font-size:20px;" @click="submit">提交修改</el-link>
                 <br>
                 <el-link :underline="false" style="font-size:20px;" @click="reset">重置修改</el-link>
             </div>
@@ -70,15 +70,9 @@ export default {
     name: 'AdminUsersDetail',
     data() {
         return {
-            UserInfo: { /*
-                UserId: '',
-                UserName: '',
-                Password: '',
-                Role: '',
-                Number: '',
-                Name: '',
-                PhoneNo: '',
-                Email: '' */
+            UserInfo: {
+            },
+            ExtraInfo: {
             },
             input_account: '',
             input_password: '',
@@ -94,7 +88,7 @@ export default {
                     label: '学员'
                 },{
                     value: '选项3',
-                    label: '经理'
+                    label: '人事'
                 },{
                     value: '选项4',
                     label: '管理员'
@@ -108,28 +102,88 @@ export default {
             javascript:history.back(-1);
         },
         reset: function () {
-            this.input_account = this.UserInfo.UserName
-            this.input_password = this.UserInfo.Password
-            this.input_role = this.UserInfo.Role
+            this.showMore = false
+            this.showEmail = false
 
-            if (this.input_role == '学员')  {
-                this.showMore = true;
-                this.input_name = this.UserInfo.Name
-                this.input_phone = this.UserInfo.PhoneNo
+            var this_ = this
+
+            this.input_account = this.UserInfo.userName
+            this.input_password = this.UserInfo.password
+            this.input_role = this.UserInfo.role
+
+            if (this.input_role == 'Member')  {
+                methods.GetUserInfo(this_.UserInfo, function(res) {
+                    this_.ExtraInfo = res
+                    this_.showMore = true
+                    this_.input_name = this_.ExtraInfo.name
+                    console.log(this_.ExtraInfo.phoneNo)
+                    this_.input_phone = this_.convertPhoneNo( this_.ExtraInfo.phoneNo )
+                    console.log(this.UserInfo)
+                    console.log(this.ExtraInfo)
+                } )
             }
-            else if (this.input_role == '教练') {
-                this.showMore = true;
-                this.showEmail = true;
-                this.input_name = this.UserInfo.Name
-                this.input_phone = this.UserInfo.PhoneNo
-                this.input_email = this.UserInfo.Email
+            else if (this.input_role == 'Coach') {
+                methods.GetUserInfo(this_.UserInfo, function(res) {
+                    this_.ExtraInfo = res
+                    this_.showMore = true;
+                    this_.showEmail = true;
+                    this_.input_name = this_.ExtraInfo.name
+                    console.log(this_.ExtraInfo.phoneNo)
+                    this_.input_phone = this_.convertPhoneNo( this_.ExtraInfo.phoneNo )
+                    this_.input_email = this_.ExtraInfo.email
+                    console.log(this_.UserInfo)
+                    console.log(this_.ExtraInfo)
+                } )
             }
+        },
+        submit: function () {
+            if ((this.UserInfo.role == 'Coach' || this.UserInfo.role == 'Member')) {
+                if (this.input_phone.length != 11) {
+                    alert ('请填写11位电话号码')
+                    return
+                }
+                else for (var i=0; i<11; i++)
+                    if (this.input_phone[i]<'0'||this.input_phone[i]>'9') {
+                        alert ('请填写11位电话号码')
+                        return
+                    }
+                
+                if (this.input_name.length==0) {
+                    alert ('请填写姓名')
+                    return
+                }
+            }
+
+            if (this.input_account.length == 0){
+                    alert ('请填写用户名')
+                    return
+                }
+
+            if (this.input_password.length == 0){
+                    alert ('请填写密码')
+                    return
+                }
+            
+            this.UserInfo.userName = this.input_account
+            this.UserInfo.password = this.input_password
+            this.ExtraInfo.name = this.input_name
+            this.ExtraInfo.phoneNo = this.input_phone
+            this.ExtraInfo.email = this.input_email
+
+            var this_ = this
+            methods.SubmitUserInfo(this.UserInfo, this.ExtraInfo, function () {
+                this_.reset()
+            })
+        },
+        convertPhoneNo: function (phoneNo) {
+            var tempNo = phoneNo[0]+phoneNo[1]+phoneNo[2]+phoneNo[4]+phoneNo[5]+phoneNo[6]+phoneNo[7]+phoneNo[9]+phoneNo[10]+phoneNo[11]+phoneNo[12]
+            return tempNo
         }
     },
-    activated: function () {
-        console.log(this.$route)
-        this.UserInfo = methods.GetUserInfo(this.$route.query.UserId).Data
-        
+    created: function () {
+        this.UserInfo = this.$route.query.User
+        this.ExtraInfo = this.$route.query.ExtraInfo
+
         this.reset()
     }
 }

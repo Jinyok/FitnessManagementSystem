@@ -55,12 +55,20 @@ namespace FMSystem.Configuration
                 .ForMember(dest => dest.State, opt => opt.MapFrom(s => Enum.Parse(typeof(Lesson.LessonState), s.State)));
 
             CreateMap<User, UserViewModel>()
-                .ForMember(dest => dest.Role, opt => opt.MapFrom(s =>s.Role.ToString()));
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(s => s.Role.ToString()))
+                .ForMember(dest => dest.CreateTime, opt => opt.MapFrom(s => s.CreateTime.Value.ToUnixTimeSeconds()))
+                .ReverseMap()
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(s => Enum.Parse(typeof(User.UserRole), s.Role)))
+                .ForMember(dest => dest.CreateTime, opt => opt.MapFrom(s => DateTimeOffset.FromUnixTimeSeconds(s.CreateTime)));
+
+
             CreateMap<UserCreateModel, User>()
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(s => Enum.Parse(typeof(User.UserRole), s.Role)));
 
             CreateMap<PersonalCourseViewModel, Instructs>()
                 .ReverseMap();
+
+            CreateMap<Member, MemberViewModel>().ReverseMap();
         }
     }
 }

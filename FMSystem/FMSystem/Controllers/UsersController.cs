@@ -28,47 +28,59 @@ namespace FMSystem.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<IActionResult> GetUser()
         {
-            return await context.User.ToListAsync();
+            var response = new ResponseModel();
+            var list = await context.User.ToListAsync();
+            if (list.Count == 0)
+                response.SetFailed("无会员");
+            else
+            {
+                var viewmodels = mapper.Map<List<UserViewModel>>(list);
+                response.SetSuccess();
+                response.SetData(viewmodels);
+            }
+            return Ok(response);
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        public async Task<IActionResult> GetUser(long id)
         {
+            var response = new ResponseModel();
             var user = await context.User.FindAsync(id);
 
             if (user == null)
             {
-                return NotFound();
+                response.SetFailed("未找到用户");
             }
-
-            return user;
+            else
+            {
+                response.SetData(mapper.Map<UserViewModel>(user));
+                response.SetSuccess();
+            }
+            return Ok(response);
         }
 
         // PUT: api/Users/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(long id, User user)
+        [HttpPut]
+        public async Task<IActionResult> PutUser(UserViewModel usermodel)
         {
-            if (id != user.UserId)
-            {
-                return BadRequest();
-            }
-
-            context.Entry(user).State = EntityState.Modified;
-
+            var response = new ResponseModel();
+            var user = mapper.Map<User>(usermodel);
+            context.User.Update(user);
             try
             {
                 await context.SaveChangesAsync();
+                response.SetSuccess();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserExists(usermodel.UserId))
                 {
-                    return NotFound();
+                    response.SetFailed("用户不存在");
                 }
                 else
                 {
@@ -76,14 +88,14 @@ namespace FMSystem.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(response);
         }
 
         // POST: api/Users
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(UserCreateModel usermodel)
+        public async Task<IActionResult> PostUser(UserCreateModel usermodel)
         {
             var response = new ResponseModel();
             var user = mapper.Map<User>(usermodel);
@@ -103,7 +115,7 @@ namespace FMSystem.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(string id)
+        public async Task<ActionResult<User>> DeleteUser(long id)
         {
             var user = await context.User.FindAsync(id);
             if (user == null)
@@ -115,6 +127,21 @@ namespace FMSystem.Controllers
             await context.SaveChangesAsync();
 
             return user;
+        }
+
+        [HttpGet]
+        public IActionResult GetCoachUserByNumber(int number)
+        {
+            var response = new ResponseModel();
+            var user = context.User.Where(e => e.Role == FMSystem.Entity.fms.User.UserRole.Coach && e.Number == number).Single();
+            if (user == null)
+                response.SetFailed("未找到");
+            else
+            {
+                response.SetSuccess();
+                response.SetData(mapper.Map<UserViewModel>(user));
+            }
+            return Ok(response);
         }
 
         private bool UserExists(long id)

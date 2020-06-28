@@ -8,14 +8,13 @@ GetMembersById
   }
   output:
   {
-         "Code": 200,
-         "Message": "成功",
-         "Data":
-         {
-              "MemberId": 1,
-              "Name": "会员",
-              "PhoneNo": 1
-          },
+         "code": 200,
+         "message": "成功",
+         "data": {
+           "memberId": 1,
+           "phoneNo": "130-6064-8191",
+           "name": "柳依依"
+         },
           
           "Code":999,
           "Message": "失败",
@@ -37,14 +36,14 @@ GetMembersById
          "Data":[
          {
               "MemberId": 1, 
+              "PhoneNo": "130-6064-8195",
               "Name": "会员",
-              "PhoneNo": 123456
-         }
+         },
         
          {
               "MemberId": 2, 
+              "PhoneNo": "130-6064-8196",
               "Name": "会员",
-              "PhoneNo": 456789
          }
             
         ],
@@ -63,13 +62,15 @@ GetMembersById
   input:
   { 
          "Name": "会员",
-         "PhoneNo": 123456
+         "PhoneNo": "123456"
   }
   output:
   {
-          "Code": 200,
-          "Message": "成功",
-          "Data":null,
+         "code": 200,
+         "message": "成功",
+         "data": {
+           "memberId": 5
+         },
           
           "Code": 999,
           "Message": "失败",
@@ -82,7 +83,7 @@ GetMembersById
 //
   input:
   {
-          "MemberId": 1 //MemberId > 0
+          "MemberId": 1,//MemberId > 0
   }
   output:
   {

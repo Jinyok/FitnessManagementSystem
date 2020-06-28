@@ -31,7 +31,7 @@ namespace FMSystem.Service
         {
             ResponseModel ResponseModel = new ResponseModel();
 
-            Coach coach = context.Coach.Where(c => c.CoachId == id).FirstOrDefault();
+            Coach coach = context.Coach.Single(s => s.CoachId == id);
 
             if (coach != null)
             {
@@ -87,7 +87,7 @@ namespace FMSystem.Service
             if (context.Coach.Where(c => c.CoachId == coach.CoachId).FirstOrDefault() != null)
             {
                 ResponseModel.SetSuccess();
-                ResponseModel.SetData(coach.CoachId);
+                ResponseModel.SetData(new { coach.CoachId });
                 return ResponseModel;
             }
             ResponseModel.SetFailed();
@@ -119,7 +119,7 @@ namespace FMSystem.Service
             var coach = mapper.Map<Coach>(coachmodel);
             if (coach.CoachId > 0)
             {
-                var s = context.Coach.Update(coach);
+                context.Coach.Update(coach);
                 context.SaveChanges();
                 ResponseModel.SetSuccess();
                 return ResponseModel;

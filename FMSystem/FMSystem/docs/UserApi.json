@@ -1,6 +1,6 @@
 //新增用户
 PostUser
-  input
+  input:
   {
     "userName": "玛里苟斯",
     "password": "123456",
@@ -14,4 +14,118 @@ PostUser
     "data": {
       "userId": 10
     }
+  }
+
+//获得所有用户
+GetUser
+  input:{}
+  output:
+  {
+    "code": 200,
+    "message": "成功",
+    "data": [
+      {
+        "userId": 1,
+        "userName": "root",
+        "role": "Root",
+        "number": 1
+      },
+      {
+        "userId": 2,
+        "userName": "admin",
+        "role": "Admin",
+        "number": 1
+      },
+      {
+        "userId": 3,
+        "userName": "liuneng",
+        "role": "Coach",
+        "number": 1
+      },
+      {
+        "userId": 4,
+        "userName": "maligousi",
+        "role": "Coach",
+        "number": 2
+      },
+      {
+        "userId": 5,
+        "userName": "marui",
+        "role": "Coach",
+        "number": 3
+      },
+      {
+        "userId": 6,
+        "userName": "zhaosan",
+        "role": "Coach",
+        "number": 4
+      },
+      {
+        "userId": 7,
+        "userName": "lisi",
+        "role": "Coach",
+        "number": 5
+      },
+      {
+        "userId": 8,
+        "userName": "dagongzai",
+        "role": "Clerk",
+        "number": 1
+      },
+      {
+        "userId": 9,
+        "userName": "vip",
+        "role": "Member",
+        "number": 1
+      },
+      {
+        "userId": 10,
+        "userName": "123",
+        "role": "Root",
+        "number": 0
+      }
+    ]
+  }
+
+//根据id获取用户
+GetUser/id
+  input:{}
+  output:
+  {
+    "code": 200,
+    "message": "成功",
+    "data": {
+      "userId": 9,
+      "userName": "vip",
+      "password": "123456",
+      "role": "Member",
+      "number": 1,
+      "createTime": 1593074607
+    },
+
+    "code": 999,
+    "message": "未找到用户",
+    "data": null
+  }
+
+//更新User
+PutUser
+  input:
+  {
+    "userId": 9,
+    "userName": "vipp",
+    "password": "123456",
+    "role": "Member",
+    "number": 1,
+    "createTime": 1593074607
+  }
+  output:
+  {
+    "code": 200,
+    "message": "成功",
+    "data": null,
+
+    "code": 999,
+    "message": "用户不存在",
+    "data": null
   }
