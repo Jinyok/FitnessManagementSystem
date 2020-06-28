@@ -86,3 +86,46 @@ GetUser
       }
     ]
   }
+
+//根据id获取用户
+GetUser/id
+  input:{}
+  output:
+  {
+    "code": 200,
+    "message": "成功",
+    "data": {
+      "userId": 9,
+      "userName": "vip",
+      "password": "123456",
+      "role": "Member",
+      "number": 1,
+      "createTime": 1593074607
+    },
+
+    "code": 999,
+    "message": "未找到用户",
+    "data": null
+  }
+
+//更新User
+PutUser
+  input:
+  {
+    "userId": 9,
+    "userName": "vipp",
+    "password": "123456",
+    "role": "Member",
+    "number": 1,
+    "createTime": 1593074607
+  }
+  output:
+  {
+    "code": 200,
+    "message": "成功",
+    "data": null,
+
+    "code": 999,
+    "message": "用户不存在",
+    "data": null
+  }

@@ -47,38 +47,40 @@ namespace FMSystem.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(long id)
         {
+            var response = new ResponseModel();
             var user = await context.User.FindAsync(id);
 
             if (user == null)
             {
-                return NotFound();
+                response.SetFailed("未找到用户");
             }
-
-            return user;
+            else
+            {
+                response.SetData(mapper.Map<UserViewModel>(user));
+                response.SetSuccess();
+            }
+            return Ok(response);
         }
 
         // PUT: api/Users/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(long id, User user)
+        [HttpPut]
+        public async Task<IActionResult> PutUser(UserViewModel usermodel)
         {
-            if (id != user.UserId)
-            {
-                return BadRequest();
-            }
-
-            context.Entry(user).State = EntityState.Modified;
-
+            var response = new ResponseModel();
+            var user = mapper.Map<User>(usermodel);
+            context.User.Update(user);
             try
             {
                 await context.SaveChangesAsync();
+                response.SetSuccess();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserExists(usermodel.UserId))
                 {
-                    return NotFound();
+                    response.SetFailed("用户不存在");
                 }
                 else
                 {
@@ -86,7 +88,7 @@ namespace FMSystem.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(response);
         }
 
         // POST: api/Users
