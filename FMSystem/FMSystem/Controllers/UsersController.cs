@@ -20,7 +20,7 @@ namespace FMSystem.Controllers
         private readonly fmsContext context;
         private readonly IMapper mapper;
 
-        public UsersController(fmsContext context,IMapper mapper)
+        public UsersController(fmsContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -89,7 +89,7 @@ namespace FMSystem.Controllers
             var user = mapper.Map<User>(usermodel);
             user.CreateTime = DateTimeOffset.Now;
             context.User.Add(user);
-            if(context.User.Any(x=>x.Role==user.Role&&x.Number==user.Number))
+            if (context.User.Any(x => x.Role == FMSystem.Entity.fms.User.UserRole.Coach && x.Role == user.Role && x.Number == user.Number))
             {
                 //TODO
                 response.SetFailed("对应Number与角色已经存在");
