@@ -11,6 +11,8 @@ using FMSystem.Entity.fms;
 using FMSystem.Interface;
 using FMSystem.Service;
 using FMSystem.ViewModels;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
+using AutoMapper;
 
 namespace FMSystem.Controllers
 {
@@ -20,11 +22,13 @@ namespace FMSystem.Controllers
     {
         private readonly fmsContext _context;
         private readonly CoachService _coachService;
+        private readonly IMapper mapper;
 
-        public CoachesController(fmsContext context, CoachService coachService)
+        public CoachesController(fmsContext context, CoachService coachService, IMapper mapper)
         {
             _context = context;
             _coachService = coachService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -40,7 +44,23 @@ namespace FMSystem.Controllers
         public IActionResult DeleteCoach(int id) => Ok(_coachService.DeleteCoach(id));
 
         [HttpPut]
-        public IActionResult UpdateCoach([Bind("CoachId Name PhoneNo")]CoachViewModel coach) => Ok(_coachService.UpdateCoach(coach));
+        public IActionResult UpdateCoach([Bind("CoachId Name PhoneNo")] CoachViewModel coach) => Ok(_coachService.UpdateCoach(coach));
+
+        [HttpGet]
+        public async Task<IActionResult> GetCoaches()
+        {
+            var response = new ResponseModel();
+            var list = await _context.Coach.ToListAsync();
+            if (list.Count == 0)
+                response.SetFailed("无教练");
+            else
+            {
+                var viewmodels = mapper.Map<List<CoachViewModel>>(list);
+                response.SetSuccess();
+                response.SetData(viewmodels);
+            }
+            return Ok(response);
+        }
 
     }
 }
