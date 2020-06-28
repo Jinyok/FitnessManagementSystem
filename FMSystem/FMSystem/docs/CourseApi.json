@@ -1,4 +1,4 @@
-//ÓÃÓÚÍ¨¹ı¿Î³ÌµÄIDÀ´µÃµ½Ö¸¶¨µÄ¿Î³ÌĞÅÏ¢
+//ç”¨äºé€šè¿‡è¯¾ç¨‹çš„IDæ¥å¾—åˆ°æŒ‡å®šçš„è¯¾ç¨‹ä¿¡æ¯
  GetCoursesById
 //
   input:
@@ -8,43 +8,43 @@
   output:
   {
          "Code": 200,
-         "Message": "³É¹¦",
+         "Message": "æˆåŠŸ",
          "Data":
          {
               "CourseId": 1,
-              "Title": "¿Î³Ì",
+              "Title": "è¯¾ç¨‹",
               "Cost": 1,
               "ClassHour": 1           
           },
           
           "Code":999,
-          "Message": "Ê§°Ü",
+          "Message": "å¤±è´¥",
           "Data": null
                
    }
 
-//Í¨¹ı±êÌâ»ñµÃÖ¸¶¨µÄ¿Î³ÌĞÅÏ¢
+//é€šè¿‡æ ‡é¢˜è·å¾—æŒ‡å®šçš„è¯¾ç¨‹ä¿¡æ¯
  GetCoursesByTitle
 //
   input:
   {
-         "Title": "¿Î³Ì"
+         "Title": "è¯¾ç¨‹"
   }
   output:
   {
          "Code": 200,
-         "Message": "³É¹¦",
+         "Message": "æˆåŠŸ",
          "Data":[
          {
               "CourseId": 1, 
-              "Title": "¿Î³Ì",
+              "Title": "è¯¾ç¨‹",
               "Cost": 1,
               "ClassHour": 1
          }
 
           {
             "CourseId": 2,
-            "Title": "¿Î³Ì",
+            "Title": "è¯¾ç¨‹",
             "Cost": 2,
             "ClassHour": 2
           }
@@ -52,35 +52,35 @@
         ],
         
         "Code": 999,
-        "Message": "Ê§°Ü",
+        "Message": "å¤±è´¥",
         "Data":null
 
 }
 
 
 
-//ĞÂÌí¼ÓÒ»Ìõ¿Î³ÌĞÅÏ¢
+//æ–°æ·»åŠ ä¸€æ¡è¯¾ç¨‹ä¿¡æ¯
  AddCourse
 //
   input:
 {
-          "Title": "¿Î³Ì",
+          "Title": "è¯¾ç¨‹",
           "Cost": 1,
           "ClassHour": 1
 }
   output:
   {
           "Code": 200,
-          "Message": "³É¹¦",
+          "Message": "æˆåŠŸ",
           "Data":null,
           
           "Code": 999,
-          "Message": "Ê§°Ü",
+          "Message": "å¤±è´¥",
           "Data": null
   }
 
 
-//É¾³ıÖ¸¶¨µÄ¿Î³ÌĞÅÏ¢
+//åˆ é™¤æŒ‡å®šçš„è¯¾ç¨‹ä¿¡æ¯
  DeleteCourse
 //
   input:
@@ -90,22 +90,22 @@
   output:
   {
           "Code": 200,
-          "Message": "³É¹¦",
+          "Message": "æˆåŠŸ",
           "Data":null,
           
           "Code": 999,
-          "Message": "Ê§°Ü",
+          "Message": "å¤±è´¥",
           "Data": null
   }
 
 
-//ĞŞ¸ÄÖ¸¶¨µÄ¿Î³ÌĞÅÏ¢
+//ä¿®æ”¹æŒ‡å®šçš„è¯¾ç¨‹ä¿¡æ¯
  UpdateCourse
 //
   input:
 {
           "CourseId": 1,
-          "Title": "¿Î³Ì",
+          "Title": "è¯¾ç¨‹",
           "Cost": 1,
           "ClassHour": 1
 
@@ -113,11 +113,57 @@
   output:
   {
           "Code": 200,
-          "Message": "³É¹¦",
+          "Message": "æˆåŠŸ",
           "Data":null,
           
           "Code": 999,
-          "Message": "Ê§°Ü",
+          "Message": "å¤±è´¥",
           "Data": null
   }
 
+//è·å–å…¨éƒ¨æ•™ç»ƒä¿¡æ¯
+GetCoaches
+  input:
+  {}
+  output:
+  {
+    "code": 200,
+    "message": "æˆåŠŸ",
+    "data": [
+      {
+        "coachId": 1,
+        "name": "åˆ˜èƒ½",
+        "phoneNo": "13060648195",
+        "email": "1506493779@qq.com",
+        "state": "InOffice"
+      },
+      {
+        "coachId": 2,
+        "name": "ç›é‡Œè‹Ÿæ–¯",
+        "phoneNo": "13535507207",
+        "email": "2506493779@qq.com",
+        "state": "InOffice"
+      },
+      {
+        "coachId": 3,
+        "name": "é©¬ç¿",
+        "phoneNo": "23535507207",
+        "email": "3506493779@qq.com",
+        "state": "InOffice"
+      },
+      {
+        "coachId": 4,
+        "name": "èµµä¸‰",
+        "phoneNo": "33535507207",
+        "email": "4506493779@qq.com",
+        "state": "InOffice"
+      },
+      {
+        "coachId": 5,
+        "name": "æå››",
+        "phoneNo": "43535507207",
+        "email": "5506493779@qq.com",
+        "state": "LeaveOffice"
+      }
+    ]
+  }

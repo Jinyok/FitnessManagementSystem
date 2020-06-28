@@ -11,6 +11,7 @@ using FMSystem.Service;
 using FMSystem.ViewModels;
 using AutoMapper;
 using FMSystem.Models;
+using Microsoft.Extensions.Logging;
 
 namespace FMSystem.Controllers
 {
@@ -21,12 +22,14 @@ namespace FMSystem.Controllers
         private readonly fmsContext _context;
         private readonly CourseService _courseService;
         private readonly IMapper mapper;
+        private readonly ILogger<CoursesController> logger;
 
-        public CoursesController(fmsContext context, CourseService courseService, IMapper mapper)
+        public CoursesController(fmsContext context, CourseService courseService, IMapper mapper,ILogger<CoursesController> logger)
         {
             _context = context;
             _courseService = courseService;
             this.mapper = mapper;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -42,7 +45,7 @@ namespace FMSystem.Controllers
         public IActionResult DeleteCourse(int id) => Ok(_courseService.DeleteCourse(id));
 
         /// <summary>
-        /// Update course if exist, Add it if not exist
+        /// Update course
         /// </summary>
         /// <param name="course"></param>
         /// <returns></returns>
@@ -111,11 +114,11 @@ namespace FMSystem.Controllers
             return Ok(response);
         }
         [HttpDelete]
-        public IActionResult DeletePersonalCourse(int MemberId,int CoachId)
+        public IActionResult DeletePersonalCourse(int MemberId, int CoachId)
         {
             var response = new ResponseModel();
             var instructs = _context.Instructs.Single(e => e.MemberId == MemberId && e.CoachId == CoachId);
-            if(instructs==null)
+            if (instructs == null)
             {
                 response.SetFailed("私教课程不存在");
                 return Ok(response);
@@ -130,16 +133,38 @@ namespace FMSystem.Controllers
         public IActionResult UpdatePersonalCourse(PersonalCourseViewModel model)
         {
             var response = new ResponseModel();
-
-            _context.Update(mapper.Map<Instructs>(model));
+            var personalCourse = mapper.Map<Instructs>(model);
+            _context.Instructs.Update(personalCourse);
             try
             {
                 _context.SaveChanges();
                 response.SetSuccess();
             }
-            catch(DbUpdateException)
+            catch (DbUpdateException e)
             {
-                response.SetFailed("私教课程不存在");
+                if (!_context.Instructs.Any(e => e.MemberId == model.MemberId && e.CoachId == model.CoachId))
+                    response.SetFailed($"私教课程不存在, MemberId:{model.MemberId}, CoachId:{model.CoachId}");
+                else
+                {
+                    response.SetFailed();
+                    logger.LogError(e.Message);
+                }
+                    
+            }
+            return Ok(response);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetCourses()
+        {
+            var response = new ResponseModel();
+            var list = await _context.Course.ToListAsync();
+            if (list.Count == 0)
+                response.SetFailed("无课程");
+            else
+            {
+                var viewmodels = mapper.Map<List<CourseViewModel>>(list);
+                response.SetSuccess();
+                response.SetData(viewmodels);
             }
             return Ok(response);
         }

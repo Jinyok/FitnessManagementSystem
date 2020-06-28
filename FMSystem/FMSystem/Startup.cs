@@ -30,6 +30,7 @@ using FMSystem.Entity.fms;
 using AutoMapper;
 using FMSystem.Configuration;
 using FMSystem.Controllers;
+using System.Text.Json;
 
 namespace FMSystem
 {
@@ -55,6 +56,8 @@ namespace FMSystem
             });
 
             services.AddControllersWithViews();
+            services.AddControllers();
+                //.AddJsonOptions(opt => opt.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
 
             services.AddHttpContextAccessor();
 

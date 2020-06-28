@@ -20,7 +20,7 @@ namespace FMSystem.Controllers
         private readonly fmsContext context;
         private readonly IMapper mapper;
 
-        public UsersController(fmsContext context,IMapper mapper)
+        public UsersController(fmsContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -30,7 +30,17 @@ namespace FMSystem.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            return await context.User.ToListAsync();
+            var response = new ResponseModel();
+            var list = await context.User.ToListAsync();
+            if (list.Count == 0)
+                response.SetFailed("无会员");
+            else
+            {
+                var viewmodels = mapper.Map<List<UserViewModel>>(list);
+                response.SetSuccess();
+                response.SetData(viewmodels);
+            }
+            return Ok(response);
         }
 
         // GET: api/Users/5
@@ -89,7 +99,7 @@ namespace FMSystem.Controllers
             var user = mapper.Map<User>(usermodel);
             user.CreateTime = DateTimeOffset.Now;
             context.User.Add(user);
-            if(context.User.Any(x=>x.Role==user.Role&&x.Number==user.Number))
+            if (context.User.Any(x => x.Role == FMSystem.Entity.fms.User.UserRole.Coach && x.Role == user.Role && x.Number == user.Number))
             {
                 //TODO
                 response.SetFailed("对应Number与角色已经存在");
@@ -103,7 +113,7 @@ namespace FMSystem.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(string id)
+        public async Task<ActionResult<User>> DeleteUser(long id)
         {
             var user = await context.User.FindAsync(id);
             if (user == null)
