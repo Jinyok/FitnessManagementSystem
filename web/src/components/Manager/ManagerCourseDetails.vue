@@ -63,10 +63,13 @@
 </template>
 
 <script>
+import methods from '../../methods.js';
+
 export default {
     name: 'ManagerCourseDetails',
     data: function () {
         // get course
+        /*
         var courses = [
             { id: 1000, title: '这是零个课程名字大概有这——么长', classHour: 15, cost: 300 },
             { id: 1001, title: '这是一个课程名字大概有这——么长', classHour: 15, cost: 300 },
@@ -75,12 +78,13 @@ export default {
             { id: 1004, title: '这是一个课程名字大概有这——么长', classHour: 15, cost: 300 },
             { id: 1005, title: '这是一个课程名字大概有这——么长', classHour: 15, cost: 300 },
         ];
-        var course;
         for (var item of courses)
             if (item.id == this.$route.params.id) {
                 course = item;
                 break;
             }
+            */
+        var course = getCourse(this.$route.params.id);
         return {
             info: course,
             infoTemp: {
@@ -90,6 +94,15 @@ export default {
         };
     },
     methods: {
+        getCourse(id) {
+            var course = { id, title, classHour, cost };
+            methods.getCourseById(id, (data) => {
+                course.id = data.courseId;
+                course.title = data.title;
+                course.classHour = data.classHour;
+                course.cost = data.cost;
+            });
+        },
         deleteCourse() {
             /* submit to server
              * if succeed:

@@ -55,10 +55,12 @@
 </template>
 
 <script>
+import methods from '../../methods.js';
+
 export default {
     name: 'ManagerCourse',
     data: function () {
-        // get courses
+        /*
         var courses = [
             { id: 1000, title: '这是零个课程名字大概有这——么长' },
             { id: 1001, title: '这是一个课程名字大概有这——么长' },
@@ -67,6 +69,8 @@ export default {
             { id: 1004, title: '这是一个课程名字大概有这——么长' },
             { id: 1005, title: '这是一个课程名字大概有这——么长' },
         ];
+        */
+        var courses = this.getCourses();
         return {
             courses: courses,
             courseList: courses,
@@ -75,9 +79,20 @@ export default {
         };
     },
     methods: {
+        getCourses() {
+            var list = [];
+            methods.getCourses((data) => {
+                for (var item of data)
+                    list.push({
+                        id: item.courseId,
+                        title: item.title
+                    });
+            });
+        },
         addCourse() {
         },
         search(type, content) {
+            this.courses = this.getCourses();
             if (type == 'id') {
                 var flag = true;
                 for (var course of this.courses)

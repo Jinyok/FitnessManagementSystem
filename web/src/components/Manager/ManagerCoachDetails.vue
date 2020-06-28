@@ -86,46 +86,51 @@
                 <form>
                     <div style="margin: 16px 0px;">
                         <span class="info">课程ID :</span>
-                        <input v-model="sectionTemp.id" class="inputbox" style="margin: 0px 16px">
+                        <input v-model="sectionTemp.id" class="inputbox" style="margin: 0px 16px; width: 100px">
                     </div>
                     <div style="margin: 16px 0px;">
                         <span class="info">授课频率 :</span>
-                        <input v-model="sectionTemp.lessonInternal"
+                        <input v-model="sectionTemp.lessonInterval"
                             type="radio" id="lesson-internal-day" name="lesson-internal"
                             value="day" style="margin-left: 16px;"
                         >
                         <label for="lesson-internal-day" class="radio">每天</label>
-                        <input v-model="sectionTemp.lessonInternal"
+                        <input v-model="sectionTemp.lessonInterval"
                             type="radio" id="lesson-internal-week" name="lesson-internal"
                             value="week" style="margin-left: 16px;"
                         >
                         <label for="lesson-internal-week" class="radio">每周</label>
                     </div>
                     <div style="display: flex; margin: 16px 0px">
-                        <div v-if="sectionTemp.lessonInternal == 'week'" style="align-item: center">
-                            <span class="info">授课日 :</span>
-                            <select v-model="sectionTemp.dayOfWeek"
-                                class="select" style="margin: 0px 16px;"
-                            >
-                                <option value=1>星期一</option>
-                                <option value=2>星期二</option>
-                                <option value=3>星期三</option>
-                                <option value=4>星期四</option>
-                                <option value=5>星期五</option>
-                                <option value=6>星期六</option>
-                                <option value=7>星期日</option>
-                            </select>
-                        </div>
-                        <div>
-                            <span class="info">授课时间 :</span>
-                            <input v-model="sectionTemp.startTime" class="inputbox"
-                                style="margin: 0px 16px; width: 30px; text-align: center;"
-                            >
-                            <span class="info">至</span>
-                            <input v-model="sectionTemp.endTime" class="inputbox"
-                                style="margin: 0px 16px; width: 30px; text-align: center;"
-                            >
-                        </div>
+                        <span class="info">授课时间 :</span>
+                        <input v-model="sectionTemp.startTime" class="inputbox"
+                            style="margin: 0px 16px; width: 30px; text-align: center;"
+                        >
+                        <span class="info">至</span>
+                        <input v-model="sectionTemp.endTime" class="inputbox"
+                            style="margin: 0px 16px; width: 30px; text-align: center;"
+                        >
+                    </div>
+                    <div style="display: flex; margin: 16px 0px">
+                        <span class="info">开始日期 :</span>
+                        <select v-model="sectionTemp.startDateY" class="select" style="margin: 0px 16px">
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                        </select>
+                        <span class="info">年</span>
+                        <select v-model="sectionTemp.startDateM" class="select" style="margin: 0px 16px">
+                            <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                            <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+                            <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+                            <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+                        </select>
+                        <span class="info">月</span>
+                        <input v-model="sectionTemp.startDateD" class="inputbox"
+                            style="margin: 0px 16px; width: 30px; text-align: center"
+                        />
+                        <span class="info">日</span>
                     </div>
                 </form>
                 <div style="display: flex; margin-top: 20px">
@@ -163,10 +168,13 @@
 </template>
 
 <script>
+import methods from '../../methods.js';
+
 export default {
     name: 'ManagerCourse',
     data: function () {
         // get coach info by id
+        /*
         var coaches = [
             { id: 1000, account: 'coachaccount', name: '柳德米拉', phone: '000-0000-0000', email: 'unknown@fms.com'},
             { id: 1001, account: 'coachaccount', name: '亚历克斯', phone: '000-0000-0000', email: 'unknown@fms.com'},
@@ -180,14 +188,16 @@ export default {
             { id: 1009, account: 'coachaccount', name: '萨卡兹百夫长', phone: '000-0000-0000', email: 'unknown@fms.com' },
             { id: 1010, account: 'coachaccount', name: '塔露拉', phone: '000-0000-0000', email: 'unknown@fms.com' },
         ];
-        var coach;
         for (var item of coaches)
             if (item.id == this.$route.params.id) {
                 coach = item;
                 break;
             }
+            */
+        var coach = getCoach(this.$route.params.id);
 
         // get coach sections by coachId
+        /*
         var sections = [
             { id: 1001, courseId: 1001, title: '这是一个课程名字大概有这——么长', classHour: 15, attendedHour: 8 },
             { id: 1002, courseId: 1001, title: '这是一个课程名字大概有这——么长', classHour: 15, attendedHour: 8 },
@@ -195,13 +205,18 @@ export default {
             { id: 1004, courseId: 1001, title: '这是一个课程名字大概有这——么长', classHour: 15, attendedHour: 8 },
             { id: 1005, courseId: 1001, title: '这是一个课程名字大概有这——么长', classHour: 15, attendedHour: 8 },
         ];
+        */
+       var sections = getSections(coach.id);
 
         // get instructs by coachId
+        /*
         var instructs = [
             { id: 1000, name: '某卡斯特'},
             { id: 1001, name: '某黎博利'},
             { id: 1002, name: '某瓦伊凡'},
         ];
+        */
+        var instructs = getInstructs(coach.id);
         return {
             info: coach,
             infoTemp: {
@@ -210,10 +225,12 @@ export default {
             infoEdit: false,
             sectionTemp: {
                 id: undefined,
-                lessonInternal: undefined,
-                dayOfWeek: undefined,
+                lessonInterval: undefined,
                 startTime: undefined,
-                endTime: undefined
+                endTime: undefined,
+                startDateY: undefined,
+                startDateM: undefined,
+                startDateD: undefined,
             },
             addingSection: false,
             instructs: instructs,
@@ -221,10 +238,42 @@ export default {
         };
     },
     methods: {
+        getCoach(id) {
+            var info = { id, name, phone, email };
+            methods.getCoachesById(id, (data) => {
+                info.id = data.coachId;
+                info.name = data.name;
+                info.phone = data.phoneNo;
+                info.email = data.email;
+            });
+            return info;
+        },
+        getSections(id) {
+            var sections = [];
+            methods.GetSectionByCoachId(id, (data) => {
+                for (var item of data)
+                    list.push({
+                        id: item.sectionId,
+                        title: item.title,
+                        courseId: item.courseId,
+                        classHour: item.classHour,
+                        attendedHour: item.attendedHours
+                    });
+            });
+            return sections;
+        },
+        getInstructs(id) {
+            var instructs = [];
+            methods.GetInstructsByCoachId(id, (data) => {
+                for (var item of data)
+                    list.push({
+                        id: item.memberId,
+                        name: item.name
+                    });
+            });
+        },
         deleteCoach() {
-            /* submit to server
-             * if succeed:
-             */
+            // deleteCoach (this.info.id): code
             this.$router.go(-1);
         },
         edit() {
@@ -234,9 +283,7 @@ export default {
             this.infoEdit = true;
         },
         submitEdit() {
-            /* submit to server
-             * if succeed:
-             */
+            // updateCoach (this.info.id, this.infoTemp.name, this.infoTemp.phone, this.infoTemp.email, 'InOffice'): code
             this.info.name = this.infoTemp.name;
             this.info.phone = this.infoTemp.phone;
             this.info.email = this.infoTemp.email;
@@ -245,40 +292,44 @@ export default {
         discardEdit() {
             this.infoEdit = false;
         },
-        increaseInstruct() {
-            /* submit to server
-             * if succeed:
-             */
-            ++this.info.instruct;
-        },
-        decreaseInstruct() {
-            /* submit to server
-             * if succeed:
-             */
-            if (this.info.instruct > 0)
-                --this.info.instruct;
-        },
         addSection() {
             this.addingSection = true;
         },
         submitNewSection() {
-            /* submit to server
-             * if succeed:
-             */
+            // addSection (this.info.id, this.sectionTemp.id): sectionId;
+            var classHour; // get course classhour
+            var interval = 0, lessonTime = (this.sectionTemp.endTime - this.sectionTemp.startTime) * 3600000,
+                date = new Date(this.sectionTemp.startDateY, this.sectionTemp.startDateM, this.sectionTemp.startDateD,
+                this.sectionTemp.startTime, 0, 0, 0).getTime ();
+            if (this.sectionTemp.lessonInterval == 'day')
+                interval = 86400000;
+            else if (this.sectionTemp.lessonInterval == 'week')
+                interval = 604800000;
+            for (var i = 0; i < classHour; ++i) {
+                // new lesson: (sectionId, info.id, date, date + lessonTime, 'NotFinish')
+                date += interval;
+            }
             this.addingSection = false;
+            this.sectionTemp.id = undefined;
+            this.sectionTemp.lessonInterval = undefined;
+            this.sectionTemp.startTime = undefined;
+            this.sectionTemp.endTime = undefined;
+            this.sectionTemp.startDateY = undefined;
+            this.sectionTemp.startDateM = undefined;
+            this.sectionTemp.startDateD = undefined;
         },
         discardNewSection() {
             this.addingSection = false;
             this.sectionTemp.id = undefined;
-            this.sectionTemp.lessonInternal = undefined;
-            this.sectionTemp.dayOfWeek = undefined;
+            this.sectionTemp.lessonInterval = undefined;
             this.sectionTemp.startTime = undefined;
             this.sectionTemp.endTime = undefined;
+            this.sectionTemp.startDateY = undefined;
+            this.sectionTemp.startDateM = undefined;
+            this.sectionTemp.startDateD = undefined;
         },
         deleteSection(id) {
-            /* submit to server
-             * if succeed:
-             */
+            // deleteSection (id): code
             this.sections = this.sections.filter((value, index, arr) => { return value.id != id});
         },
         deleteInstruct(id) {

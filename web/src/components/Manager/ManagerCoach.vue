@@ -56,46 +56,33 @@
 </template>
 
 <script>
+import methods from '../../methods.js';
+
 export default {
     name: 'ManagerCoach',
     data: function () {
-        var coaches = [
-            { id: 1000, name: '柳德米拉' },
-            { id: 1001, name: '亚历克斯' },
-            { id: 1002, name: '米莎' },
-            { id: 1003, name: '叶莲娜' },
-            { id: 1004, name: '萨沙' },
-            { id: 1005, name: '伊诺' },
-            { id: 1006, name: '博卓卡斯替' },
-            { id: 1007, name: '大亚当' },
-            { id: 1008, name: '大鲍勃' },
-            { id: 1009, name: '萨卡兹百夫长' },
-            { id: 1010, name: '塔露拉' },
-        ];
-        // get coaches info
+        var coaches = this.getCoaches ();
         return {
-            coaches: [
-                { id: 1000, name: '柳德米拉' },
-                { id: 1001, name: '亚历克斯' },
-                { id: 1002, name: '米莎' },
-                { id: 1003, name: '叶莲娜' },
-                { id: 1004, name: '萨沙' },
-                { id: 1005, name: '伊诺' },
-                { id: 1006, name: '博卓卡斯替' },
-                { id: 1007, name: '大亚当' },
-                { id: 1008, name: '大鲍勃' },
-                { id: 1009, name: '萨卡兹百夫长' },
-                { id: 1010, name: '塔露拉' },
-            ],
+            coaches: coaches,
             coachList: coaches,
             searchType: 'id',
             searchContent: ''
         };
     },
     methods: {
-        addCoach() {
+        getCoaches() {
+            var list = [];
+            methods.getCoaches((data) => {
+                for (var item of data)
+                    list.push({
+                        id: item.coachId,
+                        name: item.name
+                    });
+            });
+            return list;
         },
         search(type, content) {
+            this.coaches = this.getCoaches ();
             if (type == 'id') {
                 var flag = true;
                 for (var coach of this.coaches)
